@@ -32,7 +32,12 @@ public class FacturaProductoService implements CrudService{
         }
     }
     public Producto getMostRecaudationProduct() throws SQLException {
-        String sql = "SELECT p.idProducto, p.nombre, SUM(fp.cantidad * p.valor) AS recaudacion FROM Factura_Producto fp JOIN Producto p ON fp.idProducto = p.idProducto GROUP BY p.idProducto, p.nombre ORDER BY recaudacion DESC LIMIT 1";
+        String sql = "SELECT p.idProducto, p.nombre, SUM(fp.cantidad * p.valor) AS recaudacion " +
+                "FROM Factura_Producto fp " +
+                "JOIN Producto p ON fp.idProducto = p.idProducto " +
+                "GROUP BY p.idProducto, p.nombre " +
+                "ORDER BY recaudacion DESC " +
+                "LIMIT 1";
         PreparedStatement ps = this.conn.prepareStatement(sql);
         ResultSet rs = ps.executeQuery();
         if(rs.next()){

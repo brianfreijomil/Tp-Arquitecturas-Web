@@ -11,17 +11,18 @@ import org.integrador.Service.ClienteService;
 import org.integrador.Service.FacturaProductoService;
 import org.integrador.Service.FacturaService;
 import org.integrador.Service.ProductoService;
+import org.integrador.CsvFiles.*;
 
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
-import org.integrador.CsvFiles.*;
 
 public class CsvReader {
     private ProductoService productoService;
     private ClienteService clienteService;
     private FacturaProductoService facturaProductoService;
     private FacturaService facturaService;
+    private static final String userDir = System.getProperty("user.dir")+"/src/main/java/org/integrador/CsvFiles/";
 
     public CsvReader(ProductoService p, ClienteService c, FacturaProductoService fp, FacturaService f) throws IOException {
         this.productoService = p;
@@ -36,7 +37,7 @@ public class CsvReader {
 
     private void loadFacturaProducto(FacturaProductoService facturaProductoService) throws IOException {
         CSVParser parser = CSVFormat.DEFAULT.withHeader().parse(new
-                FileReader("org/integrador/CsvFiles/facturas-productos.csv"));
+                FileReader(userDir+"facturas-productos.csv"));
         for(CSVRecord row: parser) {
             Integer idFactura = Integer.valueOf(row.get("idFactura"));
             Integer idProducto = Integer.valueOf(row.get("idProducto"));
@@ -48,7 +49,7 @@ public class CsvReader {
 
     private void loadFactura(FacturaService facturaService) throws IOException {
         CSVParser parser = CSVFormat.DEFAULT.withHeader().parse(new
-                FileReader("org/integrador/CsvFiles/facturas.csv"));
+                FileReader(userDir+"facturas.csv"));
         for(CSVRecord row: parser) {
             Integer idFactura = Integer.valueOf(row.get("idFactura"));
             Integer idCliente = Integer.valueOf(row.get("idCliente"));
@@ -59,7 +60,7 @@ public class CsvReader {
 
     private void loadCliente(ClienteService clienteService) throws IOException {
         CSVParser parser = CSVFormat.DEFAULT.withHeader().parse(new
-                FileReader("org/integrador/CsvFiles/clientes.csv"));
+                FileReader(userDir+"clientes.csv"));
         for(CSVRecord row: parser) {
             Integer idCliente = Integer.valueOf(row.get("idCliente"));
             String nombre = row.get("nombre");
@@ -72,7 +73,7 @@ public class CsvReader {
 
     private void loadProduct(ProductoService productoService) throws IOException {
         CSVParser parser = CSVFormat.DEFAULT.withHeader().parse(new
-                FileReader("Tp-Arquitecturas-Web\\arquitect2\\src\\main\\java\\org\\integrador\\CsvFiles\\productos.csv"));
+                FileReader(userDir+"productos.csv"));
         for(CSVRecord row: parser) {
             Integer idProducto = Integer.valueOf(row.get("idProducto"));
             String name = row.get("nombre");

@@ -35,7 +35,11 @@ public class ClienteService implements CrudService{
 
 
     public List<Cliente> getAllClientByMostRecepte() throws SQLException {
-        String sql  = "Select c.idCLiente, c.nombre, c.email, count(f.idFactura) as cant from cliente c join factura f on c.idCliente = f.idCliente group by c.idCliente order by cant desc";
+        String sql  = "Select c.idCLiente, c.nombre, c.email, count(f.idFactura) as cant " +
+                "from cliente c " +
+                "join factura f on c.idCliente = f.idCliente " +
+                "group by c.idCliente " +
+                "order by cant desc";
         PreparedStatement ps = this.conn.prepareStatement(sql);
         ResultSet rs = ps.executeQuery();
         ArrayList<Cliente> arr  = new ArrayList<>();
