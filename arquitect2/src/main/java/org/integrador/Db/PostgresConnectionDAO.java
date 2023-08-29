@@ -8,11 +8,21 @@ import java.util.ArrayList;
 
 public class PostgresConnectionDAO extends DbConnectionDAO{
 
-    public PostgresConnectionDAO(){}
+    private String portDB;
+    private String nameDB;
+    private String userDB;
+    private String passwordDB;
+
+    public PostgresConnectionDAO(String portDB, String nameDB, String userDB, String passwordDB){
+        this.portDB = portDB;
+        this.nameDB = nameDB;
+        this.userDB = userDB;
+        this.passwordDB = passwordDB;
+    }
     @Override
     public Connection getConnection() throws SQLException {
         if(this.conn == null){
-            this.conn = DriverManager.getConnection("jdbc:postgresql://localhost:5432/ArquitecturasWeb?user=postgres&&password=postgres");
+            this.conn = DriverManager.getConnection("jdbc:postgresql://localhost:"+portDB+"/"+nameDB+"?user="+userDB+"&&password="+passwordDB+"");
             return this.conn;
         }
 
@@ -38,19 +48,40 @@ public class PostgresConnectionDAO extends DbConnectionDAO{
     public void createAllTables() throws SQLException {
         if(this.conn != null){
             ArrayList<String> arr = new ArrayList<>();
-            String create1 = "CREATE TABLE Cliente (idCliente int  NOT NULL, nombre varchar(500)  NOT NULL, email varchar(150)  NOT NULL, CONSTRAINT Cliente_pk PRIMARY KEY (idCliente))";
+            String create1 = "CREATE TABLE IF NOT EXISTS Cliente (" +
+                    "idCliente int  NOT NULL, " +
+                    "nombre varchar(500)  NOT NULL, " +
+                    "email varchar(150)  NOT NULL, " +
+                    "CONSTRAINT Cliente_pk PRIMARY KEY (idCliente))";
             arr.add(create1);
-            String create2 = "CREATE TABLE Factura (idFactura int  NOT NULL, idCliente int  NOT NULL, CONSTRAINT Factura_pk PRIMARY KEY (idFactura))";
+            String create2 = "CREATE TABLE IF NOT EXISTS Factura (" +
+                    "idFactura int  NOT NULL, " +
+                    "idCliente int  NOT NULL, " +
+                    "CONSTRAINT Factura_pk PRIMARY KEY (idFactura))";
             arr.add(create2);
-            String create4 = "CREATE TABLE Producto (idProducto int  NOT NULL, nombre varchar(45)  NOT NULL, valor real  NOT NULL, CONSTRAINT Producto_pk PRIMARY KEY (idProducto))";
+            String create4 = "CREATE TABLE IF NOT EXISTS Producto (" +
+                    "idProducto int  NOT NULL, " +
+                    "nombre varchar(45)  NOT NULL, " +
+                    "valor real  NOT NULL, " +
+                    "CONSTRAINT Producto_pk PRIMARY KEY (idProducto))";
             arr.add(create4);
-            String create3 = "CREATE TABLE Factura_Producto (cantidad int  NOT NULL, idFactura int  NOT NULL, idProducto int  NOT NULL, CONSTRAINT Factura_Producto_pk PRIMARY KEY (idFactura,idProducto))";
+            String create3 = "CREATE TABLE IF NOT EXISTS Factura_Producto (" +
+                    "cantidad int  NOT NULL, " +
+                    "idFactura int  NOT NULL, " +
+                    "idProducto int  NOT NULL, " +
+                    "CONSTRAINT Factura_Producto_pk PRIMARY KEY (idFactura,idProducto))";
             arr.add(create3);
-            String create5 = "ALTER TABLE Factura ADD CONSTRAINT Factura_Cliente FOREIGN KEY (idCliente) REFERENCES Cliente (idCliente) NOT DEFERRABLE INITIALLY IMMEDIATE";
+            String create5 = "ALTER TABLE Factura ADD CONSTRAINT Factura_Cliente " +
+                    "FOREIGN KEY (idCliente) REFERENCES Cliente (idCliente) " +
+                    "NOT DEFERRABLE INITIALLY IMMEDIATE";
             arr.add(create5);
-            String create6 = "ALTER TABLE Factura_Producto ADD CONSTRAINT Factura_Producto_Factura FOREIGN KEY (idFactura) REFERENCES Factura (idFactura) NOT DEFERRABLE INITIALLY IMMEDIATE";
+            String create6 = "ALTER TABLE Factura_Producto ADD CONSTRAINT Factura_Producto_Factura " +
+                    "FOREIGN KEY (idFactura) REFERENCES Factura (idFactura) " +
+                    "NOT DEFERRABLE INITIALLY IMMEDIATE";
             arr.add(create6);
-            String create7 = "ALTER TABLE Factura_Producto ADD CONSTRAINT Factura_Producto_Producto FOREIGN KEY (idProducto) REFERENCES Producto (idProducto) NOT DEFERRABLE INITIALLY IMMEDIATE";
+            String create7 = "ALTER TABLE Factura_Producto ADD CONSTRAINT Factura_Producto_Producto " +
+                    "FOREIGN KEY (idProducto) REFERENCES Producto (idProducto) " +
+                    "NOT DEFERRABLE INITIALLY IMMEDIATE";
             arr.add(create7);
 
             for (String s: arr) {

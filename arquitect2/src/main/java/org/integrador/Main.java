@@ -13,10 +13,20 @@ import java.io.IOException;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) throws SQLException, IOException {
-        DbConnectionDAO db = new PostgresConnectionDAO();
+        Scanner lectura = new Scanner (System.in);
+        System.out.println("Ingresar puerto de Base de Datos");
+        String dbPort = lectura.next();
+        System.out.println("Ingresar nombre de Base de Datos");
+        String dbName = lectura.next();
+        System.out.println("Ingresar nombre de usuario");
+        String dbUser = lectura.next();
+        System.out.println("Ingresar contraseña");
+        String dbPassword = lectura.next();
+        DbConnectionDAO db = new PostgresConnectionDAO(dbPort,dbName,dbUser,dbPassword);
         Connection conn = db.getConnection();
         //borro todas las tablas
         db.dropTables();
