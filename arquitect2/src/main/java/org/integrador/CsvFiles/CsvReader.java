@@ -7,10 +7,10 @@ import org.integrador.Entities.Cliente;
 import org.integrador.Entities.Factura;
 import org.integrador.Entities.FacturaProducto;
 import org.integrador.Entities.Producto;
-import org.integrador.Service.ClienteService;
-import org.integrador.Service.FacturaProductoService;
-import org.integrador.Service.FacturaService;
-import org.integrador.Service.ProductoService;
+import org.integrador.Service.ClienteRepository;
+import org.integrador.Service.FacturaProductoRepository;
+import org.integrador.Service.FacturaRepository;
+import org.integrador.Service.ProductoRepository;
 import org.integrador.CsvFiles.*;
 
 import java.io.FileNotFoundException;
@@ -18,24 +18,24 @@ import java.io.FileReader;
 import java.io.IOException;
 
 public class CsvReader {
-    private ProductoService productoService;
-    private ClienteService clienteService;
-    private FacturaProductoService facturaProductoService;
-    private FacturaService facturaService;
+    private ProductoRepository productoRepository;
+    private ClienteRepository clienteRepository;
+    private FacturaProductoRepository facturaProductoRepository;
+    private FacturaRepository facturaRepository;
     private static final String userDir = System.getProperty("user.dir")+"/src/main/java/org/integrador/CsvFiles/";
 
-    public CsvReader(ProductoService p, ClienteService c, FacturaProductoService fp, FacturaService f) throws IOException {
-        this.productoService = p;
-        this.clienteService = c;
-        this.facturaProductoService = fp;
-        this.facturaService = f;
-        this.loadProduct(productoService);
-        this.loadCliente(clienteService);
-        this.loadFactura(facturaService);
-        this.loadFacturaProducto(facturaProductoService);
+    public CsvReader(ProductoRepository p, ClienteRepository c, FacturaProductoRepository fp, FacturaRepository f) throws IOException {
+        this.productoRepository = p;
+        this.clienteRepository = c;
+        this.facturaProductoRepository = fp;
+        this.facturaRepository = f;
+        this.loadProduct(productoRepository);
+        this.loadCliente(clienteRepository);
+        this.loadFactura(facturaRepository);
+        this.loadFacturaProducto(facturaProductoRepository);
     }
 
-    private void loadFacturaProducto(FacturaProductoService facturaProductoService) throws IOException {
+    private void loadFacturaProducto(FacturaProductoRepository facturaProductoRepository) throws IOException {
         CSVParser parser = CSVFormat.DEFAULT.withHeader().parse(new
                 FileReader(userDir+"facturas-productos.csv"));
         for(CSVRecord row: parser) {
@@ -43,22 +43,22 @@ public class CsvReader {
             Integer idProducto = Integer.valueOf(row.get("idProducto"));
             Integer cantidad = Integer.valueOf(row.get("cantidad"));
             FacturaProducto fp = new FacturaProducto(idFactura, idProducto, cantidad);
-            facturaProductoService.create(fp);
+            facturaProductoRepository.create(fp);
         }
     }
 
-    private void loadFactura(FacturaService facturaService) throws IOException {
+    private void loadFactura(FacturaRepository facturaRepository) throws IOException {
         CSVParser parser = CSVFormat.DEFAULT.withHeader().parse(new
                 FileReader(userDir+"facturas.csv"));
         for(CSVRecord row: parser) {
             Integer idFactura = Integer.valueOf(row.get("idFactura"));
             Integer idCliente = Integer.valueOf(row.get("idCliente"));
             Factura f = new Factura(idFactura, idCliente);
-            facturaService.create(f);
+            facturaRepository.create(f);
         }
     }
 
-    private void loadCliente(ClienteService clienteService) throws IOException {
+    private void loadCliente(ClienteRepository clienteRepository) throws IOException {
         CSVParser parser = CSVFormat.DEFAULT.withHeader().parse(new
                 FileReader(userDir+"clientes.csv"));
         for(CSVRecord row: parser) {
@@ -66,12 +66,12 @@ public class CsvReader {
             String nombre = row.get("nombre");
             String email = row.get("email");
             Cliente c = new Cliente(idCliente, nombre, email);
-            clienteService.create(c);
+            clienteRepository.create(c);
         }
     }
 
 
-    private void loadProduct(ProductoService productoService) throws IOException {
+    private void loadProduct(ProductoRepository productoRepository) throws IOException {
         CSVParser parser = CSVFormat.DEFAULT.withHeader().parse(new
                 FileReader(userDir+"productos.csv"));
         for(CSVRecord row: parser) {
@@ -79,7 +79,7 @@ public class CsvReader {
             String name = row.get("nombre");
             Float value = Float.valueOf(row.get("valor"));
             Producto p = new Producto(idProducto, name, value);
-            productoService.create(p);
+            productoRepository.create(p);
         }
     }
 }

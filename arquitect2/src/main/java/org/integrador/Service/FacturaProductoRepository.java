@@ -10,7 +10,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 
-public class FacturaProductoRepository implements CrudService{
+public class FacturaProductoRepository implements CrudRepository{
     private Connection conn;
 
     public FacturaProductoRepository(Connection conn){
@@ -48,3 +48,4 @@ public class FacturaProductoRepository implements CrudService{
         return null;
     }
 }
+

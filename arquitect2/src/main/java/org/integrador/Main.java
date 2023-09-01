@@ -5,10 +5,8 @@ import org.integrador.Db.DbConnectionDAO;
 import org.integrador.Db.PostgresConnectionDAO;
 import org.integrador.Entities.Cliente;
 import org.integrador.Entities.Producto;
-import org.integrador.Service.ClienteService;
-import org.integrador.Service.FacturaProductoService;
-import org.integrador.Service.FacturaService;
-import org.integrador.Service.ProductoService;
+import org.integrador.Service.*;
+
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.SQLException;
@@ -33,19 +31,20 @@ public class Main {
         //creo todas las tablas de cada entidad
         db.createAllTables();
         System.out.println("Tablas creadas");
-        ProductoService productoService = new ProductoService(conn);
-        ClienteService clienteService = new ClienteService(conn);
-        FacturaProductoService facturaProductoService = new FacturaProductoService(conn);
-        FacturaService facturaService = new FacturaService(conn);
+        Factory factory = new Factory();
+        ProductoRepository productoRepository = factory.createProductoRepository(conn);
+        ClienteRepository clienteRepository = factory.createClienteRepository(conn);
+        FacturaProductoRepository facturaProductoRepository = factory.createFacturaProductoRepository(conn);
+        FacturaRepository facturaRepository = factory.createFacturaRepository(conn);
         //lee todos los archivos y hace los insert de todo
-        CsvReader csv = new CsvReader(productoService, clienteService, facturaProductoService, facturaService);
+        CsvReader csv = new CsvReader(productoRepository, clienteRepository, facturaProductoRepository, facturaRepository);
         System.out.println("Inserts de todas las tablas listas");
         //punto3
         System.out.println("PUNTO 3");
-        Producto p = facturaProductoService.getMostRecaudationProduct();
+        Producto p = facturaProductoRepository.getMostRecaudationProduct();
         System.out.println(p);
         System.out.println("---------------------------------------------");
-        ArrayList<Cliente> arr = (ArrayList<Cliente>) clienteService.getAllClientByMostRecepte();
+        ArrayList<Cliente> arr = (ArrayList<Cliente>) clienteRepository.getAllClientByMostRecepte();
         System.out.println("PUNTO 4");
         for (Cliente c: arr){
             System.out.println(c);
