@@ -7,13 +7,11 @@ import org.integrador.Entities.Cliente;
 import org.integrador.Entities.Factura;
 import org.integrador.Entities.FacturaProducto;
 import org.integrador.Entities.Producto;
-import org.integrador.Service.ClienteRepository;
-import org.integrador.Service.FacturaProductoRepository;
-import org.integrador.Service.FacturaRepository;
-import org.integrador.Service.ProductoRepository;
-import org.integrador.CsvFiles.*;
+import org.integrador.Repository.ClienteRepository;
+import org.integrador.Repository.FacturaProductoRepository;
+import org.integrador.Repository.FacturaRepository;
+import org.integrador.Repository.ProductoRepository;
 
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.sql.SQLException;

@@ -1,7 +1,6 @@
-package org.integrador.Service;
+package org.integrador.Repository;
 
 import java.sql.SQLException;
-import java.util.List;
 
 public interface CrudRepository {
     public void create(Object obj) throws SQLException;

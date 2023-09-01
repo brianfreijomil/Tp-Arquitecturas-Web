@@ -1,8 +1,5 @@
-package org.integrador.Service;
-import org.integrador.Db.DbConnectionDAO;
-import org.integrador.Db.PostgresConnectionDAO;
+package org.integrador.Repository;
 import org.integrador.Entities.Cliente;
-import org.integrador.Service.CrudRepository;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;

@@ -7,22 +7,13 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class PostgresConnectionDAO extends DbConnectionDAO{
-
-    private String portDB;
-    private String nameDB;
-    private String userDB;
-    private String passwordDB;
-
-    public PostgresConnectionDAO(String portDB, String nameDB, String userDB, String passwordDB){
-        this.portDB = portDB;
-        this.nameDB = nameDB;
-        this.userDB = userDB;
-        this.passwordDB = passwordDB;
+    public PostgresConnectionDAO(){
     }
+
     @Override
     public Connection getConnection() throws SQLException {
         if(this.conn == null){
-            this.conn = DriverManager.getConnection("jdbc:postgresql://localhost:"+portDB+"/"+nameDB+"?user="+userDB+"&&password="+passwordDB+"");
+            this.conn = DriverManager.getConnection("jdbc:postgresql://localhost:5432/?user=postgres&&password=Bm43803168");
             return this.conn;
         }
 

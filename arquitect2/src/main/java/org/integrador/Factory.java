@@ -1,7 +1,10 @@
-package org.integrador.Service;
+package org.integrador;
 import org.integrador.Db.DbConnectionDAO;
 import org.integrador.Db.PostgresConnectionDAO;
-import org.integrador.Entities.Factura;
+import org.integrador.Repository.ClienteRepository;
+import org.integrador.Repository.FacturaProductoRepository;
+import org.integrador.Repository.FacturaRepository;
+import org.integrador.Repository.ProductoRepository;
 
 import java.sql.Connection;
 import java.sql.SQLException;
@@ -10,21 +13,34 @@ public class Factory {
     private DbConnectionDAO db;
     private Connection conn;
 
-    public Factory(String portDB, String nameDB, String userDB, String passwordDB) throws SQLException {
-        this.db = new PostgresConnectionDAO(portDB,nameDB,userDB,passwordDB);
+    private static Factory instance;
+
+    public static Factory getInstance() throws SQLException {
+        if(instance == null){
+            instance = new Factory();
+        }
+
+        return instance;
+    }
+
+    private Factory(){
+        this.db = new PostgresConnectionDAO();
     }
 
     public void initDB() throws SQLException {
-        this.conn = this.db.getConnection();
-        this.db.dropTables();
-        this.db.createAllTables();
+        if(this.conn == null && this.db != null){
+            this.conn = this.db.getConnection();
+            this.db.dropTables();
+            this.db.createAllTables();
+        }
     }
 
     public void closeDB() throws SQLException {
-        this.db.closeConnection();
+        if(this.conn != null){
+            this.db.closeConnection();
+            this.db = null;
+        }
     }
-
-
     public ClienteRepository createClienteRepository() {
         return ClienteRepository.getInstance(conn);
     }

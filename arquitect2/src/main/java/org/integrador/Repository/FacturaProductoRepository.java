@@ -1,7 +1,5 @@
-package org.integrador.Service;
+package org.integrador.Repository;
 
-import org.integrador.Db.DbConnectionDAO;
-import org.integrador.Entities.Factura;
 import org.integrador.Entities.FacturaProducto;
 import org.integrador.Entities.Producto;
 
@@ -9,7 +7,6 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.List;
 
 public class FacturaProductoRepository implements CrudRepository{
 
