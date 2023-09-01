@@ -13,8 +13,8 @@ import java.util.List;
 public class FacturaProductoService implements CrudService{
     private Connection conn;
 
-    public FacturaProductoService(Connection conn){
-        this.conn =conn;
+    public FacturaProductoService(){
+
     }
 
     @Override

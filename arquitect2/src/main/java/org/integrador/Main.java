@@ -5,10 +5,8 @@ import org.integrador.Db.DbConnectionDAO;
 import org.integrador.Db.PostgresConnectionDAO;
 import org.integrador.Entities.Cliente;
 import org.integrador.Entities.Producto;
-import org.integrador.Service.ClienteService;
-import org.integrador.Service.FacturaProductoService;
-import org.integrador.Service.FacturaService;
-import org.integrador.Service.ProductoService;
+import org.integrador.Service.*;
+
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.SQLException;
@@ -33,10 +31,11 @@ public class Main {
         //creo todas las tablas de cada entidad
         db.createAllTables();
         System.out.println("Tablas creadas");
-        ProductoService productoService = new ProductoService(conn);
-        ClienteService clienteService = new ClienteService(conn);
-        FacturaProductoService facturaProductoService = new FacturaProductoService(conn);
-        FacturaService facturaService = new FacturaService(conn);
+        Factory factory = new Factory();
+        ProductoService productoService = factory.createProductoService();
+        ClienteService clienteService = factory.createClienteService();
+        FacturaProductoService facturaProductoService = factory.createFacturaProductoService();
+        FacturaService facturaService = factory.createFacturaService();
         //lee todos los archivos y hace los insert de todo
         CsvReader csv = new CsvReader(productoService, clienteService, facturaProductoService, facturaService);
         System.out.println("Inserts de todas las tablas listas");

@@ -14,9 +14,7 @@ public class ClienteService implements CrudService{
 
     private Connection conn;
 
-    public ClienteService(Connection conn){
-        this.conn = conn;
-    }
+    public ClienteService(){}
 
     @Override
     public void create(Object obj) {

@@ -11,8 +11,8 @@ import java.util.List;
 public class FacturaService implements CrudService{
     private Connection conn;
 
-    public FacturaService(Connection conn){
-        this.conn = conn;
+    public FacturaService(){
+
     }
     @Override
     public void create(Object obj) {

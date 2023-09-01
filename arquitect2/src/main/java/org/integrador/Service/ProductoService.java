@@ -11,8 +11,7 @@ public class ProductoService implements CrudService{
 
     private Connection conn;
 
-    public ProductoService(Connection conn){
-        this.conn = conn;
+    public ProductoService(){
     }
     @Override
     public void create(Object obj) {
