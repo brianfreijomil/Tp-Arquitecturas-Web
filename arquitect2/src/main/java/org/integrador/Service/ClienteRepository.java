@@ -10,11 +10,11 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ClienteService implements CrudService{
+public class ClienteRepository implements CrudService{
 
     private Connection conn;
 
-    public ClienteService(Connection conn){
+    public ClienteRepository(Connection conn){
         this.conn = conn;
     }
 

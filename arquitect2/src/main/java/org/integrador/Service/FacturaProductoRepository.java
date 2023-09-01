@@ -10,10 +10,10 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 
-public class FacturaProductoService implements CrudService{
+public class FacturaProductoRepository implements CrudService{
     private Connection conn;
 
-    public FacturaProductoService(Connection conn){
+    public FacturaProductoRepository(Connection conn){
         this.conn =conn;
     }
 

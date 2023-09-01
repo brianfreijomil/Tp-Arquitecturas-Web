@@ -8,10 +8,10 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.List;
 
-public class FacturaService implements CrudService{
+public class FacturaRepository implements CrudService{
     private Connection conn;
 
-    public FacturaService(Connection conn){
+    public FacturaRepository(Connection conn){
         this.conn = conn;
     }
     @Override

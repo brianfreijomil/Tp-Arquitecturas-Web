@@ -7,11 +7,11 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.List;
 
-public class ProductoService implements CrudService{
+public class ProductoRepository implements CrudService{
 
     private Connection conn;
 
-    public ProductoService(Connection conn){
+    public ProductoRepository(Connection conn){
         this.conn = conn;
     }
     @Override
