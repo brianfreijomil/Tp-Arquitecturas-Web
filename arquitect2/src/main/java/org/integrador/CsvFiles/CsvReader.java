@@ -16,6 +16,7 @@ import org.integrador.CsvFiles.*;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.sql.SQLException;
 
 public class CsvReader {
     private ProductoRepository productoRepository;
@@ -24,7 +25,7 @@ public class CsvReader {
     private FacturaRepository facturaRepository;
     private static final String userDir = System.getProperty("user.dir")+"/src/main/java/org/integrador/CsvFiles/";
 
-    public CsvReader(ProductoRepository p, ClienteRepository c, FacturaProductoRepository fp, FacturaRepository f) throws IOException {
+    public CsvReader(ProductoRepository p, ClienteRepository c, FacturaProductoRepository fp, FacturaRepository f) throws IOException, SQLException {
         this.productoRepository = p;
         this.clienteRepository = c;
         this.facturaProductoRepository = fp;
@@ -35,7 +36,7 @@ public class CsvReader {
         this.loadFacturaProducto(facturaProductoRepository);
     }
 
-    private void loadFacturaProducto(FacturaProductoRepository facturaProductoRepository) throws IOException {
+    private void loadFacturaProducto(FacturaProductoRepository facturaProductoRepository) throws IOException, SQLException {
         CSVParser parser = CSVFormat.DEFAULT.withHeader().parse(new
                 FileReader(userDir+"facturas-productos.csv"));
         for(CSVRecord row: parser) {
@@ -47,7 +48,7 @@ public class CsvReader {
         }
     }
 
-    private void loadFactura(FacturaRepository facturaRepository) throws IOException {
+    private void loadFactura(FacturaRepository facturaRepository) throws IOException, SQLException {
         CSVParser parser = CSVFormat.DEFAULT.withHeader().parse(new
                 FileReader(userDir+"facturas.csv"));
         for(CSVRecord row: parser) {
@@ -58,7 +59,7 @@ public class CsvReader {
         }
     }
 
-    private void loadCliente(ClienteRepository clienteRepository) throws IOException {
+    private void loadCliente(ClienteRepository clienteRepository) throws IOException, SQLException {
         CSVParser parser = CSVFormat.DEFAULT.withHeader().parse(new
                 FileReader(userDir+"clientes.csv"));
         for(CSVRecord row: parser) {
@@ -71,7 +72,7 @@ public class CsvReader {
     }
 
 
-    private void loadProduct(ProductoRepository productoRepository) throws IOException {
+    private void loadProduct(ProductoRepository productoRepository) throws IOException, SQLException {
         CSVParser parser = CSVFormat.DEFAULT.withHeader().parse(new
                 FileReader(userDir+"productos.csv"));
         for(CSVRecord row: parser) {

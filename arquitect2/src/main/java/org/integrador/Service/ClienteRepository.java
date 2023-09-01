@@ -1,4 +1,6 @@
 package org.integrador.Service;
+import org.integrador.Db.DbConnectionDAO;
+import org.integrador.Db.PostgresConnectionDAO;
 import org.integrador.Entities.Cliente;
 import org.integrador.Service.CrudRepository;
 
@@ -11,25 +13,29 @@ import java.util.List;
 
 public class ClienteRepository implements CrudRepository {
 
+    private static ClienteRepository instance;
     private Connection conn;
 
-    public ClienteRepository(Connection conn){
+    private ClienteRepository(Connection conn){
         this.conn = conn;
     }
 
-    @Override
-    public void create(Object obj) {
-        try{
-            Cliente c = (Cliente) obj;
-            String sql = "INSERT INTO cliente(idCliente, nombre, email) VALUES(?,?,?)";
-            PreparedStatement ps = this.conn.prepareStatement(sql);
-            ps.setInt(1, c.getIdCliente());
-            ps.setString(2, c.getName());
-            ps.setString(3, c.getName());
-            ps.execute();
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
+    public static ClienteRepository getInstance(Connection conn) {
+        if (instance == null) {
+            instance = new ClienteRepository(conn);
         }
+        return instance;
+    }
+
+    @Override
+    public void create(Object obj) throws SQLException {
+        Cliente c = (Cliente) obj;
+        String sql = "INSERT INTO cliente(idCliente, nombre, email) VALUES(?,?,?)";
+        PreparedStatement ps = this.conn.prepareStatement(sql);
+        ps.setInt(1, c.getIdCliente());
+        ps.setString(2, c.getName());
+        ps.setString(3, c.getName());
+        ps.execute();
     }
 
 
