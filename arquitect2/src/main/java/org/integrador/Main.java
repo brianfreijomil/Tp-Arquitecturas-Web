@@ -12,19 +12,15 @@ import java.util.Scanner;
 
 public class Main {
 
-    public static ProductoRepository productoRepository;
-    public static ClienteRepository clienteRepository;
-    public static FacturaRepository facturaRepository;
-    public static FacturaProductoRepository facturaProductoRepository;
     public static void main(String[] args) throws SQLException, IOException {
 
         //creo factory y sus repositories
         Factory factory = Factory.getInstance();
         factory.initDB();
-        productoRepository = factory.createProductoRepository();
-        clienteRepository = factory.createClienteRepository();
-        facturaProductoRepository = factory.createFacturaProductoRepository();
-        facturaRepository = factory.createFacturaRepository();
+        ProductoRepository productoRepository = factory.createProductoRepository();
+        ClienteRepository clienteRepository = factory.createClienteRepository();
+        FacturaProductoRepository facturaProductoRepository = factory.createFacturaProductoRepository();
+        FacturaRepository facturaRepository = factory.createFacturaRepository();
 
         //lee todos los archivos y puebla todas las tablas
         CsvReader csv = new CsvReader(productoRepository, clienteRepository, facturaProductoRepository, facturaRepository);
