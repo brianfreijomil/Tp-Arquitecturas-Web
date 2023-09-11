@@ -13,7 +13,7 @@ public class PostgresConnectionDAO extends DbConnectionDAO{
     @Override
     public Connection getConnection() throws SQLException {
         if(this.conn == null){
-            this.conn = DriverManager.getConnection("jdbc:postgresql://localhost:5432/?user=postgres&&password=Bm43803168");
+            this.conn = DriverManager.getConnection("jdbc:postgresql://localhost:5432/?user=postgres&&password=postgres");
             return this.conn;
         }
 
