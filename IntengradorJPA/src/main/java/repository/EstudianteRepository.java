@@ -32,6 +32,7 @@ public class EstudianteRepository implements CrudRepository {
         emf.close();
     }
 
+
     @Override
     public void delete(Object o) {
 
@@ -57,7 +58,8 @@ public class EstudianteRepository implements CrudRepository {
 
     public void selectByNroLibreta(int nro_libreta){
         em.getTransaction().begin();
-        TypedQuery<Estudiante> estudianteTypedQuery = em.createQuery("SELECT e FROM Estudiante e WHERE e.nro_libreta=nro_libreta", Estudiante.class);
+        TypedQuery<Estudiante> estudianteTypedQuery = em.createQuery("SELECT e FROM Estudiante e WHERE e.nro_libreta=?1", Estudiante.class);
+        estudianteTypedQuery.setParameter(1, nro_libreta);
         for(Estudiante e:estudianteTypedQuery.getResultList()) {
             System.out.println(e.getName()+ " " + e.getLastName());
         }
@@ -66,9 +68,10 @@ public class EstudianteRepository implements CrudRepository {
         emf.close();
     }
 
-    public void selectByGenre(String genre){
+    public void selectByGenre(String gen){
         em.getTransaction().begin();
-        TypedQuery<Estudiante> estudianteTypedQuery = em.createQuery("SELECT e FROM Estudiante e WHERE e.genre=genre", Estudiante.class);
+        TypedQuery<Estudiante> estudianteTypedQuery = em.createQuery("SELECT e FROM Estudiante e WHERE e.genre =?1", Estudiante.class);
+        estudianteTypedQuery.setParameter(1, gen);
         for(Estudiante e:estudianteTypedQuery.getResultList()) {
             System.out.println(e.getName()+ " " + e.getLastName()+", Carrera/s: "+e.getCarrera());
         }

@@ -2,6 +2,7 @@ package entities;
 
 import javax.persistence.*;
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 @Entity
@@ -34,7 +35,7 @@ public class Estudiante {
         this.genre = genre;
         this.nro_libreta = nro_libreta;
         this.city = city;
-        this.carreras = new ArrayList<>();
+        this.carreras = new LinkedList<>();
         carreras.add(c);
     }
 

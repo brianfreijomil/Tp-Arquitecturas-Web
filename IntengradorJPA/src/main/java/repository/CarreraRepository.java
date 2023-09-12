@@ -63,11 +63,15 @@ public class CarreraRepository implements CrudRepository {
         List<Carrera> carreras = em.createQuery("SELECT c FROM Carrera c").getResultList();
         System.out.println("Carreras");
         for (Carrera car: carreras) {
-                System.out.println(car.getName()+", Duracion: "+car.getDuracion()+" años");
+                System.out.println(car.getName()+", Duracion: "+car.getDuracion()+" años"+", Cantidad de inscriptos: "+car.getEstudiantes());
         }
         em.getTransaction().commit();
         em.close();
         emf.close();
     }
 
+    public void orderByCantidadInscriptos(){
+        em.getTransaction().begin();
+
+    }
 }

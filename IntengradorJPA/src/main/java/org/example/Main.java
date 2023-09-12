@@ -30,9 +30,14 @@ public class Main {
         EstudianteRepository estudianteRepository = factory.createEstudianteRepository();
 
         Estudiante e1 = new Estudiante(43511155,"Lucas Roman", "Amendola", 22, "masculino", 251157, "tandil", c1);
-        //e1.addCarrera(c1);
+        Estudiante e2 = new Estudiante(43123654,"Jose", "Lopez", 22, "masculino", 251156, "tandil", c1);
+        Estudiante e3 = new Estudiante(43098567,"Bruno", "Montero", 22, "masculino", 251155, "tandil", c1);
+        Estudiante e4 = new Estudiante(43345910,"Micaela", "Espindola", 22, "femenino", 251154, "tandil", c1);
+        Estudiante e5 = new Estudiante(43346971,"Martina", "Acevedo", 22, "femenino", 251153, "tandil", c1);
+        Estudiante e6 = new Estudiante(43009345,"Camila", "Jauregui", 22, "femenino", 251152, "tandil", c1);
+        Estudiante e7 = new Estudiante(43561309,"Alberto", "Fernandez", 22, "masculino", 251151, "tandil", c1);
+        Estudiante e8 = new Estudiante(42567001,"Tobias", "Palacios", 22, "masculino", 251159, "tandil", c1);
 
-        //carreraRepository.selectAll();
-        estudianteRepository.selectAll();
+        estudianteRepository.selectByGenre("masculino");
     }
 }
