@@ -1,27 +1,24 @@
 package main.practico2.entities;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
 
 @Entity
 public class Jugador {
     
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
+    @Column(nullable = false)
+    private String nombre;
     @Column(nullable = false)
     private String posicion;
     @ManyToOne
     private Equipo equipo;
-
-    //posicion(arquero, defensa, mediocampo, delantera)
-    //equipo
     public Jugador() {
         super();
     }
 
-    public Jugador(int id,String posicion,Equipo equipo) {
+    public Jugador(String nombre,String posicion,Equipo equipo) {
         super();
         this.id=id;
         this.posicion=posicion;

@@ -7,6 +7,7 @@ import java.util.List;
 public class Equipo {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
     @Column(nullable = false)
     private String nombre;
@@ -16,13 +17,12 @@ public class Equipo {
     private List<Jugador> jugadores; //7 titulares, 3 suplentes
     @ManyToOne
     private Torneo torneo;
-    //puede o no representar a una entidad/firma comercial
 
     public Equipo() {
         super();
     }
 
-    public Equipo(int id,String nombre,String tecnico) {
+    public Equipo(String nombre,String tecnico) {
         super();
         this.id=id;
         this.nombre=nombre;

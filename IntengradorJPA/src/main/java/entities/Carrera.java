@@ -7,19 +7,24 @@ import java.util.List;
 @Entity
 public class Carrera {
 
+    /*
+    * Nombre
+    * duracion en años
+    * */
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
-    @Column(nullable = false)
+    @Column(name = "nombre", nullable = false)
     private String name;
-    @Column(name = "duracion")
+    @Column(name = "duracion_anios")
     private int duracion;
-    @ManyToMany
-    private List<Estudiante> estudiantes;
 
     public Carrera() {
+        super();
     }
     public Carrera(String name, int duracion) {
+        super();
         this.name = name;
         this.duracion = duracion;
     }
@@ -42,10 +47,6 @@ public class Carrera {
 
     public void setDuracion(int duracion) {
         this.duracion = duracion;
-    }
-
-    public int getEstudiantes(){
-        return this.estudiantes.size();
     }
 
     @Override

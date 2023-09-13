@@ -49,7 +49,7 @@ public class EstudianteRepository implements CrudRepository {
         @SuppressWarnings("unchecked")
         List<Estudiante> estudiantes = em.createQuery("SELECT e FROM Estudiante e").getResultList();
         for (Estudiante es: estudiantes) {
-            System.out.println(es.getName()+ " " + es.getLastName()+", Carrera/s: "+ es.getCarrera());
+            System.out.println(es.getName()+ " " + es.getLastName());
         }
         em.getTransaction().commit();
         em.close();
@@ -73,7 +73,7 @@ public class EstudianteRepository implements CrudRepository {
         TypedQuery<Estudiante> estudianteTypedQuery = em.createQuery("SELECT e FROM Estudiante e WHERE e.genre =?1", Estudiante.class);
         estudianteTypedQuery.setParameter(1, gen);
         for(Estudiante e:estudianteTypedQuery.getResultList()) {
-            System.out.println(e.getName()+ " " + e.getLastName()+", Carrera/s: "+e.getCarrera());
+            System.out.println(e.getName()+ " " + e.getLastName());
         }
         em.getTransaction().commit();
         em.close();

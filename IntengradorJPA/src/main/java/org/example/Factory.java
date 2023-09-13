@@ -1,6 +1,7 @@
 package org.example;
 
 import repository.CarreraRepository;
+import repository.EstudianteCarreraRepository;
 import repository.EstudianteRepository;
 
 import javax.persistence.EntityManager;
@@ -33,4 +34,7 @@ public class Factory {
         return EstudianteRepository.getInstance(em,emf);
     }
 
+    public EstudianteCarreraRepository createEstudianteCarreraRepository() {
+        return EstudianteCarreraRepository.getInstance(em,emf);
+    }
 }

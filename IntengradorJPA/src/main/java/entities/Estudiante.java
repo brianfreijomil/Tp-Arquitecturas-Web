@@ -7,45 +7,48 @@ import java.util.List;
 
 @Entity
 public class Estudiante {
+
+    /*
+    * NroLegajo
+    * DNI
+    * Nombres
+    * Apellido
+    * Genero
+    * Edad
+    * Ciudad
+    */
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
-    @Column(name = "dni")
+    @Column
     private int dni;
     @Column(nullable = false)
-    private String name;
+    private String names;
     @Column(nullable = false, name = "lastName")
     private String lastName;
-    @Column(name = "age")
+    @Column(name = "edad")
     private int age;
-    @Column(name = "genre", nullable = true)
+    @Column(name = "genero", nullable = true)
     private String genre;
-    @Column(name = "nro_libreta")
+    @Column
     private int nro_libreta;
     @Column(name = "ciudad")
     private String city;
-    @ManyToMany (mappedBy = "estudiantes")
-    private List<Carrera> carreras;
 
-    public Estudiante(int dni, String name, String lastName, int age,String genre, int nro_libreta, String city, Carrera c) {
+    public Estudiante() {
+        super();
+    }
+
+    public Estudiante(int dni, String names, String lastName, int age,String genre, int nro_libreta, String city) {
+        super();
         this.dni = dni;
-        this.name = name;
+        this.names = names;
         this.lastName = lastName;
         this.age = age;
         this.genre = genre;
         this.nro_libreta = nro_libreta;
         this.city = city;
-        this.carreras = new LinkedList<>();
-        carreras.add(c);
-    }
-
-    public Estudiante() {
-
-    }
-
-    public void addCarrera(Object o){
-        Carrera c = (Carrera) o;
-        this.carreras.add(c);
     }
 
     public String getGenre() {
@@ -64,11 +67,11 @@ public class Estudiante {
     }
 
     public String getName() {
-        return name;
+        return names;
     }
 
     public void setName(String name) {
-        this.name = name;
+        this.names = name;
     }
 
     public String getLastName() {
@@ -102,22 +105,8 @@ public class Estudiante {
     public void setCity(String city) {
         this.city = city;
     }
-
-    public List<Carrera> getCarrera() {
-        return this.carreras;
-    }
-
-
     @Override
     public String toString() {
-        return "Estudiante{" +
-                "dni=" + dni +
-                ", name='" + name + '\'' +
-                ", lastName='" + lastName + '\'' +
-                ", age=" + age +
-                ", genre="+ genre+
-                ", nro_libreta=" + nro_libreta +
-                ", city=" + city +
-                '}';
+        return "Estudiante: "+names+", "+lastName+". "+city;
     }
 }

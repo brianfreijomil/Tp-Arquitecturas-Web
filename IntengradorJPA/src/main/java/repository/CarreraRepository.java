@@ -29,13 +29,12 @@ public class CarreraRepository implements CrudRepository {
         Carrera c = (Carrera) o;
         if(em.isOpen()){
             em.persist(c);
-            em.getTransaction().commit();
         }
         else {
             em.getTransaction().begin();
             em.persist(c);
-            em.getTransaction().commit();
         }
+        em.getTransaction().commit();
         em.close();
         emf.close();
     }
@@ -63,7 +62,7 @@ public class CarreraRepository implements CrudRepository {
         List<Carrera> carreras = em.createQuery("SELECT c FROM Carrera c").getResultList();
         System.out.println("Carreras");
         for (Carrera car: carreras) {
-                System.out.println(car.getName()+", Duracion: "+car.getDuracion()+" años"+", Cantidad de inscriptos: "+car.getEstudiantes());
+                System.out.println(car.getName()+", Duracion: "+car.getDuracion()+" años"+", Cantidad de inscriptos: ");
         }
         em.getTransaction().commit();
         em.close();

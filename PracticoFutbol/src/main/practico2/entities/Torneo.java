@@ -7,17 +7,18 @@ import java.util.List;
 public class Torneo {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
     @Column(nullable = false)
     private String nombre;
-    @ManyToOne
+    @OneToMany
     private List<Equipo> equipos; //predefinida
 
     public Torneo() {
         super();
     }
 
-    public Torneo(int id,String nombre) {
+    public Torneo(String nombre) {
         super();
         this.id=id;
         this.nombre=nombre;
