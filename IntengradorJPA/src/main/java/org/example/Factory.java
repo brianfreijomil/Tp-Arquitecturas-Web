@@ -12,7 +12,6 @@ import java.sql.SQLException;
 public class Factory {
     private static Factory instance;
     private EntityManagerFactory emf;
-    private EntityManager em;
 
     public static Factory getInstance() throws SQLException {
         if(instance == null){
@@ -24,22 +23,21 @@ public class Factory {
 
     private Factory(){
         this.emf = Persistence.createEntityManagerFactory("Integrador2");
-        this.em = emf.createEntityManager();
     }
 
     public CarreraRepository createCarreraRepository() {
-        return CarreraRepository.getInstance(em);
+        return CarreraRepository.getInstance(emf);
     }
     public EstudianteRepository createEstudianteRepository() {
-        return EstudianteRepository.getInstance(em);
+        return EstudianteRepository.getInstance(emf);
     }
 
     public EstudianteCarreraRepository createEstudianteCarreraRepository() {
-        return EstudianteCarreraRepository.getInstance(em);
+        return EstudianteCarreraRepository.getInstance(emf);
     }
 
-    public void closeEntityManager() {
-        em.close();
+    public void closeEntityManagerFactory() {
         emf.close();
     }
+
 }

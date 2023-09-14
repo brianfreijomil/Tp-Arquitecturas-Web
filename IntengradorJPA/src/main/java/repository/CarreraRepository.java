@@ -9,45 +9,52 @@ import javax.persistence.Persistence;
 import java.util.List;
 
 public class CarreraRepository {
+    private EntityManagerFactory emf;
     private EntityManager em;
     private static CarreraRepository instance;
 
-    private CarreraRepository(EntityManager em){
-        this.em = em;
+    private CarreraRepository(EntityManagerFactory emf){
+        this.emf = emf;
     }
 
-    public static CarreraRepository getInstance(EntityManager em){
+    public static CarreraRepository getInstance(EntityManagerFactory emf){
         if(instance==null){
-            return new CarreraRepository(em);
+            return new CarreraRepository(emf);
         }
         return instance;
     }
 
     public void insert(Carrera c) {
+        em = emf.createEntityManager();
         if(em.getTransaction().isActive()){ //chequeo si la transaccion no esta activa (no deberia)
             em.getTransaction().rollback();//tiro abajo transaccion erroneamente abierta
         }
         em.getTransaction().begin(); //inicio transaccion nueva
         em.persist(c);
         em.getTransaction().commit();
+        em.close();
     }
 
     public void delete(Object o) {
+        em = emf.createEntityManager();
     }
 
     public void deleteByName(Carrera c) {
+        em = emf.createEntityManager();
         em.getTransaction().begin();
         em.remove(c);
         em.getTransaction().commit();
+        em.close();
     }
 
 
     public void update(Object o) {
-
+        em = emf.createEntityManager();
     }
 
 
     public void selectAll() {
+        em = emf.createEntityManager();
         em.getTransaction().begin();
         @SuppressWarnings("unchecked")
         List<Carrera> carreras = em.createQuery("SELECT c FROM Carrera c").getResultList();
@@ -56,10 +63,10 @@ public class CarreraRepository {
                 System.out.println(car.getName()+", Duracion: "+car.getDuracion()+" años"+", Cantidad de inscriptos: ");
         }
         em.getTransaction().commit();
+        em.close();
     }
 
     public void orderByCantidadInscriptos(){
-        em.getTransaction().begin();
-
+        em = emf.createEntityManager();
     }
 }
