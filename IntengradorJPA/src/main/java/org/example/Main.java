@@ -14,6 +14,7 @@ import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.ArrayList;
+import java.util.List;
 
 public class Main {
     public static void main(String[] args) throws SQLException {
@@ -26,9 +27,33 @@ public class Main {
         EstudianteRepository estudianteRepository = factory.createEstudianteRepository();
         EstudianteCarreraRepository estudianteCarreraRepository = factory.createEstudianteCarreraRepository();
 
-        //FALTARIA INSERTAR TODOS LOS DATOS DE LA TABLA ESTUDIANTE_CARRERA EN BASE A
-        //LOS ESTUDIANTES QUE HAY CARGADOS
-        //HAY QUE TRAER TODOS LOS ESTUDIANTES , TRAER LAS CARRERAS A LOS QUE LAS QUERES MATRICULAR ETC ETC
+        //a) dar de alta un estudiante
+        Estudiante estudiante = new Estudiante(43508754,"Roberto","Baggio",45,"Macho",234567,"Tanndil");
+        estudianteRepository.insert(estudiante);
 
+        //b) matricular un estudiante en una carrera
+        String carreraBuscada = "Tudai";
+        Carrera carrera = carreraRepository.selectByName(carreraBuscada);
+        EstudianteCarreraId pkEstudianteCarrera = new EstudianteCarreraId(estudiante,carrera);
+        EstudianteCarrera matriculacion = new EstudianteCarrera(pkEstudianteCarrera,Timestamp.valueOf(LocalDateTime.now()),false);
+
+        //c) recuperar todos los estudiantes, y especificar algún criterio de ordenamiento simple.
+        List<Estudiante> estudiantes = estudianteRepository.selectAll();
+
+        //d) recuperar un estudiante, en base a su número de libreta universitaria.
+        int legajoBuscado = 123456;
+        Estudiante estduantePorLegajo = estudianteRepository.selectByNroLibreta(legajoBuscado);
+
+
+        //e) recuperar todos los estudiantes, en base a su género.
+        String genero = "masculino";
+        List<Estudiante> estudiantesXgenero = estudianteRepository.selectByGenre(genero);
+
+
+        //f) recuperar las carreras con estudiantes inscriptos, y ordenar por cantidad de inscriptos.
+
+
+
+        //g) recuperar los estudiantes de una determinada carrera, filtrado por ciudad de residencia.
     }
 }

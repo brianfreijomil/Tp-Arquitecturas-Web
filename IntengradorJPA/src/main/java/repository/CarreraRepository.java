@@ -52,6 +52,26 @@ public class CarreraRepository {
         em = emf.createEntityManager();
     }
 
+    public Carrera selectById(int id) {  //a mejorar
+        em = emf.createEntityManager();
+        em.getTransaction().begin();
+        Carrera c = em.find(Carrera.class,id);
+        em.getTransaction().commit();
+        em.close();
+        return c;
+    }
+
+    public Carrera selectByName(String s) {  //a mejorar
+        em = emf.createEntityManager();
+        em.getTransaction().begin();
+        List<Carrera> c = em.createQuery("select c from Carrera c where c.name like :s")
+                .setParameter(s,"s")
+                .getResultList();
+        em.getTransaction().commit();
+        em.close();
+        return c.get(0);
+    }
+
 
     public void selectAll() {
         em = emf.createEntityManager();

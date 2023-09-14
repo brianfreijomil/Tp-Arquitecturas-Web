@@ -46,39 +46,34 @@ public class EstudianteRepository implements CrudRepository<Estudiante> {
         em.close();
     }
 
-    public void selectAll() {
+    public List<Estudiante> selectAll() {
         em = emf.createEntityManager();
         em.getTransaction().begin();
-        @SuppressWarnings("unchecked")
-        List<Estudiante> estudiantes = em.createQuery("SELECT e FROM Estudiante e").getResultList();
-        for (Estudiante es: estudiantes) {
-            System.out.println(es.getName()+ " " + es.getLastName());
-        }
+        //falta criterio de ordenacion
+        List<Estudiante> estudiantes = em.createQuery("SELECT e FROM Estudiante e")
+                .getResultList();
         em.getTransaction().commit();
         em.close();
+        return estudiantes;
     }
 
-    public void selectByNroLibreta(int nro_libreta){
+    public Estudiante selectByNroLibreta(int nro_libreta){ //arreglar query
         em = emf.createEntityManager();
         em.getTransaction().begin();
-        TypedQuery<Estudiante> estudianteTypedQuery = em.createQuery("SELECT e FROM Estudiante e WHERE e.nro_libreta=?1", Estudiante.class);
-        estudianteTypedQuery.setParameter(1, nro_libreta);
-        for(Estudiante e:estudianteTypedQuery.getResultList()) {
-            System.out.println(e.getName()+ " " + e.getLastName());
-        }
+        List<Estudiante> result = em.createQuery("SELECT e FROM Estudiante e WHERE e.nro_libreta = :nro_libreta")
+                .setParameter(nro_libreta, "nro_libreta").getResultList();
         em.getTransaction().commit();
         em.close();
+        return result.get(0);
     }
 
-    public void selectByGenre(String gen){
+    public List<Estudiante> selectByGenre(String gen){ //arreglar query
         em = emf.createEntityManager();
         em.getTransaction().begin();
-        TypedQuery<Estudiante> estudianteTypedQuery = em.createQuery("SELECT e FROM Estudiante e WHERE e.genre =?1", Estudiante.class);
-        estudianteTypedQuery.setParameter(1, gen);
-        for(Estudiante e:estudianteTypedQuery.getResultList()) {
-            System.out.println(e.getName()+ " " + e.getLastName());
-        }
+        List<Estudiante> result = em.createQuery("SELECT e FROM Estudiante e WHERE e.genre = :genero")
+        .setParameter(gen, "genero").getResultList();
         em.getTransaction().commit();
         em.close();
+        return result;
     }
 }
