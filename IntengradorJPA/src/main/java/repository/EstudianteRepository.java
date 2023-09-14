@@ -5,45 +5,40 @@ import entities.Estudiante;
 import javax.persistence.*;
 import java.util.List;
 
-public class EstudianteRepository implements CrudRepository {
+public class EstudianteRepository implements CrudRepository<Estudiante> {
      private static EstudianteRepository instance;
-     private EntityManagerFactory emf;
      private EntityManager em;
 
-    private EstudianteRepository(EntityManager em, EntityManagerFactory emf) {
+    private EstudianteRepository(EntityManager em) {
         this.em = em;
-        this.emf = emf;
     }
 
-    public static EstudianteRepository getInstance(EntityManager em, EntityManagerFactory emf){
+    public static EstudianteRepository getInstance(EntityManager em){
         if(instance==null){
-            return new EstudianteRepository(em,emf);
+            return new EstudianteRepository(em);
         }
         return instance;
     }
 
     @Override
-    public void insert(Object o) {
-        Estudiante e = (Estudiante) o;
-        em.getTransaction().begin();
+    public void insert(Estudiante e) {
+        if(em.getTransaction().isActive()){ //chequeo si la transaccion no esta activa (no deberia)
+            em.getTransaction().rollback();//tiro abajo transaccion erroneamente abierta
+        }
+        em.getTransaction().begin(); //inicio transaccion nueva
         em.persist(e);
         em.getTransaction().commit();
-        em.close();
-        emf.close();
     }
 
-
     @Override
-    public void delete(Object o) {
+    public void delete(Estudiante e) {
 
     }
 
     @Override
-    public void update(Object o) {
-
+    public void update(Estudiante e) {
     }
 
-    @Override
     public void selectAll() {
         em.getTransaction().begin();
         @SuppressWarnings("unchecked")
@@ -52,8 +47,6 @@ public class EstudianteRepository implements CrudRepository {
             System.out.println(es.getName()+ " " + es.getLastName());
         }
         em.getTransaction().commit();
-        em.close();
-        emf.close();
     }
 
     public void selectByNroLibreta(int nro_libreta){
@@ -64,8 +57,6 @@ public class EstudianteRepository implements CrudRepository {
             System.out.println(e.getName()+ " " + e.getLastName());
         }
         em.getTransaction().commit();
-        em.close();
-        emf.close();
     }
 
     public void selectByGenre(String gen){
@@ -76,7 +67,5 @@ public class EstudianteRepository implements CrudRepository {
             System.out.println(e.getName()+ " " + e.getLastName());
         }
         em.getTransaction().commit();
-        em.close();
-        emf.close();
     }
 }

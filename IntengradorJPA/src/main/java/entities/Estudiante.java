@@ -8,16 +8,6 @@ import java.util.List;
 @Entity
 public class Estudiante {
 
-    /*
-    * NroLegajo
-    * DNI
-    * Nombres
-    * Apellido
-    * Genero
-    * Edad
-    * Ciudad
-    */
-
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;

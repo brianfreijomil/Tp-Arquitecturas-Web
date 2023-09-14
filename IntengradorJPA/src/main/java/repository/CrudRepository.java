@@ -1,9 +1,12 @@
 package repository;
 
-public interface CrudRepository {
-    void insert(Object o);
-    void delete(Object o);
-    void update (Object o);
+import entities.Estudiante;
+
+public interface CrudRepository<T> {
+    void insert(T o);
+
+    void delete(T o);
+    void update (T o);
     void selectAll();
 }
 

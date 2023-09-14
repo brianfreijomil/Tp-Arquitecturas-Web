@@ -9,6 +9,7 @@
         <class>entities.Estudiante</class>
         <class>entities.Carrera</class>
         <class>entities.Estudiante_Carrera</class>
+        <class>entities.EstudianteCarreraId</class>
 
         <properties>
             <property name="javax.persistence.jdbc.driver" value="org.postgresql.Driver"/>

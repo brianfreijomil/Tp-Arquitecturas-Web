@@ -7,11 +7,6 @@ import java.util.List;
 @Entity
 public class Carrera {
 
-    /*
-    * Nombre
-    * duracion en años
-    * */
-
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;

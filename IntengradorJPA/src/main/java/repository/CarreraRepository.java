@@ -8,37 +8,30 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import java.util.List;
 
-public class CarreraRepository implements CrudRepository {
-    private EntityManagerFactory emf;
+public class CarreraRepository {
     private EntityManager em;
     private static CarreraRepository instance;
 
-    private CarreraRepository(EntityManager em, EntityManagerFactory emf){
+    private CarreraRepository(EntityManager em){
         this.em = em;
-        this.emf = emf;
     }
 
-    public static CarreraRepository getInstance(EntityManager em, EntityManagerFactory emf){
+    public static CarreraRepository getInstance(EntityManager em){
         if(instance==null){
-            return new CarreraRepository(em,emf);
+            return new CarreraRepository(em);
         }
         return instance;
     }
-    @Override
-    public void insert(Object o) {
-        Carrera c = (Carrera) o;
-        if(em.isOpen()){
-            em.persist(c);
+
+    public void insert(Carrera c) {
+        if(em.getTransaction().isActive()){ //chequeo si la transaccion no esta activa (no deberia)
+            em.getTransaction().rollback();//tiro abajo transaccion erroneamente abierta
         }
-        else {
-            em.getTransaction().begin();
-            em.persist(c);
-        }
+        em.getTransaction().begin(); //inicio transaccion nueva
+        em.persist(c);
         em.getTransaction().commit();
-        em.close();
-        emf.close();
     }
-    @Override
+
     public void delete(Object o) {
     }
 
@@ -46,16 +39,14 @@ public class CarreraRepository implements CrudRepository {
         em.getTransaction().begin();
         em.remove(c);
         em.getTransaction().commit();
-        em.close();
-        emf.close();
     }
 
-    @Override
+
     public void update(Object o) {
 
     }
 
-    @Override
+
     public void selectAll() {
         em.getTransaction().begin();
         @SuppressWarnings("unchecked")
@@ -65,8 +56,6 @@ public class CarreraRepository implements CrudRepository {
                 System.out.println(car.getName()+", Duracion: "+car.getDuracion()+" años"+", Cantidad de inscriptos: ");
         }
         em.getTransaction().commit();
-        em.close();
-        emf.close();
     }
 
     public void orderByCantidadInscriptos(){

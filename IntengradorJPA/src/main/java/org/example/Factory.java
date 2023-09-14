@@ -28,13 +28,18 @@ public class Factory {
     }
 
     public CarreraRepository createCarreraRepository() {
-        return CarreraRepository.getInstance(em,emf);
+        return CarreraRepository.getInstance(em);
     }
     public EstudianteRepository createEstudianteRepository() {
-        return EstudianteRepository.getInstance(em,emf);
+        return EstudianteRepository.getInstance(em);
     }
 
     public EstudianteCarreraRepository createEstudianteCarreraRepository() {
-        return EstudianteCarreraRepository.getInstance(em,emf);
+        return EstudianteCarreraRepository.getInstance(em);
+    }
+
+    public void closeEntityManager() {
+        em.close();
+        emf.close();
     }
 }

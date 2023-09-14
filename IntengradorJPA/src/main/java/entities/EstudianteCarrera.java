@@ -7,22 +7,8 @@ import java.util.Date;
 
 @Entity(name = "estudiante_carrera")
 public class EstudianteCarrera {
-
-    /*
-    * idCarrera
-    * idEstudiante
-    * inicioCarrera
-    * graduado
-    * */
-
-    @Id
-    private int id; //id de estudiante carrera se mapea con los id de carrera y estudiante
-    @OneToOne(cascade = CascadeType.ALL)
-    @MapsId
-    private Carrera carrera; //id carrera
-    @OneToOne(cascade = CascadeType.ALL)
-    @MapsId
-    private Estudiante estudiante; //id estudiante
+    @EmbeddedId
+    private EstudianteCarreraId id;
     @Column(nullable = false)
     private Timestamp inicio_carrera;
     @Column(nullable = false)
@@ -32,11 +18,10 @@ public class EstudianteCarrera {
         super();
     }
 
-    public EstudianteCarrera(Timestamp inicio_carrera, Carrera carrera, Estudiante estudiante, boolean graduado) {
+    public EstudianteCarrera(EstudianteCarreraId ecID, Timestamp inicio_carrera, boolean graduado) {
         super();
+        this.id = ecID;
         this.inicio_carrera = inicio_carrera;
-        this.carrera = carrera;
-        this.estudiante = estudiante;
         this.graduado = graduado;
     }
 
@@ -54,13 +39,5 @@ public class EstudianteCarrera {
 
     public void setGraduado(boolean graduado) {
         this.graduado = graduado;
-    }
-
-    public Carrera getCarrera() {
-        return carrera;
-    }
-
-    public Estudiante getEstudiante() {
-        return estudiante;
     }
 }

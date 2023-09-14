@@ -6,49 +6,41 @@ import entities.EstudianteCarrera;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 
-public class EstudianteCarreraRepository implements CrudRepository{
+public class EstudianteCarreraRepository implements CrudRepository<EstudianteCarrera> {
 
-    private EntityManagerFactory emf;
     private EntityManager em;
     private static EstudianteCarreraRepository instance;
 
-    private EstudianteCarreraRepository(EntityManager em, EntityManagerFactory emf){
+    private EstudianteCarreraRepository(EntityManager em){
         this.em = em;
-        this.emf = emf;
     }
-    public static EstudianteCarreraRepository getInstance(EntityManager em, EntityManagerFactory emf){
+    public static EstudianteCarreraRepository getInstance(EntityManager em){
         if(instance==null){
-            return new EstudianteCarreraRepository(em,emf);
+            return new EstudianteCarreraRepository(em);
         }
         return instance;
     }
 
     @Override
-    public void insert(Object o) {
-        EstudianteCarrera ec = (EstudianteCarrera) o;
-        if(em.isOpen()){
-            em.persist(ec);
+    public void insert(EstudianteCarrera ec) {
+        if(em.getTransaction().isActive()){ //chequeo si la transaccion no esta activa (no deberia)
+            em.getTransaction().rollback();//tiro abajo transaccion erroneamente abierta
         }
-        else {
-            em.getTransaction().begin();
-            em.persist(ec);
-        }
+        em.getTransaction().begin(); //inicio transaccion nueva
+        em.persist(ec);
         em.getTransaction().commit();
-        em.close();
-        emf.close();
     }
 
     @Override
-    public void delete(Object o) {
-
-    }
-
-    @Override
-    public void update(Object o) {
+    public void delete(EstudianteCarrera o) {
 
     }
 
     @Override
+    public void update(EstudianteCarrera o) {
+
+    }
+
     public void selectAll() {
 
     }
