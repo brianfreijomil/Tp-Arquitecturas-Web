@@ -5,6 +5,9 @@ import entities.EstudianteCarrera;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
+import javax.persistence.Query;
+import java.sql.ResultSet;
+import java.util.List;
 
 public class EstudianteCarreraRepository implements CrudRepository<EstudianteCarrera> {
 
@@ -38,19 +41,30 @@ public class EstudianteCarreraRepository implements CrudRepository<EstudianteCar
     public void delete(EstudianteCarrera o) {
         em = emf.createEntityManager();
         em.close();
-
     }
 
     @Override
     public void update(EstudianteCarrera o) {
         em = emf.createEntityManager();
         em.close();
-
     }
 
     public void selectAll() {
         em = emf.createEntityManager();
         em.close();
+    }
 
+    public List<ResultSet> selectAllCarrerasConInscriptos() {
+        //HAY QUE ARREGLAR
+        //devuelve carrera y cantidad de inscriptos
+        em = emf.createEntityManager();
+        em.getTransaction().begin();
+        List<ResultSet> carrerasConInscriptos =
+                em.createQuery("SELECT c.nombre, COUNT(ec.estudiante_id) AS cantidadInscriptos\n" +
+                "FROM estudiante_carrera ec JOIN ec.id.carrera c ON c.id = ec.carrera_id\n" +
+                "GROUP BY c.nombre").getResultList();
+        em.getTransaction().commit();
+        em.close();
+        return carrerasConInscriptos;
     }
 }

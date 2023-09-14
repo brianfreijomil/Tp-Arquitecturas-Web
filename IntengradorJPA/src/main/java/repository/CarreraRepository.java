@@ -86,7 +86,4 @@ public class CarreraRepository {
         em.close();
     }
 
-    public void orderByCantidadInscriptos(){
-        em = emf.createEntityManager();
-    }
 }

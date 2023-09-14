@@ -50,14 +50,14 @@ public class EstudianteRepository implements CrudRepository<Estudiante> {
         em = emf.createEntityManager();
         em.getTransaction().begin();
         //falta criterio de ordenacion
-        List<Estudiante> estudiantes = em.createQuery("SELECT e FROM Estudiante e")
+        List<Estudiante> estudiantes = em.createQuery("SELECT e FROM Estudiante e ORDER BY e.lastName ASC")
                 .getResultList();
         em.getTransaction().commit();
         em.close();
         return estudiantes;
     }
 
-    public Estudiante selectByNroLibreta(int nro_libreta){ //arreglar query
+    public Estudiante selectByNroLibreta(int nro_libreta){ //relojear retorno
         em = emf.createEntityManager();
         em.getTransaction().begin();
         List<Estudiante> result = em.createQuery("SELECT e FROM Estudiante e WHERE e.nro_libreta = :nro_libreta")
@@ -67,7 +67,7 @@ public class EstudianteRepository implements CrudRepository<Estudiante> {
         return result.get(0);
     }
 
-    public List<Estudiante> selectByGenre(String gen){ //arreglar query
+    public List<Estudiante> selectByGenre(String gen){
         em = emf.createEntityManager();
         em.getTransaction().begin();
         List<Estudiante> result = em.createQuery("SELECT e FROM Estudiante e WHERE e.genre = :genero")
