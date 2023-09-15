@@ -9,10 +9,11 @@
         <class>main.practico2.entities.Torneo</class>
         <class>main.practico2.entities.Equipo</class>
         <class>main.practico2.entities.Jugador</class>
+        <class>main.practico2.entities.Partido</class>
 
         <properties>
             <property name="javax.persistence.jdbc.driver" value="org.postgresql.Driver"/>
-            <property name="javax.persistence.jdbc.url" value="jdbc:postgresql://localhost:5432/DBpractico2ArquiWeb"/>
+            <property name="javax.persistence.jdbc.url" value="jdbc:postgresql://localhost:5432/TorneoFutbol7"/>
             <property name="javax.persistence.jdbc.user" value="postgres"/>
             <property name="javax.persistence.jdbc.password" value="postgres"/>
 

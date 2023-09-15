@@ -13,7 +13,7 @@ public class Equipo {
     private String nombre;
     @Column
     private String tecnico;
-    @OneToMany
+    @OneToMany(mappedBy = "equipo_id")
     private List<Jugador> jugadores; //7 titulares, 3 suplentes
     @ManyToOne
     private Torneo torneo;
@@ -22,9 +22,10 @@ public class Equipo {
         super();
     }
 
-    public Equipo(String nombre,String tecnico) {
+    public Equipo(String nombre,String tecnico,Torneo torneo) {
         super();
         this.id=id;
+        this.torneo=torneo;
         this.nombre=nombre;
         this.tecnico=tecnico;
     }
@@ -56,5 +57,13 @@ public class Equipo {
     @Override
     public String toString() {
         return this.nombre;
+    }
+
+    public Torneo getTorneo() {
+        return torneo;
+    }
+
+    public void setTorneo(Torneo torneo) {
+        this.torneo = torneo;
     }
 }
