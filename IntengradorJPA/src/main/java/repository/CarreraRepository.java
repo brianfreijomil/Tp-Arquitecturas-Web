@@ -65,7 +65,7 @@ public class CarreraRepository {
         em = emf.createEntityManager();
         em.getTransaction().begin();
         List<Carrera> c = em.createQuery("select c from Carrera c where c.name like :s")
-                .setParameter(s,"s")
+                .setParameter("s", s)
                 .getResultList();
         em.getTransaction().commit();
         em.close();

@@ -1,9 +1,12 @@
 package org.example;
 
+import dto.CarrerasConInscriptosDTO;
+import dto.EstudiantesPorCiudad;
 import entities.Carrera;
 import entities.Estudiante;
 import entities.EstudianteCarrera;
 import entities.EstudianteCarreraId;
+import org.hibernate.type.CharacterArrayClobType;
 import repository.CarreraRepository;
 import repository.EstudianteCarreraRepository;
 import repository.EstudianteRepository;
@@ -28,17 +31,38 @@ public class Main {
         EstudianteRepository estudianteRepository = factory.createEstudianteRepository();
         EstudianteCarreraRepository estudianteCarreraRepository = factory.createEstudianteCarreraRepository();
 
+
+
+
+
         //a) dar de alta un estudiante
-        Estudiante estudiante = new Estudiante(43508754,"Roberto","Baggio",45,"Macho",234567,"Tanndil");
-        estudianteRepository.insert(estudiante);
+        //Estudiante estudiante = new Estudiante(43508754,"roberto","baggio",45,"masculino",234567,"Tandil");
+        //estudianteRepository.insert(estudiante);
 
         //b) matricular un estudiante en una carrera
-        String carreraBuscada = "Tudai";
+        String carreraBuscada = "tudai";
         Carrera carrera = carreraRepository.selectByName(carreraBuscada);
+        Estudiante estudiante = estudianteRepository.selectByNroLibreta(234567);
         EstudianteCarreraId pkEstudianteCarrera = new EstudianteCarreraId(estudiante,carrera);
         EstudianteCarrera matriculacion = new EstudianteCarrera(pkEstudianteCarrera,Timestamp.valueOf(LocalDateTime.now()),false);
+        //estudianteCarreraRepository.insert(matriculacion);
 
-        //c) recuperar todos los estudiantes, y especificar algún criterio de ordenamiento simple.
+        //List<CarrerasConInscriptosDTO> carreras = estudianteCarreraRepository.selectAllCarrerasConInscriptos();
+
+        //for (CarrerasConInscriptosDTO ci: carreras) {
+        //        System.out.println(ci.getNombreCarrera()+", "+ci.getId_carrera()+", cant. inscriptos: "+ci.getCount());
+        //}
+
+        List<EstudiantesPorCiudad> estudiantes = estudianteCarreraRepository.selectEstudiantesPorCiudad("tandil");
+
+        for (EstudiantesPorCiudad epc: estudiantes) {
+                System.out.println("Ciudad: "+ epc.getCiudad());
+                System.out.println("Id_estudiante: "+epc.getId_estudiante()+", Nombre: "+
+                                    epc.getEstudiante_nombre()+", Apellido: "+epc.getEstudiante_apellido()
+                                    +", Carrera"+epc.getCarrera());
+        }
+
+        /*c) recuperar todos los estudiantes, y especificar algún criterio de ordenamiento simple.
         //por ahora le pido que venga ordenado por apellido ascendente
         List<Estudiante> estudiantes = estudianteRepository.selectAll();
 
@@ -59,5 +83,8 @@ public class Main {
 
 
         //g) recuperar los estudiantes de una determinada carrera, filtrado por ciudad de residencia.
+        */
+        factory.closeEntityManagerFactory();
+
     }
 }

@@ -1,6 +1,7 @@
 package main.practico2.entities;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -27,9 +28,11 @@ public class Jugador {
     public Jugador(String nombre,String posicion,Equipo equipo,String estado) {
         super();
         this.id=id;
+        this.nombre=nombre;
         this.equipo_id=equipo;
         this.posicion=posicion;
         this.estado=estado;
+        this.partidos=new ArrayList<>();
     }
 
     public int getId() {
@@ -66,5 +69,10 @@ public class Jugador {
 
     public void setEstado(String estado) {
         this.estado = estado;
+    }
+
+    @Override
+    public String toString() {
+        return nombre;
     }
 }

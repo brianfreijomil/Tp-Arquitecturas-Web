@@ -1,6 +1,8 @@
 package main.practico2.Repositories;
 
 import main.practico2.entities.Equipo;
+import main.practico2.entities.Jugador;
+import main.practico2.entities.Torneo;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -39,6 +41,16 @@ public class EquipoRepository implements CrudRepository<Equipo>{
         }
     }
 
+    public void persistPlayer(Equipo e, Jugador j) {
+        if(e != null && j != null) {
+            em = emf.createEntityManager();
+            em.getTransaction().begin();
+            e.addJugador(j);
+            em.getTransaction().commit();
+            em.close();
+        }
+    }
+
     @Override
     public void update(Equipo e) {
 
@@ -46,7 +58,12 @@ public class EquipoRepository implements CrudRepository<Equipo>{
 
     @Override
     public Equipo find(int pk) {
-        return null;
+        em = emf.createEntityManager();
+        em.getTransaction().begin();
+        Equipo ee = em.find(Equipo.class, pk);
+        em.getTransaction().commit();
+        em.close();
+        return ee;
     }
 
     @Override

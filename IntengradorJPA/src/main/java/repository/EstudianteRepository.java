@@ -61,7 +61,7 @@ public class EstudianteRepository implements CrudRepository<Estudiante> {
         em = emf.createEntityManager();
         em.getTransaction().begin();
         List<Estudiante> result = em.createQuery("SELECT e FROM Estudiante e WHERE e.nro_libreta = :nro_libreta")
-                .setParameter(nro_libreta, "nro_libreta").getResultList();
+                .setParameter("nro_libreta", nro_libreta).getResultList();
         em.getTransaction().commit();
         em.close();
         return result.get(0);

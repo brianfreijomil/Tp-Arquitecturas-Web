@@ -4,6 +4,7 @@ import main.practico2.entities.pks.PartidoId;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -35,6 +36,8 @@ public class Partido {
         this.resultado = resultado;
         this.ptsParaLocal = ptsL;
         this.ptsParaVisitante = ptsV;
+        this.bajas=new ArrayList<>();
+        this.goles=new ArrayList<>();
     }
 
     public Timestamp getFecha() {

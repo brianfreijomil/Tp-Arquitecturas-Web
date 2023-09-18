@@ -1,6 +1,7 @@
 package main.practico2.entities;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -24,6 +25,8 @@ public class Torneo {
         super();
         this.id=id;
         this.nombre=nombre;
+        this.equipos=new ArrayList<>();
+        this.partidos=new ArrayList<>();
     }
 
     public int getId() {

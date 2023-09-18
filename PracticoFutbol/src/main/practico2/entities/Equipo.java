@@ -1,6 +1,7 @@
 package main.practico2.entities;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -13,7 +14,7 @@ public class Equipo {
     private String nombre;
     @Column
     private String tecnico;
-    @OneToMany(mappedBy = "equipo_id")
+    @OneToMany(fetch = FetchType.EAGER)
     private List<Jugador> jugadores; //7 titulares, 3 suplentes
     @ManyToOne
     private Torneo torneo;
@@ -28,6 +29,7 @@ public class Equipo {
         this.torneo=torneo;
         this.nombre=nombre;
         this.tecnico=tecnico;
+        this.jugadores=new ArrayList<>();
     }
 
     public int getId() {
@@ -65,5 +67,11 @@ public class Equipo {
 
     public void setTorneo(Torneo torneo) {
         this.torneo = torneo;
+    }
+
+    public void addJugador(Jugador j) {
+        if(j != null) {
+            jugadores.add(j);
+        }
     }
 }

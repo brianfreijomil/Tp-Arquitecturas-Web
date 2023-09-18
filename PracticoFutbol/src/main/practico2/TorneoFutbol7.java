@@ -5,6 +5,7 @@ import main.practico2.Repositories.JugadorRepository;
 import main.practico2.Repositories.PartidoRepository;
 import main.practico2.Repositories.TorneoRepository;
 import main.practico2.entities.Equipo;
+import main.practico2.entities.Jugador;
 import main.practico2.entities.Torneo;
 
 public class TorneoFutbol7 {
@@ -17,16 +18,21 @@ public class TorneoFutbol7 {
         JugadorRepository jugadorService = factory.createJugadorRepository();
         PartidoRepository partidoService = factory.cretePartidoRepository();
 
-        /*agrear torneo
-        Torneo t = new Torneo("mls");
-        torneoService.persist(t);
-        se probo y funciono*/
+        //Torneo t = new Torneo("mls");
+        //torneoService.persist(t);
 
-        //agregar equipo
-        Torneo tt = torneoService.find(1);
-        Equipo e = new Equipo("inter miami","tata martino",tt);
-        equipoService.persist(e);
-        //se probo y funciono
+
+        //Torneo tt = torneoService.find(6);
+        //Equipo e = new Equipo("inter miami","tata martino",tt);
+        //equipoService.persist(e);
+
+
+        Equipo ee = equipoService.find(10);
+        Jugador j = new Jugador("messi lionel","delantero",ee,"disponible");
+        jugadorService.persist(j);
+
+        equipoService.persistPlayer(ee,j);
+
 
 
 
