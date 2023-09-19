@@ -13,4 +13,5 @@ public interface InterfaceRepEstudianteCarrera<EstudianteCarrera> {
     public EstudianteCarrera selectEstudianteCarreraById(long id);
 
     public List<EstudianteCarrera> selectAllEstudianteCarrera();
+
 }

@@ -8,14 +8,14 @@
 
         <class>entities.Estudiante</class>
         <class>entities.Carrera</class>
-        <class>entities.Estudiante_Carrera</class>
+        <class>entities.EstudianteCarrera</class>
         <class>entities.EstudianteCarreraId</class>
 
         <properties>
             <property name="javax.persistence.jdbc.driver" value="org.postgresql.Driver"/>
             <property name="javax.persistence.jdbc.url" value="jdbc:postgresql://localhost:5432/integradorJPA"/>
             <property name="javax.persistence.jdbc.user" value="postgres"/>
-            <property name="javax.persistence.jdbc.password" value="postgres"/>
+            <property name="javax.persistence.jdbc.password" value="43511155"/>
 
             <property name="hibernate.hbm2ddl.auto" value="update"/>
             <property name="hibernate.dialect" value="org.hibernate.dialect.PostgreSQL82Dialect"/>

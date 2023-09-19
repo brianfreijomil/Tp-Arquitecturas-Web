@@ -3,6 +3,7 @@ package repositories;
 import Interfaces.InterfaceRepEstudianteCarrera;
 import dto.CarrerasConInscriptosDTO;
 import dto.EstudiantesPorCarreraPorCiudadDTO;
+import dto.InscriptosYGraduadosPorCarreraDTO;
 import entities.EstudianteCarrera;
 
 import javax.persistence.EntityManager;
@@ -96,5 +97,18 @@ public class EstudianteCarreraRepository implements InterfaceRepEstudianteCarrer
         em.getTransaction().commit();
         em.close();
         return estudiantes;
+    }
+
+    public List<InscriptosYGraduadosPorCarreraDTO> selectInscriptosYEgresadosPorAnio(){
+        em = emf.createEntityManager();
+        em.getTransaction().begin();
+        List<InscriptosYGraduadosPorCarreraDTO> carreras = em.createQuery(
+                "select new dto.InscriptosYGraduadosPorCarreraDTO(c.nombre, ec.id.carrera.id, COUNT(ec.id.estudiante.id), COUNT (ec.graduacion), ec.inscripcion)\n"+
+                        "from estudiante_carrera ec JOIN ec.id.carrera c " +
+                        "group by c.nombre, ec.id.carrera.id, ec.inscripcion "+
+                        "order by ec.inscripcion DESC").getResultList();
+        em.getTransaction().commit();
+        em.close();
+        return carreras;
     }
 }

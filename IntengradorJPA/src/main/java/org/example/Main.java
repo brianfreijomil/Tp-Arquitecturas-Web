@@ -3,6 +3,7 @@ package org.example;
 import CsvFiles.CsvReader;
 import dto.CarrerasConInscriptosDTO;
 import dto.EstudiantesPorCarreraPorCiudadDTO;
+import dto.InscriptosYGraduadosPorCarreraDTO;
 import entities.Carrera;
 import entities.Estudiante;
 import entities.EstudianteCarrera;
@@ -28,9 +29,10 @@ public class Main {
         EstudianteRepository estudianteRepository = factory.createEstudianteRepository();
         EstudianteCarreraRepository estudianteCarreraRepository = factory.createEstudianteCarreraRepository();
 
+
+
         //poblando tablas
         CsvReader csvReader = new CsvReader(carreraRepository,estudianteRepository,estudianteCarreraRepository);
-
 
 
         //Ejercicios
@@ -105,7 +107,16 @@ public class Main {
             System.out.println(ecc.getId_estudiante()+", "+ecc.getEstudiante_nombre()+", "+ecc.getEstudiante_apellido()+", "+ecc.getCarrera()+", "+ecc.getCiudad());
         }
 
+        /*------------------------------------------------------------------------------------------------------*/
+        //3) Generar un reporte de las carreras, que para cada carrera incluya información de los
+        //inscriptos y egresados por año. Se deben ordenar las carreras alfabéticamente, y presentar
+        //los años de manera cronológica.*/
 
+        List<InscriptosYGraduadosPorCarreraDTO> ins_gr_p_anio = estudianteCarreraRepository.selectInscriptosYEgresadosPorAnio();
+
+        for (InscriptosYGraduadosPorCarreraDTO igpa: ins_gr_p_anio) {
+            System.out.println("Carrera: "+igpa.getNombre_carrera()+", Inscriptos:"+igpa.getCount()+", graduados: "+igpa.getGraduacion()+"año:"+igpa.getInscripcion());
+        }
 
         //Cierro Entity Manager Factory
         factory.closeEntityManagerFactory();
