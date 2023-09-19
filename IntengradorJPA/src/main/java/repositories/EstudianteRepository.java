@@ -1,11 +1,12 @@
-package repository;
+package repositories;
 
+import Interfaces.InterfaceRepEstudiante;
 import entities.Estudiante;
 
 import javax.persistence.*;
 import java.util.List;
 
-public class EstudianteRepository implements CrudRepository<Estudiante> {
+public class EstudianteRepository implements InterfaceRepEstudiante<Estudiante> {
      private static EstudianteRepository instance;
      private EntityManagerFactory emf;
      private EntityManager em;
@@ -22,42 +23,57 @@ public class EstudianteRepository implements CrudRepository<Estudiante> {
     }
 
     @Override
-    public void insert(Estudiante e) {
+    public void createEstudiante(Estudiante e) {
         em = emf.createEntityManager();
-        if(em.getTransaction().isActive()){ //chequeo si la transaccion no esta activa (no deberia)
-            em.getTransaction().rollback();//tiro abajo transaccion erroneamente abierta
+        if(em.getTransaction().isActive()){
+            em.getTransaction().rollback();
         }
-        em.getTransaction().begin(); //inicio transaccion nueva
+        em.getTransaction().begin();
         em.persist(e);
         em.getTransaction().commit();
         em.close();
     }
 
     @Override
-    public void delete(Estudiante e) {
+    public void deleteEstudianteById(long id) {
         em = emf.createEntityManager();
         em.close();
 
     }
 
     @Override
-    public void update(Estudiante e) {
+    public void updateEstudiante(Estudiante e) {
         em = emf.createEntityManager();
         em.close();
     }
 
-    public List<Estudiante> selectAll() {
+    @Override
+    public Estudiante selectEstudianteById(long id) {
         em = emf.createEntityManager();
         em.getTransaction().begin();
-        //falta criterio de ordenacion
-        List<Estudiante> estudiantes = em.createQuery("SELECT e FROM Estudiante e ORDER BY e.lastName ASC")
+        Integer pk = Math.toIntExact(id);
+        Estudiante e = em.find(Estudiante.class, pk);
+        em.getTransaction().commit();
+        em.close();
+        return e;
+    }
+
+    @Override
+    public List<Estudiante> selectAllEstudiante() {
+        return null;
+    }
+
+    public List<Estudiante> selectAllEstudianteOrdApellido() {
+        em = emf.createEntityManager();
+        em.getTransaction().begin();
+        List<Estudiante> estudiantes = em.createQuery("SELECT e FROM Estudiante e ORDER BY e.apellido ASC")
                 .getResultList();
         em.getTransaction().commit();
         em.close();
         return estudiantes;
     }
 
-    public Estudiante selectByNroLibreta(int nro_libreta){ //relojear retorno
+    public Estudiante selectEstudianteByNroLibreta(int nro_libreta){ //relojear retorno
         em = emf.createEntityManager();
         em.getTransaction().begin();
         List<Estudiante> result = em.createQuery("SELECT e FROM Estudiante e WHERE e.nro_libreta = :nro_libreta")
@@ -67,11 +83,11 @@ public class EstudianteRepository implements CrudRepository<Estudiante> {
         return result.get(0);
     }
 
-    public List<Estudiante> selectByGenre(String gen){
+    public List<Estudiante> selectEstudianteByGenero(String genero){
         em = emf.createEntityManager();
         em.getTransaction().begin();
-        List<Estudiante> result = em.createQuery("SELECT e FROM Estudiante e WHERE e.genre = :genero")
-        .setParameter(gen, "genero").getResultList();
+        List<Estudiante> result = em.createQuery("SELECT e FROM Estudiante e WHERE e.genero = :genero")
+        .setParameter(genero, "genero").getResultList();
         em.getTransaction().commit();
         em.close();
         return result;

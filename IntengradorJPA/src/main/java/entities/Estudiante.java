@@ -9,75 +9,69 @@ import java.util.List;
 public class Estudiante {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private int id;
-    @Column
-    private int dni;
+    private int DNI;
     @Column(nullable = false)
-    private String names;
-    @Column(nullable = false, name = "lastName")
-    private String lastName;
-    @Column(name = "edad")
-    private int age;
-    @Column(name = "genero", nullable = true)
-    private String genre;
+    private String nombre;
+    @Column(nullable = false)
+    private String apellido;
+    @Column
+    private int edad;
+    @Column(nullable = true)
+    private String genero;
     @Column
     private int nro_libreta;
-    @Column(name = "ciudad")
-    private String city;
+    @Column(nullable = false)
+    private String ciudad;
 
     public Estudiante() {
         super();
     }
 
-    public Estudiante(int dni, String names, String lastName, int age,String genre, int nro_libreta, String city) {
+    public Estudiante(int DNI, String nombre, String apellido, int edad,String genero, int nro_libreta, String ciudad) {
         super();
-        this.dni = dni;
-        this.names = names;
-        this.lastName = lastName;
-        this.age = age;
-        this.genre = genre;
+        this.DNI = DNI;
+        this.nombre = nombre;
+        this.apellido = apellido;
+        this.edad = edad;
+        this.genero = genero;
         this.nro_libreta = nro_libreta;
-        this.city = city;
+        this.ciudad = ciudad;
     }
 
-    public String getGenre() {
-        return genre;
+    public int getDNI() {
+        return DNI;
     }
 
-    public void setGenre(String genre) {
-        this.genre = genre;
+    public String getNombre() {
+        return nombre;
     }
 
-    public int getId() {
-        return id;
-    }
-    public int getDni() {
-        return dni;
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
     }
 
-    public String getName() {
-        return names;
+    public String getApellido() {
+        return apellido;
     }
 
-    public void setName(String name) {
-        this.names = name;
+    public void setApellido(String apellido) {
+        this.apellido = apellido;
     }
 
-    public String getLastName() {
-        return lastName;
+    public int getEdad() {
+        return edad;
     }
 
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
+    public void setEdad(int edad) {
+        this.edad = edad;
     }
 
-    public int getAge() {
-        return age;
+    public String getGenero() {
+        return genero;
     }
 
-    public void setAge(int age) {
-        this.age = age;
+    public void setGenero(String genero) {
+        this.genero = genero;
     }
 
     public int getNro_libreta() {
@@ -88,15 +82,16 @@ public class Estudiante {
         this.nro_libreta = nro_libreta;
     }
 
-    public String getCity() {
-        return city;
+    public String getCiudad() {
+        return ciudad;
     }
 
-    public void setCity(String city) {
-        this.city = city;
+    public void setCiudad(String ciudad) {
+        this.ciudad = ciudad;
     }
+
     @Override
     public String toString() {
-        return "Estudiante: "+names+", "+lastName+". "+city;
+        return "Estudiante: "+nombre+", "+apellido+". "+ciudad;
     }
 }

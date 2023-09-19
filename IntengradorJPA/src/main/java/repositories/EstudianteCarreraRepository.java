@@ -1,17 +1,15 @@
-package repository;
+package repositories;
 
+import Interfaces.InterfaceRepEstudianteCarrera;
 import dto.CarrerasConInscriptosDTO;
 import dto.EstudiantesPorCarreraPorCiudadDTO;
-import dto.EstudiantesPorCarreraPorCiudadDTO;
 import entities.EstudianteCarrera;
-import entities.Carrera;
-import entities.Estudiante;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import java.util.List;
 
-public class EstudianteCarreraRepository implements CrudRepository<EstudianteCarrera> {
+public class EstudianteCarreraRepository implements InterfaceRepEstudianteCarrera<EstudianteCarrera> {
 
     private EntityManagerFactory emf;
     private EntityManager em;
@@ -28,37 +26,41 @@ public class EstudianteCarreraRepository implements CrudRepository<EstudianteCar
     }
 
     @Override
-    public void insert(EstudianteCarrera ec) {
+    public void createEstudianteCarrera(EstudianteCarrera ec) {
         em = emf.createEntityManager();
-        if(em.getTransaction().isActive()){ //chequeo si la transaccion no esta activa (no deberia)
-            em.getTransaction().rollback();//tiro abajo transaccion erroneamente abierta
+        if(em.getTransaction().isActive()){
+            em.getTransaction().rollback();
         }
-        em.getTransaction().begin(); //inicio transaccion nueva
+        em.getTransaction().begin();
         em.persist(ec);
         em.getTransaction().commit();
         em.close();
     }
 
     @Override
-    public void delete(EstudianteCarrera o) {
+    public void deleteEstudianteCarreraById(long id) {
         em = emf.createEntityManager();
         em.close();
     }
 
     @Override
-    public void update(EstudianteCarrera o) {
+    public void updateEstudianteCarrera(EstudianteCarrera o) {
         em = emf.createEntityManager();
         em.close();
     }
 
-    public void selectAll() {
+    public EstudianteCarrera selectEstudianteCarreraById(long id) {
+        return null;
+    }
+
+    @Override
+    public List<EstudianteCarrera> selectAllEstudianteCarrera() {
         em = emf.createEntityManager();
         em.close();
+        return null;
     }
 
     public List<CarrerasConInscriptosDTO> selectAllCarrerasConInscriptos() {
-        //HAY QUE ARREGLAR
-        //devuelve carrera y cantidad de inscriptos
         em = emf.createEntityManager();
         em.getTransaction().begin();
         List<CarrerasConInscriptosDTO> carrerasConInscriptos =
@@ -69,7 +71,7 @@ public class EstudianteCarreraRepository implements CrudRepository<EstudianteCar
         return carrerasConInscriptos;
     }
 
-    public  List<EstudiantesPorCarreraPorCiudadDTO> selectEstudiantesPorCiudad(String city){
+    public  List<EstudiantesPorCarreraPorCiudadDTO> selectEstudiantesPorCarreraByCiudad(String city){
         em = emf.createEntityManager();
         em.getTransaction().begin();
         List<EstudiantesPorCarreraPorCiudadDTO> estudiantes = em.createQuery(

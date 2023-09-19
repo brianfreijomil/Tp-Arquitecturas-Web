@@ -1,14 +1,13 @@
-package repository;
+package repositories;
 
+import Interfaces.InterfaceRepCarrera;
 import entities.Carrera;
-import entities.Estudiante;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
 import java.util.List;
 
-public class CarreraRepository {
+public class CarreraRepository implements InterfaceRepCarrera<Carrera> {
     private EntityManagerFactory emf;
     private EntityManager em;
     private static CarreraRepository instance;
@@ -24,19 +23,21 @@ public class CarreraRepository {
         return instance;
     }
 
-    public void insert(Carrera c) {
+    public void createCarrera(Carrera c) {
         em = emf.createEntityManager();
-        if(em.getTransaction().isActive()){ //chequeo si la transaccion no esta activa (no deberia)
-            em.getTransaction().rollback();//tiro abajo transaccion erroneamente abierta
+        if(em.getTransaction().isActive()){
+            em.getTransaction().rollback();
         }
-        em.getTransaction().begin(); //inicio transaccion nueva
+        em.getTransaction().begin();
         em.persist(c);
         em.getTransaction().commit();
         em.close();
     }
 
-    public void delete(Object o) {
+    @Override
+    public void deleteCarreraById(long id) {
         em = emf.createEntityManager();
+        em.close();
     }
 
     public void deleteByName(Carrera c) {
@@ -47,12 +48,14 @@ public class CarreraRepository {
         em.close();
     }
 
-
-    public void update(Object o) {
+    @Override
+    public void updateCarrera(Carrera c) {
         em = emf.createEntityManager();
+        em.close();
     }
 
-    public Carrera selectById(int id) {  //a mejorar
+    @Override
+    public Carrera selectCarreraById(long id) {  //a mejorar
         em = emf.createEntityManager();
         em.getTransaction().begin();
         Carrera c = em.find(Carrera.class,id);
@@ -61,7 +64,7 @@ public class CarreraRepository {
         return c;
     }
 
-    public Carrera selectByName(String s) {  //a mejorar
+    public Carrera selectCarreraByName(String s) {  //a mejorar
         em = emf.createEntityManager();
         em.getTransaction().begin();
         List<Carrera> c = em.createQuery("select c from Carrera c where c.name like :s")
@@ -72,18 +75,14 @@ public class CarreraRepository {
         return c.get(0);
     }
 
-
-    public void selectAll() {
+    @Override
+    public List<Carrera> selectAllCarrera() {
         em = emf.createEntityManager();
         em.getTransaction().begin();
-        @SuppressWarnings("unchecked")
         List<Carrera> carreras = em.createQuery("SELECT c FROM Carrera c").getResultList();
-        System.out.println("Carreras");
-        for (Carrera car: carreras) {
-                System.out.println(car.getName()+", Duracion: "+car.getDuracion()+" años"+", Cantidad de inscriptos: ");
-        }
         em.getTransaction().commit();
         em.close();
+        return carreras;
     }
 
 }

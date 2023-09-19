@@ -8,32 +8,32 @@ import java.util.List;
 public class Carrera {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private int id;
-    @Column(name = "nombre", nullable = false)
-    private String name;
+    private long id;
+    @Column(nullable = false)
+    private String nombre;
     @Column(name = "duracion_anios")
     private int duracion;
 
     public Carrera() {
         super();
     }
-    public Carrera(String name, int duracion) {
+    public Carrera(long id, String nombre, int duracion) {
         super();
-        this.name = name;
+        this.id = id;
+        this.nombre = nombre;
         this.duracion = duracion;
     }
 
-    public int getId() {
+    public long getId() {
         return id;
     }
 
-    public String getName() {
-        return name;
+    public String getNombre() {
+        return nombre;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setNombre(String name) {
+        this.nombre = name;
     }
 
     public int getDuracion() {
@@ -48,7 +48,7 @@ public class Carrera {
     public String toString() {
         return "Carrera{" +
                 "id=" + id +
-                ", name='" + name + '\'' +
+                ", name='" + nombre + '\'' +
                 ", duracion=" + duracion +
                 '}';
     }

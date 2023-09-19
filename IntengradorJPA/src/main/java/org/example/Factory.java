@@ -1,10 +1,9 @@
 package org.example;
 
-import repository.CarreraRepository;
-import repository.EstudianteCarreraRepository;
-import repository.EstudianteRepository;
+import repositories.CarreraRepository;
+import repositories.EstudianteCarreraRepository;
+import repositories.EstudianteRepository;
 
-import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import java.sql.SQLException;

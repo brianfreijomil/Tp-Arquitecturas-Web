@@ -7,13 +7,14 @@ import entities.EstudianteCarreraId;
 import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVParser;
 import org.apache.commons.csv.CSVRecord;
-import repository.CarreraRepository;
-import repository.EstudianteCarreraRepository;
-import repository.EstudianteRepository;
+import repositories.CarreraRepository;
+import repositories.EstudianteCarreraRepository;
+import repositories.EstudianteRepository;
 
 import java.io.FileReader;
 import java.io.IOException;
 import java.sql.SQLException;
+import java.sql.Timestamp;
 
 public class CsvReader {
     private CarreraRepository carreraRepository;
@@ -34,10 +35,11 @@ public class CsvReader {
         CSVParser parser = CSVFormat.DEFAULT.withHeader().parse(new
                 FileReader(userDir + "carreras.csv"));
         for (CSVRecord row : parser) {
+            long id = Long.parseLong(row.get("id_carrera"));
             String nombre = String.valueOf(row.get("carrera"));
             Integer duracion = Integer.valueOf(row.get("duracion"));
-            Carrera c = new Carrera(nombre,duracion);
-            carreraRepository.insert(c);
+            Carrera c = new Carrera(id,nombre,duracion);
+            carreraRepository.createCarrera(c);
         }
     }
 
@@ -53,24 +55,32 @@ public class CsvReader {
             String ciudad = row.get("ciudad");
             int lu = Integer.valueOf(row.get("LU"));
             Estudiante e = new Estudiante(dni,nombre,apellido,edad,genero,lu,ciudad);
-            estudianteRepository.insert(e);
+            estudianteRepository.createEstudiante(e);
         }
     }
 
 
     private void loadEstudianteCarreraRepository() throws IOException, SQLException {
-        /*CSVParser parser = CSVFormat.DEFAULT.withHeader().parse(new
-                FileReader(userDir + "productos.csv"));
+        CSVParser parser = CSVFormat.DEFAULT.withHeader().parse(new
+                FileReader(userDir + "estudianteCarrera.csv"));
         for (CSVRecord row : parser) {
             Integer idEstudiante = Integer.valueOf(row.get("id_estudiante"));
             Integer idCarrera = Integer.valueOf(row.get("id_carrera"));
             String inscripcion = row.get("inscripcion");
             String graduacion = row.get("graduacion");
             Integer antiguedad = Integer.valueOf(row.get("antiguedad"));
-            EstudianteCarreraId pk = new EstudianteCarreraId();
-            EstudianteCarrera ec = new EstudianteCarrera();
-            estudianteCarreraRepository.insert(ec);
-        }*/
+            //busco el estudiante y la carrera por sus id
+            Estudiante e = estudianteRepository.selectEstudianteById(idEstudiante);
+            Carrera c = carreraRepository.selectCarreraById(idCarrera);
+            //creo la pk para EstudianteCarrera
+            EstudianteCarreraId pk = new EstudianteCarreraId(e,c);
+            //instancia
+
+            String fechaInscripcion = inscripcion+"-12-31 23:59:59";
+            String fechagraduacion = graduacion+"-12-31 00:00:00";
+            EstudianteCarrera ec = new EstudianteCarrera(pk,Timestamp.valueOf(fechaInscripcion),Timestamp.valueOf(fechagraduacion),antiguedad);
+            estudianteCarreraRepository.createEstudianteCarrera(ec);
+        }
 
     }
 }

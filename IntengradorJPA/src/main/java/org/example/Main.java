@@ -1,26 +1,12 @@
 package org.example;
 
 import CsvFiles.CsvReader;
-import dto.CarrerasConInscriptosDTO;
-import dto.EstudiantesPorCarreraPorCiudadDTO;
-import entities.Carrera;
-import entities.Estudiante;
-import entities.EstudianteCarrera;
-import entities.EstudianteCarreraId;
-import org.hibernate.type.CharacterArrayClobType;
-import repository.CarreraRepository;
-import repository.EstudianteCarreraRepository;
-import repository.EstudianteRepository;
+import repositories.CarreraRepository;
+import repositories.EstudianteCarreraRepository;
+import repositories.EstudianteRepository;
 
 import java.io.IOException;
-import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Time;
-import java.sql.Timestamp;
-import java.time.LocalDateTime;
-import java.time.LocalTime;
-import java.util.ArrayList;
-import java.util.List;
 
 public class Main {
     public static void main(String[] args) throws SQLException, IOException {
