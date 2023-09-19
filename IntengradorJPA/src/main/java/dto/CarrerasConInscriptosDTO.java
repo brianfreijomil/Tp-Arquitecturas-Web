@@ -1,6 +1,7 @@
 package dto;
 
 public class CarrerasConInscriptosDTO{
+    /*recuperar las carreras con estudiantes inscriptos, y ordenar por cantidad de inscriptos.*/
     private String nombreCarrera;
     private Long count;
 

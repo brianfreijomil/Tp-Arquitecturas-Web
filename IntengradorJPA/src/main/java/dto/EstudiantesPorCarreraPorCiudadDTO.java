@@ -1,13 +1,14 @@
 package dto;
 
-public class EstudiantesPorCiudad {
+public class EstudiantesPorCarreraPorCiudadDTO {
+    /*recuperar los estudiantes de una determinada carrera, filtrado por ciudad de residencia.*/
     private String ciudad;
     private int id_estudiante;
     private String estudiante_nombre;
     private String estudiante_apellido;
     private String carrera;
 
-    public EstudiantesPorCiudad(int id_estudiante, String estudiante_nombre, String estudiante_apellido, String carrera) {
+    public EstudiantesPorCarreraPorCiudadDTO(int id_estudiante, String estudiante_nombre, String estudiante_apellido, String carrera) {
         this.id_estudiante = id_estudiante;
         this.estudiante_nombre = estudiante_nombre;
         this.estudiante_apellido = estudiante_apellido;

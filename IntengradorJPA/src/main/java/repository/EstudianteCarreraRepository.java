@@ -1,7 +1,8 @@
 package repository;
 
 import dto.CarrerasConInscriptosDTO;
-import dto.EstudiantesPorCiudad;
+import dto.EstudiantesPorCarreraPorCiudadDTO;
+import dto.EstudiantesPorCarreraPorCiudadDTO;
 import entities.EstudianteCarrera;
 import entities.Carrera;
 import entities.Estudiante;
@@ -68,10 +69,10 @@ public class EstudianteCarreraRepository implements CrudRepository<EstudianteCar
         return carrerasConInscriptos;
     }
 
-    public  List<EstudiantesPorCiudad> selectEstudiantesPorCiudad(String city){
+    public  List<EstudiantesPorCarreraPorCiudadDTO> selectEstudiantesPorCiudad(String city){
         em = emf.createEntityManager();
         em.getTransaction().begin();
-        List<EstudiantesPorCiudad> estudiantes = em.createQuery(
+        List<EstudiantesPorCarreraPorCiudadDTO> estudiantes = em.createQuery(
             "select new dto.EstudiantesPorCiudad(ec.id.estudiante.id, e.names, e.lastName, c.name)\n"+
                 "from estudiante_carrera ec JOIN ec.id.estudiante e " +
                 "JOIN ec.id.carrera c "+

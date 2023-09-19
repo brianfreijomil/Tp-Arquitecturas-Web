@@ -1,7 +1,8 @@
 package org.example;
 
+import CsvFiles.CsvReader;
 import dto.CarrerasConInscriptosDTO;
-import dto.EstudiantesPorCiudad;
+import dto.EstudiantesPorCarreraPorCiudadDTO;
 import entities.Carrera;
 import entities.Estudiante;
 import entities.EstudianteCarrera;
@@ -11,6 +12,7 @@ import repository.CarreraRepository;
 import repository.EstudianteCarreraRepository;
 import repository.EstudianteRepository;
 
+import java.io.IOException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Time;
@@ -21,7 +23,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Main {
-    public static void main(String[] args) throws SQLException {
+    public static void main(String[] args) throws SQLException, IOException {
 
         //factory
         Factory factory = Factory.getInstance();
@@ -30,6 +32,10 @@ public class Main {
         CarreraRepository carreraRepository = factory.createCarreraRepository();
         EstudianteRepository estudianteRepository = factory.createEstudianteRepository();
         EstudianteCarreraRepository estudianteCarreraRepository = factory.createEstudianteCarreraRepository();
+
+        CsvReader csvReader = new CsvReader(carreraRepository,estudianteRepository,estudianteCarreraRepository);
+
+
 
 
 
@@ -40,27 +46,12 @@ public class Main {
         //estudianteRepository.insert(estudiante);
 
         //b) matricular un estudiante en una carrera
-        String carreraBuscada = "tudai";
-        Carrera carrera = carreraRepository.selectByName(carreraBuscada);
-        Estudiante estudiante = estudianteRepository.selectByNroLibreta(234567);
-        EstudianteCarreraId pkEstudianteCarrera = new EstudianteCarreraId(estudiante,carrera);
-        EstudianteCarrera matriculacion = new EstudianteCarrera(pkEstudianteCarrera,Timestamp.valueOf(LocalDateTime.now()),false);
-        //estudianteCarreraRepository.insert(matriculacion);
 
         //List<CarrerasConInscriptosDTO> carreras = estudianteCarreraRepository.selectAllCarrerasConInscriptos();
 
         //for (CarrerasConInscriptosDTO ci: carreras) {
         //        System.out.println(ci.getNombreCarrera()+", "+ci.getId_carrera()+", cant. inscriptos: "+ci.getCount());
         //}
-
-        List<EstudiantesPorCiudad> estudiantes = estudianteCarreraRepository.selectEstudiantesPorCiudad("tandil");
-
-        for (EstudiantesPorCiudad epc: estudiantes) {
-                System.out.println("Ciudad: "+ epc.getCiudad());
-                System.out.println("Id_estudiante: "+epc.getId_estudiante()+", Nombre: "+
-                                    epc.getEstudiante_nombre()+", Apellido: "+epc.getEstudiante_apellido()
-                                    +", Carrera"+epc.getCarrera());
-        }
 
         /*c) recuperar todos los estudiantes, y especificar algún criterio de ordenamiento simple.
         //por ahora le pido que venga ordenado por apellido ascendente
