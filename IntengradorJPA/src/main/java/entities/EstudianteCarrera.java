@@ -56,6 +56,6 @@ public class EstudianteCarrera {
 
     @Override
     public String toString() {
-        return id+", "+inscripcion+", "+graduacion+", "+antiguedad;
+        return "Carrera: "+id+", "+inscripcion+", "+graduacion+", "+antiguedad;
     }
 }

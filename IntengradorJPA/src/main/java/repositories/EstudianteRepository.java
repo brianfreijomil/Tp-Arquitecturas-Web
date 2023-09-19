@@ -35,7 +35,7 @@ public class EstudianteRepository implements InterfaceRepEstudiante<Estudiante> 
     }
 
     @Override
-    public void deleteEstudianteById(long id) {
+    public void deleteEstudianteByDNI(int DNI) {
         em = emf.createEntityManager();
         em.close();
 
@@ -48,11 +48,10 @@ public class EstudianteRepository implements InterfaceRepEstudiante<Estudiante> 
     }
 
     @Override
-    public Estudiante selectEstudianteById(long id) {
+    public Estudiante selectEstudianteByDNI(int DNI) {
         em = emf.createEntityManager();
         em.getTransaction().begin();
-        Integer pk = Math.toIntExact(id);
-        Estudiante e = em.find(Estudiante.class, pk);
+        Estudiante e = em.find(Estudiante.class, DNI);
         em.getTransaction().commit();
         em.close();
         return e;
@@ -60,7 +59,12 @@ public class EstudianteRepository implements InterfaceRepEstudiante<Estudiante> 
 
     @Override
     public List<Estudiante> selectAllEstudiante() {
-        return null;
+        em = emf.createEntityManager();
+        em.getTransaction().begin();
+        List<Estudiante> estudiantes = em.createQuery("SELECT e FROM Estudiante e").getResultList();
+        em.getTransaction().commit();
+        em.close();
+        return estudiantes;
     }
 
     public List<Estudiante> selectAllEstudianteOrdApellido() {
@@ -83,11 +87,11 @@ public class EstudianteRepository implements InterfaceRepEstudiante<Estudiante> 
         return result.get(0);
     }
 
-    public List<Estudiante> selectEstudianteByGenero(String genero){
+    public List<Estudiante> selectAllEstudianteByGenero(String genero){
         em = emf.createEntityManager();
         em.getTransaction().begin();
         List<Estudiante> result = em.createQuery("SELECT e FROM Estudiante e WHERE e.genero = :genero")
-        .setParameter(genero, "genero").getResultList();
+        .setParameter("genero", genero).getResultList();
         em.getTransaction().commit();
         em.close();
         return result;

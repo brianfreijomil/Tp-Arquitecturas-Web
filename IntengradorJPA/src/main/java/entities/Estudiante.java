@@ -92,6 +92,6 @@ public class Estudiante {
 
     @Override
     public String toString() {
-        return "Estudiante: "+nombre+", "+apellido+". "+ciudad;
+        return "Estudiante: "+DNI+", "+nombre+", "+apellido+". "+ciudad;
     }
 }

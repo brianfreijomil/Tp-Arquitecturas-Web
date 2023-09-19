@@ -3,11 +3,11 @@ package dto;
 public class CarrerasConInscriptosDTO{
     /*recuperar las carreras con estudiantes inscriptos, y ordenar por cantidad de inscriptos.*/
     private String nombreCarrera;
-    private Long count;
+    private long count;
 
-    private int id_carrera;
+    private long id_carrera;
 
-    public CarrerasConInscriptosDTO(String nombreCarrera, int id_carrera, Long count) {
+    public CarrerasConInscriptosDTO(String nombreCarrera, long id_carrera, long count) {
         this.nombreCarrera = nombreCarrera;
         this.count = count;
         this.id_carrera = id_carrera;
@@ -21,15 +21,15 @@ public class CarrerasConInscriptosDTO{
         this.nombreCarrera = nombreCarrera;
     }
 
-    public Long getCount() {
+    public long getCount() {
         return count;
     }
 
-    public void setCount(Long count) {
+    public void setCount(int count) {
         this.count = count;
     }
 
-    public int getId_carrera() {
+    public long getId_carrera() {
         return id_carrera;
     }
 

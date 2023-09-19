@@ -6,11 +6,11 @@ public interface InterfaceRepEstudiante<Estudiante> {
 
     public void createEstudiante(Estudiante e);
 
-    public void deleteEstudianteById(long id);
+    public void deleteEstudianteByDNI(int DNI);
 
     public void updateEstudiante(Estudiante e);
 
-    public Estudiante selectEstudianteById(long id);
+    public Estudiante selectEstudianteByDNI(int DNI);
 
     public List<Estudiante> selectAllEstudiante();
 }

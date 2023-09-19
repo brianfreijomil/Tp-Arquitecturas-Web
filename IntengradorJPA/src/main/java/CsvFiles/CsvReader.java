@@ -70,7 +70,7 @@ public class CsvReader {
             String graduacion = row.get("graduacion");
             Integer antiguedad = Integer.valueOf(row.get("antiguedad"));
             //busco el estudiante y la carrera por sus id
-            Estudiante e = estudianteRepository.selectEstudianteById(idEstudiante);
+            Estudiante e = estudianteRepository.selectEstudianteByDNI(idEstudiante);
             Carrera c = carreraRepository.selectCarreraById(idCarrera);
             //creo la pk para EstudianteCarrera
             EstudianteCarreraId pk = new EstudianteCarreraId(e,c);

@@ -67,7 +67,7 @@ public class CarreraRepository implements InterfaceRepCarrera<Carrera> {
     public Carrera selectCarreraByName(String s) {  //a mejorar
         em = emf.createEntityManager();
         em.getTransaction().begin();
-        List<Carrera> c = em.createQuery("select c from Carrera c where c.name like :s")
+        List<Carrera> c = em.createQuery("select c from Carrera c where c.nombre like :s")
                 .setParameter("s", s)
                 .getResultList();
         em.getTransaction().commit();
