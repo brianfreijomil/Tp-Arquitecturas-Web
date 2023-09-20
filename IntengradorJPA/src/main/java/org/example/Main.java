@@ -19,15 +19,24 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 public class Main {
+
+    private static CarreraRepository carreraRepository;
+    private static EstudianteRepository estudianteRepository;
+    private static EstudianteCarreraRepository estudianteCarreraRepository;
+
     public static void main(String[] args) throws SQLException, IOException {
 
         //factory
-        Factory factory = Factory.getInstance();
+        //Factory factory = Factory.getInstance();
+        AbstractFactory postgresFactory = AbstractFactory.getDAOFactory(AbstractFactory.POSTGRESQL_DB);
 
+        carreraRepository = postgresFactory.createCarreraRepository();
+        estudianteRepository = postgresFactory.createEstudianteRepository();
+        estudianteCarreraRepository = postgresFactory.createEstudianteCarreraRepository();
         //repositories
-        CarreraRepository carreraRepository = factory.createCarreraRepository();
-        EstudianteRepository estudianteRepository = factory.createEstudianteRepository();
-        EstudianteCarreraRepository estudianteCarreraRepository = factory.createEstudianteCarreraRepository();
+        //actory.createCarreraRepository();
+        //EstudianteRepository estudianteRepository = factory.createEstudianteRepository();
+        //EstudianteCarreraRepository estudianteCarreraRepository = factory.createEstudianteCarreraRepository();
 
 
 
@@ -119,6 +128,6 @@ public class Main {
         }
 
         //Cierro Entity Manager Factory
-        factory.closeEntityManagerFactory();
+        postgresFactory.closeEntityManagerFactory();
     }
 }

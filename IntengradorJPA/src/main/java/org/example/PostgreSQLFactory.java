@@ -8,20 +8,20 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import java.sql.SQLException;
 
-public class Factory {
-    private static Factory instance;
+public class PostgreSQLFactory extends AbstractFactory{
+    private static PostgreSQLFactory instance;
     private EntityManagerFactory emf;
 
-    public static Factory getInstance() throws SQLException {
+    public static PostgreSQLFactory getInstance() throws SQLException {
         if(instance == null){
-            instance = new Factory();
+            instance = new PostgreSQLFactory();
         }
 
         return instance;
     }
 
-    private Factory(){
-        this.emf = Persistence.createEntityManagerFactory("Integrador2");
+    private PostgreSQLFactory() {
+        this.emf = Persistence.createEntityManagerFactory("POSTGRESQL_DB");
     }
 
     public CarreraRepository createCarreraRepository() {
