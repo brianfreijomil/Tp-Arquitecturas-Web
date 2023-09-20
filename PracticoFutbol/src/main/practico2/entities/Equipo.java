@@ -8,14 +8,13 @@ import java.util.List;
 public class Equipo {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
     @Column(nullable = false)
     private String nombre;
     @Column
     private String tecnico;
-    @OneToMany(fetch = FetchType.EAGER)
-    private List<Jugador> jugadores; //7 titulares, 3 suplentes
+    @OneToMany(mappedBy = "equipo", fetch = FetchType.EAGER)
+    private List<Jugador> jugador;
     @ManyToOne
     private Torneo torneo;
 
@@ -23,13 +22,13 @@ public class Equipo {
         super();
     }
 
-    public Equipo(String nombre,String tecnico,Torneo torneo) {
+    public Equipo(int id,String nombre,String tecnico,Torneo torneo) {
         super();
         this.id=id;
         this.torneo=torneo;
         this.nombre=nombre;
         this.tecnico=tecnico;
-        this.jugadores=new ArrayList<>();
+        this.jugador=new ArrayList<Jugador>();
     }
 
     public int getId() {
@@ -45,7 +44,7 @@ public class Equipo {
     }
 
     public List<Jugador> getJugadores() {
-        return jugadores;
+        return jugador;
     }
 
     public String getTecnico() {
@@ -71,7 +70,7 @@ public class Equipo {
 
     public void addJugador(Jugador j) {
         if(j != null) {
-            jugadores.add(j);
+            jugador.add(j);
         }
     }
 }

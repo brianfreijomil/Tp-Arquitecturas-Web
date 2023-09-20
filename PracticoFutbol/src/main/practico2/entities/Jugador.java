@@ -8,7 +8,6 @@ import java.util.List;
 public class Jugador {
     
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
     @Column(nullable = false)
     private String nombre;
@@ -16,8 +15,8 @@ public class Jugador {
     private String posicion; //delantero,arquero,volante,defensor
     @Column(nullable = false)
     private String estado;//lesionado,echado,disponible //puede ser boolean tamb
-    @ManyToOne
-    private Equipo equipo_id;
+    @ManyToOne()
+    private Equipo equipo;
     @ManyToMany
     private List<Partido> partidos;
 
@@ -25,11 +24,10 @@ public class Jugador {
         super();
     }
 
-    public Jugador(String nombre,String posicion,Equipo equipo,String estado) {
+    public Jugador(int id,String nombre,String posicion,String estado) {
         super();
         this.id=id;
         this.nombre=nombre;
-        this.equipo_id=equipo;
         this.posicion=posicion;
         this.estado=estado;
         this.partidos=new ArrayList<>();
@@ -37,14 +35,6 @@ public class Jugador {
 
     public int getId() {
         return id;
-    }
-
-    public Equipo getEquipo() {
-        return equipo_id;
-    }
-
-    public void setEquipo(Equipo equipo) {
-        this.equipo_id = equipo;
     }
 
     public String getPosicion() {

@@ -18,20 +18,10 @@ public class TorneoFutbol7 {
         JugadorRepository jugadorService = factory.createJugadorRepository();
         PartidoRepository partidoService = factory.cretePartidoRepository();
 
-        //Torneo t = new Torneo("mls");
-        //torneoService.persist(t);
+        Equipo e = equipoService.find(100);
+        Jugador j = jugadorService.find(10);
+        e.addJugador(j);
 
-
-        //Torneo tt = torneoService.find(6);
-        //Equipo e = new Equipo("inter miami","tata martino",tt);
-        //equipoService.persist(e);
-
-
-        Equipo ee = equipoService.find(10);
-        Jugador j = new Jugador("messi lionel","delantero",ee,"disponible");
-        jugadorService.persist(j);
-
-        equipoService.persistPlayer(ee,j);
 
 
 

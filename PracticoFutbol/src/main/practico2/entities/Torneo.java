@@ -8,7 +8,6 @@ import java.util.List;
 public class Torneo {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
     @Column(nullable = false)
     private String nombre;
@@ -21,7 +20,7 @@ public class Torneo {
         super();
     }
 
-    public Torneo(String nombre) {
+    public Torneo(int id, String nombre) {
         super();
         this.id=id;
         this.nombre=nombre;
