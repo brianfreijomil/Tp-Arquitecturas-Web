@@ -1,4 +1,4 @@
-package org.example;
+package factory;
 
 import repositories.CarreraRepository;
 import repositories.EstudianteCarreraRepository;
@@ -8,7 +8,7 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import java.sql.SQLException;
 
-public class PostgreSQLFactory extends AbstractFactory{
+public class PostgreSQLFactory extends AbstractFactory {
     private static PostgreSQLFactory instance;
     private EntityManagerFactory emf;
 

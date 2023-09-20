@@ -1,4 +1,4 @@
-package org.example;
+package factory;
 
 import repositories.CarreraRepository;
 import repositories.EstudianteCarreraRepository;

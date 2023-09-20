@@ -8,6 +8,7 @@ import entities.Carrera;
 import entities.Estudiante;
 import entities.EstudianteCarrera;
 import entities.EstudianteCarreraId;
+import factory.AbstractFactory;
 import repositories.CarreraRepository;
 import repositories.EstudianteCarreraRepository;
 import repositories.EstudianteRepository;
