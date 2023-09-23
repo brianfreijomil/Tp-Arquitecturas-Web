@@ -8,11 +8,12 @@ public class EstudiantesPorCarreraPorCiudadDTO {
     private String estudiante_apellido;
     private String carrera;
 
-    public EstudiantesPorCarreraPorCiudadDTO(int id_estudiante, String estudiante_nombre, String estudiante_apellido, String carrera) {
+    public EstudiantesPorCarreraPorCiudadDTO(int id_estudiante, String estudiante_nombre, String estudiante_apellido, String carrera, String ciudad) {
         this.id_estudiante = id_estudiante;
         this.estudiante_nombre = estudiante_nombre;
         this.estudiante_apellido = estudiante_apellido;
         this.carrera = carrera;
+        this.ciudad = ciudad;
     }
 
     public String getCiudad(){
@@ -49,5 +50,10 @@ public class EstudiantesPorCarreraPorCiudadDTO {
 
     public void setCarrera(String carrera) {
         this.carrera = carrera;
+    }
+
+    @Override
+    public String toString() {
+        return "Estudiante: "+this.estudiante_apellido+", "+this.estudiante_nombre+", "+this.id_estudiante+", "+this.carrera+", "+this.ciudad;
     }
 }

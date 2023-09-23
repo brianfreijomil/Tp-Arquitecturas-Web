@@ -1,6 +1,5 @@
 package repositories;
 
-import Interfaces.InterfaceRepCarrera;
 import entities.Carrera;
 
 import javax.persistence.EntityManager;

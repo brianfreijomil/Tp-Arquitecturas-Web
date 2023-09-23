@@ -1,4 +1,6 @@
-package Interfaces;
+package repositories;
+
+import entities.EstudianteCarreraId;
 
 import java.util.List;
 
@@ -10,7 +12,7 @@ public interface InterfaceRepEstudianteCarrera<EstudianteCarrera> {
 
     public void updateEstudianteCarrera(EstudianteCarrera ec);
 
-    public EstudianteCarrera selectEstudianteCarreraById(long id);
+    public EstudianteCarrera selectEstudianteCarreraById(EstudianteCarreraId id);
 
     public List<EstudianteCarrera> selectAllEstudianteCarrera();
 

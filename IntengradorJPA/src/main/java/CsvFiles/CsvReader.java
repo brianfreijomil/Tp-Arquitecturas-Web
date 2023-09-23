@@ -75,10 +75,15 @@ public class CsvReader {
             //creo la pk para EstudianteCarrera
             EstudianteCarreraId pk = new EstudianteCarreraId(e,c);
             //instancia
-
-            String fechaInscripcion = inscripcion+"-12-31 23:59:59";
-            String fechagraduacion = graduacion+"-12-31 00:00:00";
-            EstudianteCarrera ec = new EstudianteCarrera(pk,Timestamp.valueOf(fechaInscripcion),Timestamp.valueOf(fechagraduacion),antiguedad);
+            String fechaInscripcion = inscripcion+"-01-01 00:00:00";
+            EstudianteCarrera ec;
+            if(graduacion.equals("0000")){ //no se graduo
+                ec = new EstudianteCarrera(pk,Timestamp.valueOf(fechaInscripcion),null,antiguedad);
+            }
+            else {
+                String fechagraduacion = graduacion+"-01-01 00:00:00";
+                ec = new EstudianteCarrera(pk,Timestamp.valueOf(fechaInscripcion),Timestamp.valueOf(fechagraduacion),antiguedad);
+            }
             estudianteCarreraRepository.createEstudianteCarrera(ec);
         }
 

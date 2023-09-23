@@ -1,6 +1,5 @@
 package repositories;
 
-import Interfaces.InterfaceRepEstudiante;
 import entities.Estudiante;
 
 import javax.persistence.*;

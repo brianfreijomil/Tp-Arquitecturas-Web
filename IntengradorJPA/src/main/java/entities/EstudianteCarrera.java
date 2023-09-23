@@ -9,7 +9,7 @@ public class EstudianteCarrera {
     private EstudianteCarreraId id;
     @Column(nullable = false)
     private Timestamp inscripcion;
-    @Column(nullable = false)
+    @Column(nullable = true)
     private Timestamp graduacion;
     @Column
     private int antiguedad;
@@ -56,6 +56,6 @@ public class EstudianteCarrera {
 
     @Override
     public String toString() {
-        return "Carrera: "+id+", "+inscripcion+", "+graduacion+", "+antiguedad;
+        return "Carrera y DNI estudiante: "+id+", inscripcion: "+inscripcion+", graduacion: "+graduacion+", antiguedad en años: "+antiguedad;
     }
 }
