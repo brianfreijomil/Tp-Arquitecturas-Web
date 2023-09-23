@@ -28,17 +28,11 @@ public class Main {
     public static void main(String[] args) throws SQLException, IOException {
 
         //factory
-        //Factory factory = Factory.getInstance();
         AbstractFactory postgresFactory = AbstractFactory.getDAOFactory(AbstractFactory.POSTGRESQL_DB);
 
         carreraRepository = postgresFactory.createCarreraRepository();
         estudianteRepository = postgresFactory.createEstudianteRepository();
         estudianteCarreraRepository = postgresFactory.createEstudianteCarreraRepository();
-        //repositories
-        //actory.createCarreraRepository();
-        //EstudianteRepository estudianteRepository = factory.createEstudianteRepository();
-        //EstudianteCarreraRepository estudianteCarreraRepository = factory.createEstudianteCarreraRepository();
-
 
 
         //poblando tablas
