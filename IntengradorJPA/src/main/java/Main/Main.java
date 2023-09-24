@@ -1,4 +1,4 @@
-package org.example;
+package Main;
 
 import CsvFiles.CsvReader;
 import dto.CarrerasConInscriptosDTO;

@@ -10,16 +10,16 @@ public class Estudiante {
 
     @Id
     private int DNI;
-    @Column(nullable = false)
-    private String nombre;
+    @Column
+    private int nro_libreta;
     @Column(nullable = false)
     private String apellido;
+    @Column(nullable = false)
+    private String nombre;
     @Column
     private int edad;
     @Column(nullable = true)
     private String genero;
-    @Column
-    private int nro_libreta;
     @Column(nullable = false)
     private String ciudad;
 
