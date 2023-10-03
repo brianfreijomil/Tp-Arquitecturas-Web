@@ -1,8 +1,6 @@
 package com.arquitecturasWeb.Integrador3.controllers;
 
-import com.arquitecturasWeb.Integrador3.domain.Student;
-import com.arquitecturasWeb.Integrador3.repositories.StudentRepository;
-import com.arquitecturasWeb.Integrador3.services.StudentService;
+import com.arquitecturasWeb.Integrador3.service.DTOs.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
