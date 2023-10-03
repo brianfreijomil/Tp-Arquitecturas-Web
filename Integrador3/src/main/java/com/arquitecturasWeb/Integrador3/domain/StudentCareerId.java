@@ -1,4 +1,5 @@
 package com.arquitecturasWeb.Integrador3.domain;
+import com.arquitecturasWeb.Integrador3.service.DTOs.StudentCareerId.Request.StudentCareerIdRequestDTO;
 import jakarta.persistence.Embeddable;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
@@ -22,8 +23,8 @@ public class StudentCareerId implements Serializable {
 
     public StudentCareerId(StudentCareerIdRequestDTO requets) {
         super();
-        this.student = requets.getStudent();
-        this.career = requets.getCareer();
+        this.student = new Student(requets.getStudent());
+        this.career = new Career(requets.getCareer());
     }
 
 }

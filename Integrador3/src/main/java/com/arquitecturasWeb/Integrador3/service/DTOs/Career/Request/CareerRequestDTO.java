@@ -1,10 +1,14 @@
-package com.arquitecturasWeb.Integrador3.service.DTOs.Race.Request;
+package com.arquitecturasWeb.Integrador3.service.DTOs.Career.Request;
 
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
-@AllArgsConstructor
-public class RaceRequestDTO {
+import lombok.Data;
+import lombok.RequiredArgsConstructor;
+
+@RequiredArgsConstructor
+@Data
+public class CareerRequestDTO {
     @NotNull(message = "the id cannot be null")
     private final Long id;
     @NotNull(message = "the name cannot be null")

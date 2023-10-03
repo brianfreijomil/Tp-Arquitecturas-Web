@@ -1,5 +1,6 @@
 package com.arquitecturasWeb.Integrador3.domain;
 
+import com.arquitecturasWeb.Integrador3.service.DTOs.StudentCareer.Request.StudentCareerRequestDTO;
 import jakarta.persistence.Column;
 import jakarta.persistence.EmbeddedId;
 import jakarta.persistence.Entity;
@@ -23,7 +24,7 @@ public class StudentCareer {
 
     public StudentCareer(StudentCareerRequestDTO request) {
         super();
-        this.id = request.getId();
+        this.id = new StudentCareerId(request.getId());
         this.inscription = request.getInscription();
         this.graduation = request.getGraduation();
         this.antiquity = request.getAntiquity();
