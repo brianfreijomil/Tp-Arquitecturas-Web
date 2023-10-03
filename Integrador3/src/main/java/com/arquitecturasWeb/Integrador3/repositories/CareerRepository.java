@@ -11,7 +11,6 @@ public interface CareerRepository extends JpaRepository<Career, Long> {
 
     Career getCareerById(long id);
     Career getCareerByName(String name);
-
     @Override
     List<Career> findAll();
 }

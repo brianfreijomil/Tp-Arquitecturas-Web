@@ -26,6 +26,23 @@ public class CareerService implements JpaRepository<Career, Long> {
     public void flush() {
 
     }
+    //--------------------------------------------------------->>>>>
+    public Career getCareerByName(String name){
+        return repository.getCareerByName(name);
+    }
+    @Override
+    public Career getById(Long id) {
+        return repository.getCareerById(id);
+    }
+    @Override
+    public List<Career> findAll() {
+        return repository.findAll();
+    }
+    @Override
+    public <S extends Career> S save(S entity) {
+        return null;
+    }
+    //-------------------------------------------------------->>>>>
 
     @Override
     public <S extends Career> List<S> saveAllAndFlush(Iterable<S> entities) {
@@ -52,10 +69,7 @@ public class CareerService implements JpaRepository<Career, Long> {
         return null;
     }
 
-    @Override
-    public Career getById(Long id) {
-        return repository.getCareerById(id);
-    }
+
 
     @Override
     public Career getReferenceById(Long aLong) {
@@ -102,10 +116,7 @@ public class CareerService implements JpaRepository<Career, Long> {
         return null;
     }
 
-    @Override
-    public <S extends Career> S save(S entity) {
-        return null;
-    }
+
 
     @Override
     public <S extends Career> List<S> saveAll(Iterable<S> entities) {
@@ -122,10 +133,7 @@ public class CareerService implements JpaRepository<Career, Long> {
         return false;
     }
 
-    @Override
-    public List<Career> findAll() {
-        return repository.findAll();
-    }
+
 
     @Override
     public List<Career> findAllById(Iterable<Long> longs) {
@@ -172,7 +180,5 @@ public class CareerService implements JpaRepository<Career, Long> {
         return null;
     }
 
-    public Career getCareerByName(String name){
-        return repository.getCareerByName(name);
-    }
+
 }

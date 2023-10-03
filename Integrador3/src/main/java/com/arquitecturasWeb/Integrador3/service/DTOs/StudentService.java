@@ -25,7 +25,23 @@ public class StudentService implements JpaRepository<Student, Long> {
     public void flush() {
 
     }
+    //------------------------------------------------------------------>>>>>
+    @Override
+    public <S extends Student> S save(S entity) {
+        return repository.save(entity);
+    }
+    public Object getStudentByLastName(String lastName) {
+        return repository.getStudentByLastName(lastName);
+    }
 
+    public Object getStudentByLU(int lu) {
+        return repository.getStudentByLu(lu);
+    }
+    public Object getStudentByGenre(String genre) {
+
+        return repository.getStudentByGenre(genre);
+    }
+    //------------------------------------------------------------------>>>>>
     @Override
     public <S extends Student> S saveAndFlush(S entity) {
         return null;
@@ -102,11 +118,6 @@ public class StudentService implements JpaRepository<Student, Long> {
     }
 
     @Override
-    public <S extends Student> S save(S entity) {
-        return repository.save(entity);
-    }
-
-    @Override
     public <S extends Student> List<S> saveAll(Iterable<S> entities) {
         return null;
     }
@@ -171,15 +182,4 @@ public class StudentService implements JpaRepository<Student, Long> {
         return null;
     }
 
-    public Object getStudentByLastName(String lastName) {
-        return repository.getStudentByLastName(lastName);
-    }
-
-    public Object getStudentByLU(int lu) {
-        return repository.getStudentByLu(lu);
-    }
-
-    public Object getStudentByGenre(String genre) {
-        return repository.getStudentByGenre(genre);
-    }
 }
