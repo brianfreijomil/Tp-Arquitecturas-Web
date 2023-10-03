@@ -1,6 +1,6 @@
 package com.arquitecturasWeb.Integrador3.services;
 
-import com.arquitecturasWeb.Integrador3.entities.Carrera;
+import com.arquitecturasWeb.Integrador3.domain.Career;
 import com.arquitecturasWeb.Integrador3.repositories.CareerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Example;
@@ -16,7 +16,7 @@ import java.util.Optional;
 import java.util.function.Function;
 
 @Service("CareerService")
-public class CareerService implements JpaRepository<Carrera, Long> {
+public class CareerService implements JpaRepository<Career, Long> {
 
     @Autowired
     private CareerRepository repository;
@@ -28,12 +28,12 @@ public class CareerService implements JpaRepository<Carrera, Long> {
     }
 
     @Override
-    public <S extends Carrera> List<S> saveAllAndFlush(Iterable<S> entities) {
+    public <S extends Career> List<S> saveAllAndFlush(Iterable<S> entities) {
         return null;
     }
 
     @Override
-    public void deleteAllInBatch(Iterable<Carrera> entities) {
+    public void deleteAllInBatch(Iterable<Career> entities) {
 
     }
 
@@ -48,72 +48,72 @@ public class CareerService implements JpaRepository<Carrera, Long> {
     }
 
     @Override
-    public Carrera getOne(Long aLong) {
+    public Career getOne(Long aLong) {
         return null;
     }
 
     @Override
-    public Carrera getById(Long aLong) {
+    public Career getById(Long aLong) {
         return null;
     }
 
     @Override
-    public Carrera getReferenceById(Long aLong) {
+    public Career getReferenceById(Long aLong) {
         return null;
     }
 
     @Override
-    public <S extends Carrera> Optional<S> findOne(Example<S> example) {
+    public <S extends Career> Optional<S> findOne(Example<S> example) {
         return Optional.empty();
     }
 
     @Override
-    public <S extends Carrera> List<S> findAll(Example<S> example) {
+    public <S extends Career> List<S> findAll(Example<S> example) {
         return null;
     }
 
     @Override
-    public <S extends Carrera> List<S> findAll(Example<S> example, Sort sort) {
+    public <S extends Career> List<S> findAll(Example<S> example, Sort sort) {
         return null;
     }
 
     @Override
-    public <S extends Carrera> Page<S> findAll(Example<S> example, Pageable pageable) {
+    public <S extends Career> Page<S> findAll(Example<S> example, Pageable pageable) {
         return null;
     }
 
     @Override
-    public <S extends Carrera> long count(Example<S> example) {
+    public <S extends Career> long count(Example<S> example) {
         return 0;
     }
 
     @Override
-    public <S extends Carrera> boolean exists(Example<S> example) {
+    public <S extends Career> boolean exists(Example<S> example) {
         return false;
     }
 
     @Override
-    public <S extends Carrera, R> R findBy(Example<S> example, Function<FluentQuery.FetchableFluentQuery<S>, R> queryFunction) {
+    public <S extends Career, R> R findBy(Example<S> example, Function<FluentQuery.FetchableFluentQuery<S>, R> queryFunction) {
         return null;
     }
 
     @Override
-    public <S extends Carrera> S saveAndFlush(S entity) {
+    public <S extends Career> S saveAndFlush(S entity) {
         return null;
     }
 
     @Override
-    public <S extends Carrera> S save(S entity) {
+    public <S extends Career> S save(S entity) {
         return null;
     }
 
     @Override
-    public <S extends Carrera> List<S> saveAll(Iterable<S> entities) {
+    public <S extends Career> List<S> saveAll(Iterable<S> entities) {
         return null;
     }
 
     @Override
-    public Optional<Carrera> findById(Long aLong) {
+    public Optional<Career> findById(Long aLong) {
         return Optional.empty();
     }
 
@@ -123,12 +123,12 @@ public class CareerService implements JpaRepository<Carrera, Long> {
     }
 
     @Override
-    public List<Carrera> findAll() {
+    public List<Career> findAll() {
         return null;
     }
 
     @Override
-    public List<Carrera> findAllById(Iterable<Long> longs) {
+    public List<Career> findAllById(Iterable<Long> longs) {
         return null;
     }
 
@@ -143,7 +143,7 @@ public class CareerService implements JpaRepository<Carrera, Long> {
     }
 
     @Override
-    public void delete(Carrera entity) {
+    public void delete(Career entity) {
 
     }
 
@@ -153,7 +153,7 @@ public class CareerService implements JpaRepository<Carrera, Long> {
     }
 
     @Override
-    public void deleteAll(Iterable<? extends Carrera> entities) {
+    public void deleteAll(Iterable<? extends Career> entities) {
 
     }
 
@@ -163,12 +163,12 @@ public class CareerService implements JpaRepository<Carrera, Long> {
     }
 
     @Override
-    public List<Carrera> findAll(Sort sort) {
+    public List<Career> findAll(Sort sort) {
         return null;
     }
 
     @Override
-    public Page<Carrera> findAll(Pageable pageable) {
+    public Page<Career> findAll(Pageable pageable) {
         return null;
     }
 }

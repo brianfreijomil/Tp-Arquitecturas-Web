@@ -1,6 +1,6 @@
 package com.arquitecturasWeb.Integrador3.services;
 
-import com.arquitecturasWeb.Integrador3.entities.Estudiante;
+import com.arquitecturasWeb.Integrador3.domain.Student;
 import com.arquitecturasWeb.Integrador3.repositories.StudentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Example;
@@ -16,9 +16,10 @@ import java.util.Optional;
 import java.util.function.Function;
 
 @Service("StudentService")
-public class StudentService implements JpaRepository<Estudiante, Long> {
+public class StudentService implements JpaRepository<Student, Long> {
     @Autowired
     private StudentRepository repository;
+
 
     @Override
     public void flush() {
@@ -26,17 +27,17 @@ public class StudentService implements JpaRepository<Estudiante, Long> {
     }
 
     @Override
-    public <S extends Estudiante> S saveAndFlush(S entity) {
+    public <S extends Student> S saveAndFlush(S entity) {
         return null;
     }
 
     @Override
-    public <S extends Estudiante> List<S> saveAllAndFlush(Iterable<S> entities) {
+    public <S extends Student> List<S> saveAllAndFlush(Iterable<S> entities) {
         return null;
     }
 
     @Override
-    public void deleteAllInBatch(Iterable<Estudiante> entities) {
+    public void deleteAllInBatch(Iterable<Student> entities) {
 
     }
 
@@ -51,67 +52,67 @@ public class StudentService implements JpaRepository<Estudiante, Long> {
     }
 
     @Override
-    public Estudiante getOne(Long aLong) {
+    public Student getOne(Long aLong) {
         return null;
     }
 
     @Override
-    public Estudiante getById(Long aLong) {
+    public Student getById(Long aLong) {
         return null;
     }
 
     @Override
-    public Estudiante getReferenceById(Long aLong) {
+    public Student getReferenceById(Long aLong) {
         return null;
     }
 
     @Override
-    public <S extends Estudiante> Optional<S> findOne(Example<S> example) {
+    public <S extends Student> Optional<S> findOne(Example<S> example) {
         return Optional.empty();
     }
 
     @Override
-    public <S extends Estudiante> List<S> findAll(Example<S> example) {
+    public <S extends Student> List<S> findAll(Example<S> example) {
         return null;
     }
 
     @Override
-    public <S extends Estudiante> List<S> findAll(Example<S> example, Sort sort) {
+    public <S extends Student> List<S> findAll(Example<S> example, Sort sort) {
         return null;
     }
 
     @Override
-    public <S extends Estudiante> Page<S> findAll(Example<S> example, Pageable pageable) {
+    public <S extends Student> Page<S> findAll(Example<S> example, Pageable pageable) {
         return null;
     }
 
     @Override
-    public <S extends Estudiante> long count(Example<S> example) {
+    public <S extends Student> long count(Example<S> example) {
         return 0;
     }
 
     @Override
-    public <S extends Estudiante> boolean exists(Example<S> example) {
+    public <S extends Student> boolean exists(Example<S> example) {
         return false;
     }
 
     @Override
-    public <S extends Estudiante, R> R findBy(Example<S> example, Function<FluentQuery.FetchableFluentQuery<S>, R> queryFunction) {
+    public <S extends Student, R> R findBy(Example<S> example, Function<FluentQuery.FetchableFluentQuery<S>, R> queryFunction) {
         return null;
     }
 
     @Override
-    public <S extends Estudiante> S save(S entity) {
+    public <S extends Student> S save(S entity) {
         return null;
     }
 
     @Override
-    public <S extends Estudiante> List<S> saveAll(Iterable<S> entities) {
+    public <S extends Student> List<S> saveAll(Iterable<S> entities) {
         return null;
     }
 
     @Override
-    public Optional<Estudiante> findById(Long aLong) {
+    public Optional<Student> findById(Long aLong) {
         return Optional.empty();
     }
 
@@ -121,12 +122,12 @@ public class StudentService implements JpaRepository<Estudiante, Long> {
     }
 
     @Override
-    public List<Estudiante> findAll() {
+    public List<Student> findAll() {
         return null;
     }
 
     @Override
-    public List<Estudiante> findAllById(Iterable<Long> longs) {
+    public List<Student> findAllById(Iterable<Long> longs) {
         return null;
     }
 
@@ -141,7 +142,7 @@ public class StudentService implements JpaRepository<Estudiante, Long> {
     }
 
     @Override
-    public void delete(Estudiante entity) {
+    public void delete(Student entity) {
 
     }
 
@@ -151,7 +152,7 @@ public class StudentService implements JpaRepository<Estudiante, Long> {
     }
 
     @Override
-    public void deleteAll(Iterable<? extends Estudiante> entities) {
+    public void deleteAll(Iterable<? extends Student> entities) {
 
     }
 
@@ -161,12 +162,12 @@ public class StudentService implements JpaRepository<Estudiante, Long> {
     }
 
     @Override
-    public List<Estudiante> findAll(Sort sort) {
+    public List<Student> findAll(Sort sort) {
         return null;
     }
 
     @Override
-    public Page<Estudiante> findAll(Pageable pageable) {
+    public Page<Student> findAll(Pageable pageable) {
         return null;
     }
 }
