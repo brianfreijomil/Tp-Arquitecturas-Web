@@ -103,7 +103,7 @@ public class StudentService implements JpaRepository<Student, Long> {
 
     @Override
     public <S extends Student> S save(S entity) {
-        return null;
+        return repository.save(entity);
     }
 
     @Override

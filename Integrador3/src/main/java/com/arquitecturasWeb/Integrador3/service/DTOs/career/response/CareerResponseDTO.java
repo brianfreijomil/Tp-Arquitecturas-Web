@@ -1,4 +1,4 @@
-package com.arquitecturasWeb.Integrador3.service.DTOs.Career.Response;
+package com.arquitecturasWeb.Integrador3.service.DTOs.career.response;
 
 import com.arquitecturasWeb.Integrador3.domain.Career;
 

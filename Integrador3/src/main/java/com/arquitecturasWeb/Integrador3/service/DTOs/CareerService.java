@@ -53,8 +53,8 @@ public class CareerService implements JpaRepository<Career, Long> {
     }
 
     @Override
-    public Career getById(Long aLong) {
-        return null;
+    public Career getById(Long id) {
+        return repository.getCareerById(id);
     }
 
     @Override
@@ -124,7 +124,7 @@ public class CareerService implements JpaRepository<Career, Long> {
 
     @Override
     public List<Career> findAll() {
-        return null;
+        return repository.findAll();
     }
 
     @Override
@@ -170,5 +170,9 @@ public class CareerService implements JpaRepository<Career, Long> {
     @Override
     public Page<Career> findAll(Pageable pageable) {
         return null;
+    }
+
+    public Career getCareerByName(String name){
+        return repository.getCareerByName(name);
     }
 }

@@ -1,7 +1,7 @@
-package com.arquitecturasWeb.Integrador3.service.DTOs;
+package com.arquitecturasWeb.Integrador3.domain;
 
 import com.arquitecturasWeb.Integrador3.domain.StudentCareerId;
-import com.arquitecturasWeb.Integrador3.service.DTOs.StudentCareer.Request.StudentCareerRequestDTO;
+import com.arquitecturasWeb.Integrador3.service.DTOs.studentCareer.request.StudentCareerRequestDTO;
 import jakarta.persistence.Column;
 import jakarta.persistence.EmbeddedId;
 import jakarta.persistence.Entity;
@@ -13,7 +13,7 @@ import java.sql.Timestamp;
 @Entity
 @Data
 @NoArgsConstructor
-public class StudentCareer {
+public class StudentCareerService {
     @EmbeddedId
     private StudentCareerId id;
     @Column(nullable = false)
@@ -23,7 +23,7 @@ public class StudentCareer {
     @Column
     private int antiquity;
 
-    public StudentCareer(StudentCareerRequestDTO request) {
+    public StudentCareerService(StudentCareerRequestDTO request) {
         super();
         this.id = new StudentCareerId(request.getId());
         this.inscription = request.getInscription();
