@@ -112,8 +112,8 @@ public class StudentService implements JpaRepository<Student, Long> {
     }
 
     @Override
-    public Optional<Student> findById(Long aLong) {
-        return Optional.empty();
+    public Optional<Student> findById(Long id) {
+        return repository.findById(id);
     }
 
     @Override
@@ -123,7 +123,7 @@ public class StudentService implements JpaRepository<Student, Long> {
 
     @Override
     public List<Student> findAll() {
-        return null;
+        return repository.findAll();
     }
 
     @Override
@@ -169,5 +169,17 @@ public class StudentService implements JpaRepository<Student, Long> {
     @Override
     public Page<Student> findAll(Pageable pageable) {
         return null;
+    }
+
+    public Object getStudentByLastName(String lastName) {
+        return repository.getStudentByLastName(lastName);
+    }
+
+    public Object getStudentByLU(int lu) {
+        return repository.getStudentByLu(lu);
+    }
+
+    public Object getStudentByGenre(String genre) {
+        return repository.getStudentByGenre(genre);
     }
 }
