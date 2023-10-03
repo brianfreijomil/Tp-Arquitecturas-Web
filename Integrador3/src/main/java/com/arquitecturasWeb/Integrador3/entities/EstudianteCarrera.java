@@ -1,6 +1,6 @@
-package entities;
+package com.arquitecturasWeb.Integrador3.entities;
 
-import javax.persistence.*;
+import jakarta.persistence.*;
 import java.sql.Timestamp;
 
 @Entity(name = "estudiante_carrera")

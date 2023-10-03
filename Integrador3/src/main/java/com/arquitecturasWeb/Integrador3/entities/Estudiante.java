@@ -1,6 +1,6 @@
-package entities;
+package com.arquitecturasWeb.Integrador3.entities;
 
-import javax.persistence.*;
+import jakarta.persistence.*;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
