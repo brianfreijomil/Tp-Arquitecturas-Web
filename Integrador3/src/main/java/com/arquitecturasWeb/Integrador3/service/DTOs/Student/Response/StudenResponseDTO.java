@@ -1,6 +1,5 @@
 package com.arquitecturasWeb.Integrador3.service.DTOs.Student.Response;
 
-import com.arquitecturasWeb.Integrador3.domain.Student;
 import lombok.NoArgsConstructor;
 public class StudenResponseDTO {
     private final int dni;
