@@ -1,37 +1,37 @@
 package com.arquitecturasWeb.Integrador3.controllers;
 
 import com.arquitecturasWeb.Integrador3.service.DTOs.StudentService;
+import com.arquitecturasWeb.Integrador3.service.DTOs.student.request.StudentRequestDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import com.arquitecturasWeb.Integrador3.domain.Student;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/students")
 public class StudentController {
-    @Autowired
+
     private StudentService service;
+    @Autowired
+    public StudentController(StudentService ss){
+        this.service = ss;
+    }
+
+    @PostMapping("/")
+    public void saveStudent(@RequestBody StudentRequestDTO sdto){
+        this.service.save(sdto);
+    }
 
     @GetMapping("")
-    public ResponseEntity<?> getAll(){
-        try {
-            return ResponseEntity.status(HttpStatus.OK).body(service.findAll());
-        }
-        catch (Exception e){
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("{\"error\":\"Error. Por favor intente más tarde.\"}");
-        }
+    public List<Student> getAllStudents(){
+        return this.service.findAll();
     }
     @GetMapping("/{DNI}")
-    public ResponseEntity<?> getStudentByDni(@PathVariable Long dni){
-        try {
-            return ResponseEntity.status(HttpStatus.OK).body(service.findById(dni));
-        }
-        catch (Exception e){
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("{\"error\":\"Error. Por favor intente más tarde.\"}");
-        }
+    public Student getStudentByDni(@PathVariable Long dni){
+        return this.service.getById(dni);
     }
 
     @GetMapping("/{lastName}")
