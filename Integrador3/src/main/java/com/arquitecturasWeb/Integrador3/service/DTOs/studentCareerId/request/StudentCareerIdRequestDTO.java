@@ -1,7 +1,7 @@
-package com.arquitecturasWeb.Integrador3.service.DTOs.StudentCareerId.Request;
+package com.arquitecturasWeb.Integrador3.service.DTOs.studentCareerId.request;
 
-import com.arquitecturasWeb.Integrador3.service.DTOs.Career.Request.CareerRequestDTO;
-import com.arquitecturasWeb.Integrador3.service.DTOs.Student.Request.StudentRequestDTO;
+import com.arquitecturasWeb.Integrador3.service.DTOs.career.request.CareerRequestDTO;
+import com.arquitecturasWeb.Integrador3.service.DTOs.student.request.StudentRequestDTO;
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;

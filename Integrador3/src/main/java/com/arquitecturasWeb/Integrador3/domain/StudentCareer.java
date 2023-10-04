@@ -1,7 +1,6 @@
-package com.arquitecturasWeb.Integrador3.service.DTOs;
+package com.arquitecturasWeb.Integrador3.domain;
 
-import com.arquitecturasWeb.Integrador3.domain.StudentCareerId;
-import com.arquitecturasWeb.Integrador3.service.DTOs.StudentCareer.Request.StudentCareerRequestDTO;
+import com.arquitecturasWeb.Integrador3.service.DTOs.studentCareer.request.StudentCareerRequestDTO;
 import jakarta.persistence.Column;
 import jakarta.persistence.EmbeddedId;
 import jakarta.persistence.Entity;

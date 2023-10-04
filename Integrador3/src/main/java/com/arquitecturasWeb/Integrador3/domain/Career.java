@@ -1,6 +1,6 @@
 package com.arquitecturasWeb.Integrador3.domain;
 
-import com.arquitecturasWeb.Integrador3.service.DTOs.Career.Request.CareerRequestDTO;
+import com.arquitecturasWeb.Integrador3.service.DTOs.career.request.CareerRequestDTO;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;

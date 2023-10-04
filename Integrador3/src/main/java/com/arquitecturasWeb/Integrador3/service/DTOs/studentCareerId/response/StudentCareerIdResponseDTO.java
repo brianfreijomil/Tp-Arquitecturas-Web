@@ -1,8 +1,7 @@
-package com.arquitecturasWeb.Integrador3.service.DTOs.StudentCareerId.Response;
+package com.arquitecturasWeb.Integrador3.service.DTOs.studentCareerId.response;
 
 import com.arquitecturasWeb.Integrador3.domain.StudentCareerId;
-import com.arquitecturasWeb.Integrador3.service.DTOs.Career.Response.CareerResponseDTO;
-import com.arquitecturasWeb.Integrador3.service.DTOs.Student.Response.StudentResponseDTO;
+import com.arquitecturasWeb.Integrador3.service.DTOs.career.response.CareerResponseDTO;
 
 public class StudentCareerIdResponseDTO {
     private CareerResponseDTO career;

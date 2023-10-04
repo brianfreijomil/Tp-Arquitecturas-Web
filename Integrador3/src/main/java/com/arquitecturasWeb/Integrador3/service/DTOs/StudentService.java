@@ -2,184 +2,68 @@ package com.arquitecturasWeb.Integrador3.service.DTOs;
 
 import com.arquitecturasWeb.Integrador3.domain.Student;
 import com.arquitecturasWeb.Integrador3.repositories.StudentRepository;
+import com.arquitecturasWeb.Integrador3.service.DTOs.student.request.StudentRequestDTO;
+import com.arquitecturasWeb.Integrador3.service.DTOs.student.response.StudentResponseDTO;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Example;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
-import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.repository.query.FluentQuery;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.function.Function;
+import java.util.stream.Collectors;
 
 @Service("StudentService")
-public class StudentService implements JpaRepository<Student, Long> {
-    @Autowired
+public class StudentService{
     private StudentRepository repository;
 
-
-    @Override
-    public void flush() {
-
+    @Autowired
+    public StudentService(StudentRepository repository){
+        this.repository = repository;
     }
 
-    @Override
-    public <S extends Student> S saveAndFlush(S entity) {
+    @Transactional
+    public int save(StudentRequestDTO student){
+        return repository.save(new Student(student)).getDNI();
+    }
+    @Transactional
+    public StudentResponseDTO getStudentByLastName(String lastName) {
+        Optional<Student> student = repository.findByLastName(lastName);
+        if(student.isPresent()){
+            StudentResponseDTO s = new StudentResponseDTO(student.get());
+            return s;
+        }
         return null;
     }
-
-    @Override
-    public <S extends Student> List<S> saveAllAndFlush(Iterable<S> entities) {
+    @Transactional
+    public StudentResponseDTO getStudentByLU(int lu) {
+        Optional<Student> student = repository.findByLu(lu);
+        if(student.isPresent()){
+            StudentResponseDTO s = new StudentResponseDTO(student.get());
+            return s;
+        }
         return null;
     }
-
-    @Override
-    public void deleteAllInBatch(Iterable<Student> entities) {
-
-    }
-
-    @Override
-    public void deleteAllByIdInBatch(Iterable<Long> longs) {
-
-    }
-
-    @Override
-    public void deleteAllInBatch() {
-
-    }
-
-    @Override
-    public Student getOne(Long aLong) {
+    @Transactional
+    public StudentResponseDTO getStudentByGenre(String genre) {
+        Optional<Student> student = repository.findByGenre(genre);
+        if(student.isPresent()){
+            StudentResponseDTO s = new StudentResponseDTO(student.get());
+            return s;
+        }
         return null;
     }
-
-    @Override
-    public Student getById(Long aLong) {
+    @Transactional
+    public StudentResponseDTO findByDNI(int dni){
+        Optional<Student> student = repository.findByDNI(dni);
+        if(student.isPresent()){
+            StudentResponseDTO s = new StudentResponseDTO(student.get());
+            return s;
+        }
         return null;
     }
-
-    @Override
-    public Student getReferenceById(Long aLong) {
-        return null;
-    }
-
-    @Override
-    public <S extends Student> Optional<S> findOne(Example<S> example) {
-        return Optional.empty();
-    }
-
-    @Override
-    public <S extends Student> List<S> findAll(Example<S> example) {
-        return null;
-    }
-
-    @Override
-    public <S extends Student> List<S> findAll(Example<S> example, Sort sort) {
-        return null;
-    }
-
-    @Override
-    public <S extends Student> Page<S> findAll(Example<S> example, Pageable pageable) {
-        return null;
-    }
-
-    @Override
-    public <S extends Student> long count(Example<S> example) {
-        return 0;
-    }
-
-    @Override
-    public <S extends Student> boolean exists(Example<S> example) {
-        return false;
-    }
-
-    @Override
-    public <S extends Student, R> R findBy(Example<S> example, Function<FluentQuery.FetchableFluentQuery<S>, R> queryFunction) {
-        return null;
-    }
-
-    @Override
-    public <S extends Student> S save(S entity) {
-        return null;
-    }
-
-    @Override
-    public <S extends Student> List<S> saveAll(Iterable<S> entities) {
-        return null;
-    }
-
-    @Override
-    public Optional<Student> findById(Long id) {
-        return repository.findById(id);
-    }
-
-    @Override
-    public boolean existsById(Long aLong) {
-        return false;
-    }
-
-    @Override
-    public List<Student> findAll() {
-        return repository.findAll();
-    }
-
-    @Override
-    public List<Student> findAllById(Iterable<Long> longs) {
-        return null;
-    }
-
-    @Override
-    public long count() {
-        return 0;
-    }
-
-    @Override
-    public void deleteById(Long aLong) {
-
-    }
-
-    @Override
-    public void delete(Student entity) {
-
-    }
-
-    @Override
-    public void deleteAllById(Iterable<? extends Long> longs) {
-
-    }
-
-    @Override
-    public void deleteAll(Iterable<? extends Student> entities) {
-
-    }
-
-    @Override
-    public void deleteAll() {
-
-    }
-
-    @Override
-    public List<Student> findAll(Sort sort) {
-        return null;
-    }
-
-    @Override
-    public Page<Student> findAll(Pageable pageable) {
-        return null;
-    }
-
-    public Object getStudentByLastName(String lastName) {
-        return repository.getStudentByLastName(lastName);
-    }
-
-    public Object getStudentByLU(int lu) {
-        return repository.getStudentByLu(lu);
-    }
-
-    public Object getStudentByGenre(String genre) {
-        return repository.getStudentByGenre(genre);
+    @Transactional
+    public List<StudentResponseDTO> findAll() {
+        List<Student> students = repository.findAll();
+        return students.stream().map(StudentResponseDTO::new).collect(Collectors.toList());
     }
 }

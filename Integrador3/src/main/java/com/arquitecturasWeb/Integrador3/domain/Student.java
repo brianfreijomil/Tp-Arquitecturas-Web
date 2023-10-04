@@ -1,6 +1,6 @@
 package com.arquitecturasWeb.Integrador3.domain;
 
-import com.arquitecturasWeb.Integrador3.service.DTOs.Student.Request.StudentRequestDTO;
+import com.arquitecturasWeb.Integrador3.service.DTOs.student.request.StudentRequestDTO;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
