@@ -12,9 +12,11 @@ public interface StudentRepository extends JpaRepository<Student, Long> {
 
     Student getStudentByGenre(String genre);
 
-    Student findByDNI(int dni);
+    Optional<Student> findByDNI(int dni);
 
     Optional<Student> findByLastName(String lastName);
 
     Optional<Student> findByLu(int lu);
+
+    Optional<Student> findByGenre(String genre);
 }

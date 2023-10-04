@@ -11,12 +11,13 @@ import org.springframework.web.bind.annotation.*;
 import com.arquitecturasWeb.Integrador3.domain.Student;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/students")
 public class StudentController {
-
     private StudentService service;
+
     @Autowired
     public StudentController(StudentService ss){
         this.service = ss;
@@ -24,15 +25,16 @@ public class StudentController {
 
     @PostMapping("/")
     public void saveStudent(@RequestBody @Valid StudentRequestDTO sdto){
-
+        service.save(sdto);
     }
 
     @GetMapping("")
     public List<StudentResponseDTO> getAllStudents(){
         return this.service.findAll();
     }
+
     @GetMapping("/{DNI}")
-    public Student getStudentByDni(@PathVariable int dni){
+    public StudentResponseDTO getStudentByDni(@PathVariable int dni){
         return this.service.findByDNI(dni);
     }
 
@@ -47,11 +49,6 @@ public class StudentController {
     }
     @GetMapping("/{genre}")
     public ResponseEntity<?> getStudentByGenre(@PathVariable String genre){
-        try {
-            return ResponseEntity.status(HttpStatus.OK).body(service.getStudentByGenre(genre));
-        }
-        catch (Exception e){
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("{\"error\":\"Error. Por favor intente más tarde.\"}");
-        }
+       return ResponseEntity.ok(service.getStudentByGenre(genre));
     }
 }
