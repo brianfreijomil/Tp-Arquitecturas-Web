@@ -1,4 +1,4 @@
-package com.arquitecturasWeb.Integrador3.service.DTOs;
+package com.arquitecturasWeb.Integrador3.service;
 
 import com.arquitecturasWeb.Integrador3.domain.Student;
 import com.arquitecturasWeb.Integrador3.domain.StudentCareer;
@@ -22,7 +22,7 @@ public class StudentCareerService {
         this.repository = repository;
     }
 
-    @Transactional
+    @Transactional(readOnly = true)
     public List<CareerWithStudentsResponseDTO> findCareersWithStudents() {
         List<CareerWithStudentsResponseDTO> studentsCareers = repository.findCareersWithStudents();
         return studentsCareers;

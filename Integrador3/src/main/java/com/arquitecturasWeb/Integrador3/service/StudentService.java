@@ -1,4 +1,4 @@
-package com.arquitecturasWeb.Integrador3.service.DTOs;
+package com.arquitecturasWeb.Integrador3.service;
 
 import com.arquitecturasWeb.Integrador3.domain.Student;
 import com.arquitecturasWeb.Integrador3.repositories.StudentRepository;
@@ -25,7 +25,7 @@ public class StudentService{
     public int save(StudentRequestDTO student){
         return repository.save(new Student(student)).getDNI();
     }
-    @Transactional
+    @Transactional(readOnly = true)
     public StudentResponseDTO getStudentByLastName(String lastName) {
         Optional<Student> student = repository.findByLastName(lastName);
         if(student.isPresent()){
@@ -34,7 +34,7 @@ public class StudentService{
         }
         return null;
     }
-    @Transactional
+    @Transactional(readOnly = true)
     public StudentResponseDTO getStudentByLU(int lu) {
         Optional<Student> student = repository.findByLu(lu);
         if(student.isPresent()){
@@ -43,7 +43,7 @@ public class StudentService{
         }
         return null;
     }
-    @Transactional
+    @Transactional(readOnly = true)
     public StudentResponseDTO getStudentByGenre(String genre) {
         Optional<Student> student = repository.findByGenre(genre);
         if(student.isPresent()){
@@ -52,7 +52,7 @@ public class StudentService{
         }
         return null;
     }
-    @Transactional
+    @Transactional(readOnly = true)
     public StudentResponseDTO findByDNI(int dni){
         Optional<Student> student = repository.findByDNI(dni);
         if(student.isPresent()){
@@ -65,5 +65,13 @@ public class StudentService{
     public List<StudentResponseDTO> findAll() {
         List<Student> students = repository.findAll();
         return students.stream().map(StudentResponseDTO::new).collect(Collectors.toList());
+    }
+
+    @Transactional(readOnly = true)
+    public List<StudentResponseDTO> search(StudentRequestDTO request) {
+        return this.repository.
+                search(request.getDNI(), request.getLu(), request.getLastName(), request.getName(), request.getAge(), request.getGenre(), request.getCity())
+                .stream()
+                .map(StudentResponseDTO::new).collect(Collectors.toList());
     }
 }

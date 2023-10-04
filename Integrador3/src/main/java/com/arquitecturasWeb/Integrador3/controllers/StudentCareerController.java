@@ -1,7 +1,6 @@
 package com.arquitecturasWeb.Integrador3.controllers;
 
-import com.arquitecturasWeb.Integrador3.service.DTOs.StudentCareerService;
-import com.arquitecturasWeb.Integrador3.service.DTOs.StudentService;
+import com.arquitecturasWeb.Integrador3.service.StudentCareerService;
 import com.arquitecturasWeb.Integrador3.service.DTOs.studentCareer.response.CareerWithStudentsResponseDTO;
 import com.arquitecturasWeb.Integrador3.service.DTOs.studentCareer.response.StudentsOfCareerByCityResponseDTO;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -1,4 +1,4 @@
-package com.arquitecturasWeb.Integrador3.service.DTOs;
+package com.arquitecturasWeb.Integrador3.service;
 
 import com.arquitecturasWeb.Integrador3.domain.Career;
 import com.arquitecturasWeb.Integrador3.domain.Student;
