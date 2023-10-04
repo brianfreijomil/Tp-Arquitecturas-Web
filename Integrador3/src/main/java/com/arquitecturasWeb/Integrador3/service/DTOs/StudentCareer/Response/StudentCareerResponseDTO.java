@@ -1,6 +1,6 @@
-package com.arquitecturasWeb.Integrador3.service.DTOs.StudentCareer.Response;
+package com.arquitecturasWeb.Integrador3.service.DTOs.StudentCareer;
 
-import com.arquitecturasWeb.Integrador3.domain.StudentCareer;
+import com.arquitecturasWeb.Integrador3.domain.;
 import com.arquitecturasWeb.Integrador3.service.DTOs.StudentCareerId.Response.StudentCareerIdResponseDTO;
 
 import java.sql.Timestamp;

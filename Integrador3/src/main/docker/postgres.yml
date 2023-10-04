@@ -1,0 +1,12 @@
+version: "3.8"
+services:
+  mysql:
+    container_name: postgres
+    image: postgres:16.0
+    environment:
+      POSTGRES_USER: postgres # especifica el nombre de usuario de PostgreSQL
+      POSTGRES_PASSWORD:  # especifica la contraseña de PostgreSQL
+      POSTGRES_DB: integrador3 # especifica el nombre de la base de datos
+
+    ports:
+      - "5433:5432"
