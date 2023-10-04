@@ -1,36 +1,44 @@
-/*package CsvFiles;
+package com.arquitecturasWeb.Integrador3.utils;
 
-import entities.Carrera;
-import entities.Estudiante;
-import entities.EstudianteCarrera;
-import entities.EstudianteCarreraId;
+import com.arquitecturasWeb.Integrador3.domain.Career;
+import com.arquitecturasWeb.Integrador3.domain.Student;
+import com.arquitecturasWeb.Integrador3.domain.StudentCareer;
+import com.arquitecturasWeb.Integrador3.domain.StudentCareerId;
+import com.arquitecturasWeb.Integrador3.repositories.CareerRepository;
+import com.arquitecturasWeb.Integrador3.repositories.StudentCareerRepository;
+import com.arquitecturasWeb.Integrador3.repositories.StudentRepository;
+
 import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVParser;
 import org.apache.commons.csv.CSVRecord;
-import repositories.CarreraRepository;
-import repositories.EstudianteCarreraRepository;
-import repositories.EstudianteRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
 
 import java.io.FileReader;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.sql.Timestamp;
 
+@Component
 public class CsvReader {
-    private CarreraRepository carreraRepository;
-    private EstudianteRepository estudianteRepository;
-    private EstudianteCarreraRepository estudianteCarreraRepository;
-    private static final String userDir = System.getProperty("user.dir") + "/src/main/java/CsvFiles/";
+    private final CareerRepository carrerRepository;
+    private final StudentRepository studentRepository;
+    private final StudentCareerRepository studentCareerRepository;
+    private static final String userDir = System.getProperty("user.dir") + "/src/main/java/com/arquitecturasWeb/integrador3/utils/";
 
-    public CsvReader(CarreraRepository cr, EstudianteRepository er, EstudianteCarreraRepository ecr) throws IOException, SQLException {
-        this.carreraRepository=cr;
-        this.estudianteRepository=er;
-        this.estudianteCarreraRepository=ecr;
+    @Autowired
+    public CsvReader(CareerRepository cr, StudentRepository er, StudentCareerRepository ecr){
+        this.carrerRepository=cr;
+        this.studentRepository=er;
+        this.studentCareerRepository=ecr;
+    }
+
+    public void load() throws SQLException, IOException {
         this.loadCarrera();
         this.loadEstudiante();
         this.loadEstudianteCarreraRepository();
     }
-
     private void loadCarrera() throws IOException, SQLException {
         CSVParser parser = CSVFormat.DEFAULT.withHeader().parse(new
                 FileReader(userDir + "carreras.csv"));
@@ -38,8 +46,8 @@ public class CsvReader {
             long id = Long.parseLong(row.get("id_carrera"));
             String nombre = String.valueOf(row.get("carrera"));
             Integer duracion = Integer.valueOf(row.get("duracion"));
-            Carrera c = new Carrera(id,nombre,duracion);
-            carreraRepository.createCarrera(c);
+            Career c = new Career(id,nombre,duracion);
+            carrerRepository.save(c);
         }
     }
 
@@ -54,11 +62,10 @@ public class CsvReader {
             String genero = row.get("genero");
             String ciudad = row.get("ciudad");
             int lu = Integer.valueOf(row.get("LU"));
-            Estudiante e = new Estudiante(dni,nombre,apellido,edad,genero,lu,ciudad);
-            estudianteRepository.createEstudiante(e);
+            Student e = new Student(dni, lu, apellido, nombre, edad, genero, ciudad);
+            studentRepository.save(e);
         }
     }
-
 
     private void loadEstudianteCarreraRepository() throws IOException, SQLException {
         CSVParser parser = CSVFormat.DEFAULT.withHeader().parse(new
@@ -70,23 +77,22 @@ public class CsvReader {
             String graduacion = row.get("graduacion");
             Integer antiguedad = Integer.valueOf(row.get("antiguedad"));
             //busco el estudiante y la carrera por sus id
-            Estudiante e = estudianteRepository.selectEstudianteByDNI(idEstudiante);
-            Carrera c = carreraRepository.selectCarreraById(idCarrera);
+            Student e = studentRepository.findByDNI(idEstudiante).get();
+            Career c = carrerRepository.findById(idCarrera.longValue()).get();
             //creo la pk para EstudianteCarrera
-            EstudianteCarreraId pk = new EstudianteCarreraId(e,c);
+            StudentCareerId pk = new StudentCareerId(c,e);
             //instancia
             String fechaInscripcion = inscripcion+"-01-01 00:00:00";
-            EstudianteCarrera ec;
+            StudentCareer ec;
             if(graduacion.equals("0000")){ //no se graduo
-                ec = new EstudianteCarrera(pk,Timestamp.valueOf(fechaInscripcion),null,antiguedad);
+                ec = new StudentCareer(pk, Timestamp.valueOf(fechaInscripcion),null,antiguedad);
             }
             else {
                 String fechagraduacion = graduacion+"-01-01 00:00:00";
-                ec = new EstudianteCarrera(pk,Timestamp.valueOf(fechaInscripcion),Timestamp.valueOf(fechagraduacion),antiguedad);
+                ec = new StudentCareer(pk,Timestamp.valueOf(fechaInscripcion),Timestamp.valueOf(fechagraduacion),antiguedad);
             }
-            estudianteCarreraRepository.createEstudianteCarrera(ec);
+            studentCareerRepository.save(ec);
         }
 
     }
 }
-*/

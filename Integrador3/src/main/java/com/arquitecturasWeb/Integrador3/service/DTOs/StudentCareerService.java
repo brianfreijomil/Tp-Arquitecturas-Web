@@ -27,7 +27,7 @@ public class StudentCareerService {
         List<CareerWithStudentsResponseDTO> studentsCareers = repository.findCareersWithStudents();
         return studentsCareers;
     }
-    @Transactional
+    @Transactional(readOnly = true)
     public List<StudentsOfCareerByCityResponseDTO> findStudentsOfCareerByCity() {
         List<StudentsOfCareerByCityResponseDTO> students = repository.findStudentByCareerAndCity();
         return students;

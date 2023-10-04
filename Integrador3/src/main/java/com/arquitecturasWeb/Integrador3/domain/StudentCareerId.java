@@ -3,6 +3,7 @@ import com.arquitecturasWeb.Integrador3.service.DTOs.studentCareerId.request.Stu
 import jakarta.persistence.Embeddable;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -11,6 +12,7 @@ import java.io.Serializable;
 @Embeddable
 @Data
 @NoArgsConstructor
+@AllArgsConstructor
 public class StudentCareerId implements Serializable {
 
     @ManyToOne
