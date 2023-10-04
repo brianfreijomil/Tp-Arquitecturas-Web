@@ -1,4 +1,4 @@
-package com.arquitecturasWeb.Integrador3.service.DTOs.Student.Response;
+package com.arquitecturasWeb.Integrador3.service.DTOs.student.response;
 
 import com.arquitecturasWeb.Integrador3.domain.Student;
 

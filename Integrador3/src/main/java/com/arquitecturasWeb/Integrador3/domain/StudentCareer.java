@@ -1,9 +1,10 @@
 package com.arquitecturasWeb.Integrador3.domain;
 
-import com.arquitecturasWeb.Integrador3.service.DTOs.StudentCareer.Request.StudentCareerRequestDTO;
+import com.arquitecturasWeb.Integrador3.service.DTOs.studentCareer.request.StudentCareerRequestDTO;
 import jakarta.persistence.Column;
 import jakarta.persistence.EmbeddedId;
 import jakarta.persistence.Entity;
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -12,6 +13,7 @@ import java.sql.Timestamp;
 @Entity
 @Data
 @NoArgsConstructor
+@AllArgsConstructor
 public class StudentCareer {
     @EmbeddedId
     private StudentCareerId id;

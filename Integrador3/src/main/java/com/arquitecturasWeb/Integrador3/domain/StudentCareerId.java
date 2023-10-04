@@ -1,8 +1,9 @@
 package com.arquitecturasWeb.Integrador3.domain;
-import com.arquitecturasWeb.Integrador3.service.DTOs.StudentCareerId.Request.StudentCareerIdRequestDTO;
+import com.arquitecturasWeb.Integrador3.service.DTOs.studentCareerId.request.StudentCareerIdRequestDTO;
 import jakarta.persistence.Embeddable;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -11,6 +12,7 @@ import java.io.Serializable;
 @Embeddable
 @Data
 @NoArgsConstructor
+@AllArgsConstructor
 public class StudentCareerId implements Serializable {
 
     @ManyToOne
@@ -26,5 +28,4 @@ public class StudentCareerId implements Serializable {
         this.student = new Student(requets.getStudent());
         this.career = new Career(requets.getCareer());
     }
-
 }
