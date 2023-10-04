@@ -2,6 +2,8 @@ package com.arquitecturasWeb.Integrador3.controllers;
 
 import com.arquitecturasWeb.Integrador3.service.DTOs.StudentService;
 import com.arquitecturasWeb.Integrador3.service.DTOs.student.request.StudentRequestDTO;
+import com.arquitecturasWeb.Integrador3.service.DTOs.student.response.StudentResponseDTO;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -21,37 +23,27 @@ public class StudentController {
     }
 
     @PostMapping("/")
-    public void saveStudent(@RequestBody StudentRequestDTO sdto){
-        this.service.save(sdto);
+    public void saveStudent(@RequestBody @Valid StudentRequestDTO sdto){
+
     }
 
     @GetMapping("")
-    public List<Student> getAllStudents(){
+    public List<StudentResponseDTO> getAllStudents(){
         return this.service.findAll();
     }
     @GetMapping("/{DNI}")
-    public Student getStudentByDni(@PathVariable Long dni){
-        return this.service.getById(dni);
+    public Student getStudentByDni(@PathVariable int dni){
+        return this.service.findByDNI(dni);
     }
 
     @GetMapping("/{lastName}")
-    public ResponseEntity<?> getStudentByLastName(@PathVariable String lastName){
-        try {
-            return ResponseEntity.status(HttpStatus.OK).body(service.getStudentByLastName(lastName));
-        }
-        catch (Exception e){
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("{\"error\":\"Error. Por favor intente más tarde.\"}");
-        }
+    public StudentResponseDTO getStudentByLastName(@PathVariable String lastName){
+        return service.getStudentByLastName(lastName);
     }
 
     @GetMapping("/{lu}")
     public ResponseEntity<?> getStudentByLU(@PathVariable int lu){
-        try {
-            return ResponseEntity.status(HttpStatus.OK).body(service.getStudentByLU(lu));
-        }
-        catch (Exception e){
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("{\"error\":\"Error. Por favor intente más tarde.\"}");
-        }
+        return ResponseEntity.ok(service.getStudentByLU(lu));
     }
     @GetMapping("/{genre}")
     public ResponseEntity<?> getStudentByGenre(@PathVariable String genre){

@@ -26,5 +26,4 @@ public class StudentCareerId implements Serializable {
         this.student = new Student(requets.getStudent());
         this.career = new Career(requets.getCareer());
     }
-
 }
