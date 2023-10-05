@@ -55,7 +55,6 @@ public class StudentService{
 
     @Transactional(readOnly = true)
     public List<StudentResponseDTO> search(SearchStudentsDTO request) {
-        System.out.println(request);
         return this.repository.
                 search(request.getDNI(), request.getLu(), request.getLastName(), request.getName(), request.getAge(), request.getGenre(), request.getCity())
                 .stream()

@@ -20,5 +20,5 @@ public interface CareerRepository extends JpaRepository<Career, Long> {
             " where(:id is null or c.id = :id) " +
             "and (:name is null or c.name like :name)" +
             "and (:duration is null or c.duration = :duration)")
-    List<Career> search(long id, String name, int duration);
+    List<Career> search(Long id, String name, Integer duration);
 }

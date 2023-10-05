@@ -11,9 +11,11 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class StudentRequestDTO {
     @Min(value = 1, message ="DNI should not be less than 1")
-    private final int DNI;
+    @NotNull(message = "DNI cannot be null")
+    private final Integer DNI;
     @Min(value = 1, message ="lu should not be less than 1")
-    private final int lu;
+    @NotNull(message = "LU cannot be null")
+    private final Integer lu;
     @NotNull(message = "the lastName cannot be null")
     @NotEmpty(message = "the lastName cannot be empty")
     private final String lastName;
@@ -23,7 +25,8 @@ public class StudentRequestDTO {
     @NotNull(message = "the age cannot be null")
     @Min(value = 16, message ="Age should not be less than 16")
     @Max(value = 99, message ="Age should not be greater than 99")
-    private final int age;
+    @NotNull(message = "AGE cannot be null")
+    private final Integer age;
     @NotNull(message = "the genre cannot be null")
     @NotEmpty(message = "the genre cannot be empty")
     private final String genre;

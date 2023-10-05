@@ -8,6 +8,7 @@ import com.arquitecturasWeb.Integrador3.service.DTOs.career.response.CareerRespo
 import com.arquitecturasWeb.Integrador3.service.DTOs.student.response.StudentResponseDTO;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -21,9 +22,9 @@ public class CareerController {
         this.service = service;
     }
 
-    @PostMapping("/")
-    public void saveCareer(@RequestBody @Valid CareerRequestDTO cdto){
-        service.save(cdto);
+    @PostMapping("")
+    public ResponseEntity save(@RequestBody @Valid CareerRequestDTO cdto){
+        return service.save(cdto);
     }
 
     @GetMapping("/{id}")
