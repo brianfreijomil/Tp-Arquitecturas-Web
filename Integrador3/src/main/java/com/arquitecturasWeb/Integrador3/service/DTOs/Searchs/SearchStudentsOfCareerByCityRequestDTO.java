@@ -1,4 +1,4 @@
-package com.arquitecturasWeb.Integrador3.service.DTOs.studentCareer.request;
+package com.arquitecturasWeb.Integrador3.service.DTOs.Searchs;
 
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;

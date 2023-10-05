@@ -2,9 +2,12 @@ package com.arquitecturasWeb.Integrador3.service;
 
 import com.arquitecturasWeb.Integrador3.domain.Student;
 import com.arquitecturasWeb.Integrador3.repositories.StudentRepository;
+import com.arquitecturasWeb.Integrador3.service.DTOs.Searchs.SearchStudentsDTO;
 import com.arquitecturasWeb.Integrador3.service.DTOs.student.request.StudentRequestDTO;
 import com.arquitecturasWeb.Integrador3.service.DTOs.student.response.StudentResponseDTO;
+import com.arquitecturasWeb.Integrador3.service.exception.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -24,50 +27,28 @@ public class StudentService{
     public int save(StudentRequestDTO student){
         return repository.save(new Student(student)).getDNI();
     }
+
     @Transactional(readOnly = true)
-    public StudentResponseDTO getStudentByLastName(String lastName) {
-        Optional<Student> student = repository.findByLastName(lastName);
-        if(student.isPresent()){
-            StudentResponseDTO s = new StudentResponseDTO(student.get());
-            return s;
-        }
-        return null;
-    }
-    @Transactional(readOnly = true)
-    public StudentResponseDTO getStudentByLU(int lu) {
+    public StudentResponseDTO findStudentByLU(int lu) {
         Optional<Student> student = repository.findByLu(lu);
-        if(student.isPresent()){
-            StudentResponseDTO s = new StudentResponseDTO(student.get());
-            return s;
-        }
-        return null;
+        return student.map(StudentResponseDTO::new).orElseThrow(() -> new NotFoundException("Student", "LU", (long) lu));
     }
-    @Transactional(readOnly = true)
-    public StudentResponseDTO getStudentByGenre(String genre) {
-        Optional<Student> student = repository.findByGenre(genre);
-        if(student.isPresent()){
-            StudentResponseDTO s = new StudentResponseDTO(student.get());
-            return s;
-        }
-        return null;
-    }
+
     @Transactional(readOnly = true)
     public StudentResponseDTO findByDNI(int dni){
         Optional<Student> student = repository.findByDNI(dni);
-        if(student.isPresent()){
-            StudentResponseDTO s = new StudentResponseDTO(student.get());
-            return s;
-        }
-        return null;
+        return student.map(StudentResponseDTO::new).orElseThrow(() -> new NotFoundException("Student", "DNI", (long) dni));
     }
     @Transactional(readOnly = true)
     public List<StudentResponseDTO> findAll() {
-        List<Student> students = repository.findAll();
+        Sort sort = Sort.by(Sort.Order.asc("name"));
+        List<Student> students = repository.findAll(sort);
         return students.stream().map(StudentResponseDTO::new).collect(Collectors.toList());
     }
 
     @Transactional(readOnly = true)
-    public List<StudentResponseDTO> search(StudentRequestDTO request) {
+    public List<StudentResponseDTO> search(SearchStudentsDTO request) {
+        System.out.println(request);
         return this.repository.
                 search(request.getDNI(), request.getLu(), request.getLastName(), request.getName(), request.getAge(), request.getGenre(), request.getCity())
                 .stream()

@@ -2,7 +2,7 @@ package com.arquitecturasWeb.Integrador3.service;
 
 import com.arquitecturasWeb.Integrador3.repositories.StudentCareerRepository;
 import com.arquitecturasWeb.Integrador3.service.DTOs.career.response.ReportCareerDTO;
-import com.arquitecturasWeb.Integrador3.service.DTOs.studentCareer.request.SearchStudentsOfCareerByCityRequestDTO;
+import com.arquitecturasWeb.Integrador3.service.DTOs.Searchs.SearchStudentsOfCareerByCityRequestDTO;
 import com.arquitecturasWeb.Integrador3.service.DTOs.studentCareer.response.CareerWithStudentsResponseDTO;
 import com.arquitecturasWeb.Integrador3.service.DTOs.studentCareer.response.StudentsOfCareerByCityResponseDTO;
 import org.springframework.stereotype.Service;
