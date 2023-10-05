@@ -5,9 +5,11 @@ import com.arquitecturasWeb.Integrador3.repositories.StudentRepository;
 import com.arquitecturasWeb.Integrador3.service.DTOs.Searchs.SearchStudentsDTO;
 import com.arquitecturasWeb.Integrador3.service.DTOs.student.request.StudentRequestDTO;
 import com.arquitecturasWeb.Integrador3.service.DTOs.student.response.StudentResponseDTO;
+import com.arquitecturasWeb.Integrador3.service.exception.ConflictExistException;
 import com.arquitecturasWeb.Integrador3.service.exception.NotFoundException;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -24,8 +26,13 @@ public class StudentService{
     }
 
     @Transactional
-    public int save(StudentRequestDTO student){
-        return repository.save(new Student(student)).getDNI();
+    public ResponseEntity save(StudentRequestDTO student){
+        /*if the student does not exist then I persist*/
+        if(!this.repository.existsById((long) student.getDNI())){
+            return new ResponseEntity(student.getDNI(), HttpStatus.CREATED);
+        }
+
+        throw new ConflictExistException("Student", "DNI", (long) student.getDNI());
     }
 
     @Transactional(readOnly = true)
