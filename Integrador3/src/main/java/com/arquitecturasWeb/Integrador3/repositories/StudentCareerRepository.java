@@ -2,7 +2,6 @@ package com.arquitecturasWeb.Integrador3.repositories;
 
 import com.arquitecturasWeb.Integrador3.domain.StudentCareer;
 import com.arquitecturasWeb.Integrador3.domain.StudentCareerId;
-import com.arquitecturasWeb.Integrador3.service.DTOs.studentCareer.request.StudentsOfCareerByCityRequestDTO;
 import com.arquitecturasWeb.Integrador3.service.DTOs.studentCareer.response.CareerWithStudentsResponseDTO;
 import com.arquitecturasWeb.Integrador3.service.DTOs.studentCareer.response.StudentsOfCareerByCityResponseDTO;
 import org.springframework.data.jpa.repository.JpaRepository;

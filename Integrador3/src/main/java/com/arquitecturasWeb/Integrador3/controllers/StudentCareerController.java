@@ -29,9 +29,9 @@ public class StudentCareerController {
     public List<StudentsOfCareerByCityResponseDTO> findStudentsOfCareerByCity(SearchStudentsOfCareerByCityRequestDTO s){
         return  this.service.findStudentsOfCareerByCity(s);
     }
-
+/*
     @GetMapping("reportOfCareers")
     public List<ReportCareerDTO> reportOfCareers(){
         return this.service.reportOfCareers();
-    }
+    }*/
 }
