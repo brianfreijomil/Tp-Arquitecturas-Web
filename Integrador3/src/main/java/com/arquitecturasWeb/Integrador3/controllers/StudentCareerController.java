@@ -39,8 +39,8 @@ public class StudentCareerController {
         return  this.service.findStudentsOfCareerByCity(s);
     }
 
-    @GetMapping("reportOfCareers")
+   /* @GetMapping("reportOfCareers")
     public List<ReportCareerDTO> reportOfCareers(){
         return this.service.reportOfCareers();
-    }
+    }*/
 }
