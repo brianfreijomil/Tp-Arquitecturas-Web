@@ -24,11 +24,11 @@ public interface StudentRepository extends JpaRepository<Student, Long> {
 
     @Query("Select s " +
             "from Student s " +
-            " where(:dni is not null and s.DNI = :dni) " +
-            " and(:lu is not null and s.lu = :lu) " +
+            " where(:dni is null or s.DNI = :dni) " +
+            " and(:lu is null or s.lu = :lu) " +
             "and (:lastName is null or s.lastName like :lastName)" +
             "and (:name is null or s.name like :name)" +
-            "and (:age is not null and s.age = :age)" +
+            "and (:age is null or s.age = :age)" +
             "and (:genre is null or s.genre like :genre)" +
             "and (:city is null or s.city like :city) ")
     List<Student> search(int dni, int lu, String lastName, String name, int age, String genre, String city);

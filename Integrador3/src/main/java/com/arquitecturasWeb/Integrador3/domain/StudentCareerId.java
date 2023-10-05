@@ -16,11 +16,11 @@ import java.io.Serializable;
 public class StudentCareerId implements Serializable {
 
     @ManyToOne
-    @JoinColumn(name = "carrera_id")
+    @JoinColumn(name = "career_id")
     private Career career;
 
     @ManyToOne
-    @JoinColumn(name = "estudiante_id")
+    @JoinColumn(name = "student_id")
     private Student student;
 
     public StudentCareerId(StudentCareerIdRequestDTO requets) {

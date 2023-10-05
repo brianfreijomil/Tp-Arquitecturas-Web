@@ -1,7 +1,11 @@
 package com.arquitecturasWeb.Integrador3.service.DTOs.student.response;
 
 import com.arquitecturasWeb.Integrador3.domain.Student;
+import lombok.Getter;
+import lombok.Setter;
 
+@Getter
+@Setter
 public class StudentResponseDTO {
     private final int dni;
     private final int lu;

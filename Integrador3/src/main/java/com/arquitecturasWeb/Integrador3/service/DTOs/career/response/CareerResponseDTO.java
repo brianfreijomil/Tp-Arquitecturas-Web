@@ -1,7 +1,9 @@
 package com.arquitecturasWeb.Integrador3.service.DTOs.career.response;
 
 import com.arquitecturasWeb.Integrador3.domain.Career;
+import lombok.Data;
 
+@Data
 public class CareerResponseDTO {
     private final Long id;
     private final String name;

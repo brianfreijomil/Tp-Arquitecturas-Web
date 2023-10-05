@@ -16,7 +16,6 @@ import java.util.stream.Collectors;
 public class StudentService{
     private StudentRepository repository;
 
-    @Autowired
     public StudentService(StudentRepository repository){
         this.repository = repository;
     }
@@ -61,7 +60,7 @@ public class StudentService{
         }
         return null;
     }
-    @Transactional
+    @Transactional(readOnly = true)
     public List<StudentResponseDTO> findAll() {
         List<Student> students = repository.findAll();
         return students.stream().map(StudentResponseDTO::new).collect(Collectors.toList());

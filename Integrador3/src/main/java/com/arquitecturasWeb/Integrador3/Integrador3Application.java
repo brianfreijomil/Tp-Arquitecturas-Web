@@ -12,15 +12,19 @@ import java.sql.SQLException;
 @SpringBootApplication
 public class Integrador3Application {
 
-	@Autowired
-	private CsvReader loadDb;
+    private CsvReader loadDb;
+
+	public Integrador3Application(CsvReader loadDb) {
+		this.loadDb = loadDb;
+	}
+
 	public static void main(String[] args) {
 		SpringApplication.run(Integrador3Application.class, args);
 	}
 
 	@PostConstruct
 	public void init() throws SQLException, IOException {
-		this.loadDb.load();
+		//this.loadDb.load();
 	}
 
 }

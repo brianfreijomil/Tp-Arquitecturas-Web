@@ -22,12 +22,11 @@ import java.sql.Timestamp;
 
 @Component
 public class CsvReader {
-    private final CareerRepository carrerRepository;
-    private final StudentRepository studentRepository;
-    private final StudentCareerRepository studentCareerRepository;
+    private CareerRepository carrerRepository;
+    private StudentRepository studentRepository;
+    private StudentCareerRepository studentCareerRepository;
     private static final String userDir = System.getProperty("user.dir") + "/src/main/java/com/arquitecturasWeb/integrador3/utils/";
 
-    @Autowired
     public CsvReader(CareerRepository cr, StudentRepository er, StudentCareerRepository ecr){
         this.carrerRepository=cr;
         this.studentRepository=er;

@@ -14,7 +14,6 @@ import java.util.List;
 public class CareerController {
     private CareerService service;
 
-    @Autowired
     public CareerController(CareerService service){
         this.service = service;
     }
@@ -25,13 +24,8 @@ public class CareerController {
     }
 
     @GetMapping("/{id}")
-    public CareerResponseDTO getCareerById(@PathVariable long id){
+    public CareerResponseDTO getCareerById(@PathVariable Long id){
         return service.findCareerById(id);
-    }
-
-    @GetMapping("/{name}")
-    public CareerResponseDTO getCareerByName(@PathVariable String name){
-        return service.findCareerByName(name);
     }
 
     @GetMapping("/")
