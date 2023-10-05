@@ -31,5 +31,11 @@ public class StudentCareerService {
         List<StudentsOfCareerByCityResponseDTO> students = repository.findStudentByCareerAndCity();
         return students;
     }
+    @Transactional(readOnly = true)
+    public List<ReportCareerDTO> reportOfCareers() {
+        return this.repository.findInscriptionAndGraduatedForYear().stream()
+                .map(result -> new ReportCareerDTO((String) result[0], ((BigDecimal) result[1]), ((BigDecimal) result[2]), ((Long) result[3])))
+                .collect(Collectors.toList());
+    }
 
 }
