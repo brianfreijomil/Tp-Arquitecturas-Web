@@ -10,7 +10,7 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
 
-@Repository("EstudianteRepository")
+
 public interface StudentRepository extends JpaRepository<Student, Long> {
 
     List<Student> findAll(Sort sort);

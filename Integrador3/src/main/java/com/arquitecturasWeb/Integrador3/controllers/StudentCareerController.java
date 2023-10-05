@@ -1,13 +1,17 @@
 package com.arquitecturasWeb.Integrador3.controllers;
 
-import com.arquitecturasWeb.Integrador3.service.DTOs.career.response.ReportCareerDTO;
+import com.arquitecturasWeb.Integrador3.domain.StudentCareerId;
 import com.arquitecturasWeb.Integrador3.service.DTOs.Searchs.SearchStudentsOfCareerByCityRequestDTO;
+import com.arquitecturasWeb.Integrador3.service.DTOs.career.request.CareerRequestDTO;
+import com.arquitecturasWeb.Integrador3.service.DTOs.studentCareer.request.StudentCareerRequestDTO;
+import com.arquitecturasWeb.Integrador3.service.DTOs.studentCareerId.response.StudentCareerIdResponseDTO;
 import com.arquitecturasWeb.Integrador3.service.StudentCareerService;
 import com.arquitecturasWeb.Integrador3.service.DTOs.studentCareer.response.CareerWithStudentsResponseDTO;
 import com.arquitecturasWeb.Integrador3.service.DTOs.studentCareer.response.StudentsOfCareerByCityResponseDTO;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import jakarta.persistence.Id;
+import jakarta.validation.Valid;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -18,6 +22,11 @@ public class StudentCareerController {
 
     public StudentCareerController(StudentCareerService service){
         this.service = service;
+    }
+
+    @PostMapping("")
+    public ResponseEntity save(@RequestBody @Valid StudentCareerRequestDTO scrdto){
+        return service.save(scrdto);
     }
 
     @GetMapping("/getByCareersWithStudents")
