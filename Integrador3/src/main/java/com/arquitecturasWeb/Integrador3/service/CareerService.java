@@ -30,7 +30,7 @@ public class CareerService{
     }
 
     public CareerResponseDTO findCareerById(long id) {
-        return repository.findById(id).map(CareerResponseDTO::new).orElseThrow(() -> new NotFoundException("no se ecntron la carrera"));
+        return repository.findById(id).map(CareerResponseDTO::new).orElseThrow(() -> new NotFoundException("Cliente", "ID", id));
     }
 
     public CareerResponseDTO findCareerByName(String name) {

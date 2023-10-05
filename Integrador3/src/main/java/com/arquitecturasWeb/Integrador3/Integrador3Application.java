@@ -23,6 +23,7 @@ public class Integrador3Application {
 	}
 
 	@PostConstruct
+	/*IF YO*/
 	public void init() throws SQLException, IOException {
 		//this.loadDb.load();
 	}
