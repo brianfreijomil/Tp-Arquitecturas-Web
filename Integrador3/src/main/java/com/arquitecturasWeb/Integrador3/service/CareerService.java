@@ -1,4 +1,4 @@
-package com.arquitecturasWeb.Integrador3.service.DTOs;
+package com.arquitecturasWeb.Integrador3.service;
 
 import com.arquitecturasWeb.Integrador3.domain.Career;
 import com.arquitecturasWeb.Integrador3.domain.Student;
@@ -6,6 +6,7 @@ import com.arquitecturasWeb.Integrador3.repositories.CareerRepository;
 import com.arquitecturasWeb.Integrador3.service.DTOs.career.request.CareerRequestDTO;
 import com.arquitecturasWeb.Integrador3.service.DTOs.career.response.CareerResponseDTO;
 import com.arquitecturasWeb.Integrador3.service.DTOs.student.response.StudentResponseDTO;
+import com.arquitecturasWeb.Integrador3.service.exception.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Example;
 import org.springframework.data.domain.Page;
@@ -29,12 +30,7 @@ public class CareerService{
     }
 
     public CareerResponseDTO findCareerById(long id) {
-        Optional<Career> career = repository.findById(id);
-        if(career.isPresent()){
-            CareerResponseDTO c = new CareerResponseDTO(career.get());
-            return c;
-        }
-        return null;
+        return repository.findById(id).map(CareerResponseDTO::new).orElseThrow(() -> new NotFoundException("no se ecntron la carrera"));
     }
 
     public CareerResponseDTO findCareerByName(String name) {

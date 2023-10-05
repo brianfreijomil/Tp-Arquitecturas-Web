@@ -1,15 +1,14 @@
-package com.arquitecturasWeb.Integrador3.service.DTOs;
+package com.arquitecturasWeb.Integrador3.service;
 
-import com.arquitecturasWeb.Integrador3.domain.Student;
-import com.arquitecturasWeb.Integrador3.domain.StudentCareer;
 import com.arquitecturasWeb.Integrador3.repositories.StudentCareerRepository;
-import com.arquitecturasWeb.Integrador3.service.DTOs.student.response.StudentResponseDTO;
-import com.arquitecturasWeb.Integrador3.service.DTOs.studentCareer.request.StudentsOfCareerByCityRequestDTO;
+import com.arquitecturasWeb.Integrador3.service.DTOs.career.response.ReportCareerDTO;
+import com.arquitecturasWeb.Integrador3.service.DTOs.studentCareer.request.SearchStudentsOfCareerByCityRequestDTO;
 import com.arquitecturasWeb.Integrador3.service.DTOs.studentCareer.response.CareerWithStudentsResponseDTO;
 import com.arquitecturasWeb.Integrador3.service.DTOs.studentCareer.response.StudentsOfCareerByCityResponseDTO;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -22,14 +21,21 @@ public class StudentCareerService {
         this.repository = repository;
     }
 
-    @Transactional
+    @Transactional(readOnly = true)
     public List<CareerWithStudentsResponseDTO> findCareersWithStudents() {
         List<CareerWithStudentsResponseDTO> studentsCareers = repository.findCareersWithStudents();
         return studentsCareers;
     }
     @Transactional(readOnly = true)
-    public List<StudentsOfCareerByCityResponseDTO> findStudentsOfCareerByCity() {
+    public List<StudentsOfCareerByCityResponseDTO> findStudentsOfCareerByCity(SearchStudentsOfCareerByCityRequestDTO search) {
         List<StudentsOfCareerByCityResponseDTO> students = repository.findStudentByCareerAndCity();
         return students;
+    }
+
+    @Transactional(readOnly = true)
+    public List<ReportCareerDTO> reportOfCareers() {
+        return this.repository.findInscriptionAndGraduatedForYear().stream()
+                .map(result -> new ReportCareerDTO((String) result[0], ((BigDecimal) result[1]), ((BigDecimal) result[2]), ((Long) result[3])))
+                .collect(Collectors.toList());
     }
 }
