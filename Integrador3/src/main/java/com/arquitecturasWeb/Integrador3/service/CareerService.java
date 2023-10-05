@@ -3,6 +3,8 @@ package com.arquitecturasWeb.Integrador3.service;
 import com.arquitecturasWeb.Integrador3.domain.Career;
 import com.arquitecturasWeb.Integrador3.domain.Student;
 import com.arquitecturasWeb.Integrador3.repositories.CareerRepository;
+import com.arquitecturasWeb.Integrador3.service.DTOs.Searchs.SearchCareersDTO;
+import com.arquitecturasWeb.Integrador3.service.DTOs.Searchs.SearchStudentsDTO;
 import com.arquitecturasWeb.Integrador3.service.DTOs.career.request.CareerRequestDTO;
 import com.arquitecturasWeb.Integrador3.service.DTOs.career.response.CareerResponseDTO;
 import com.arquitecturasWeb.Integrador3.service.DTOs.student.response.StudentResponseDTO;
@@ -49,5 +51,13 @@ public class CareerService{
 
     public void save(CareerRequestDTO career) {
         repository.save(new Career(career)).getId();
+    }
+
+    public List<CareerResponseDTO> search(SearchCareersDTO request) {
+        System.out.println(request);
+        return this.repository.
+                search(request.getId(), request.getName(), request.getDuration())
+                .stream()
+                .map(CareerResponseDTO::new).collect(Collectors.toList());
     }
 }
