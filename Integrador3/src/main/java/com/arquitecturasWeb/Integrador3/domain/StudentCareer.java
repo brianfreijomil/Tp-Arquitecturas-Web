@@ -30,11 +30,13 @@ public class StudentCareer {
     public StudentCareer(StudentCareerId id, Long inscription, Long graduation, Integer antiquity) {
         super();
         this.id = id;
-        this.inscription = new Timestamp(Math.toIntExact(inscription), 1, 1, 1, 1, 1, 1);
+        this.inscription = Timestamp.valueOf(inscription+"-01-01 00:00:00");
+        //new Timestamp(Math.toIntExact(inscription), 1, 1, 1, 1, 1, 1);
         if(graduation == null){
             this.graduation = null;
         }else{
-            this.graduation = new Timestamp(Math.toIntExact(graduation), 1, 1, 1, 1, 1, 1);
+            this.graduation = Timestamp.valueOf(graduation+"-01-01 00:00:00");
+            //new Timestamp(Math.toIntExact(graduation), 1, 1, 1, 1, 1, 1);
         }
         this.antiquity = antiquity;
     }

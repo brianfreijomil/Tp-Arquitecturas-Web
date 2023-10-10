@@ -58,6 +58,7 @@ public class StudentService{
                 StudentCareerId id = new StudentCareerId(s, c);
                 if(!this.studentCareerRepository.existsById(id)){
                     StudentCareer sc = new StudentCareer(id, scrdto.getInscription(), scrdto.getGraduation(), scrdto.getAntiquity());
+                    System.out.println(sc.getInscription());
                     this.studentCareerRepository.save(sc);
                     return new ResponseEntity("CREATED Student: " + studentId + ", Career: " + scrdto.getCareer_id(), HttpStatus.ACCEPTED);
                 }

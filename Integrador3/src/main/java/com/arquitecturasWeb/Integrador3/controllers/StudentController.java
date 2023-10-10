@@ -30,6 +30,7 @@ public class StudentController {
 
     @PostMapping("/{dni}/career")
     public ResponseEntity save(@RequestBody @Valid StudentCareerRequestDTO scrdto, @PathVariable int dni) {
+        System.out.println(scrdto.getInscription());
         return service.save(scrdto, dni);
     }
 
