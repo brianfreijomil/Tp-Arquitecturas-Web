@@ -7,8 +7,12 @@ import jakarta.persistence.Entity;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.http.HttpStatusCode;
 
 import java.sql.Timestamp;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.util.Date;
 
 @Entity
 @Data
@@ -23,11 +27,15 @@ public class StudentCareer {
     @Column
     private int antiquity;
 
-    public StudentCareer(StudentCareerId id, Timestamp inscription, Timestamp graduation, int antiquity) {
+    public StudentCareer(StudentCareerId id, Long inscription, Long graduation, Integer antiquity) {
         super();
         this.id = id;
-        this.inscription = inscription;
-        this.graduation = graduation;
+        this.inscription = new Timestamp(Math.toIntExact(inscription), 1, 1, 1, 1, 1, 1);
+        if(graduation == null){
+            this.graduation = null;
+        }else{
+            this.graduation = new Timestamp(Math.toIntExact(graduation), 1, 1, 1, 1, 1, 1);
+        }
         this.antiquity = antiquity;
     }
 

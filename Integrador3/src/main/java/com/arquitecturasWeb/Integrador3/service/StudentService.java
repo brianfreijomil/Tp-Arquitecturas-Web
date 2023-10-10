@@ -18,6 +18,7 @@ import com.arquitecturasWeb.Integrador3.service.exception.ConflictExistException
 import com.arquitecturasWeb.Integrador3.service.exception.NotFoundException;
 import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -55,16 +56,19 @@ public class StudentService{
             Career c = this.careerRepository.findById(scrdto.getCareer_id()).get();
             if(c != null){
                 StudentCareerId id = new StudentCareerId(s, c);
-                StudentCareer sc = new StudentCareer(id, scrdto.getInscription(), scrdto.getGraduation(), scrdto.getAntiquity());
-                this.studentCareerRepository.save(sc);
-                return new ResponseEntity(new StudentCareerResponseDTO(sc), HttpStatus.CREATED);
+                if(!this.studentCareerRepository.existsById(id)){
+                    StudentCareer sc = new StudentCareer(id, scrdto.getInscription(), scrdto.getGraduation(), scrdto.getAntiquity());
+                    this.studentCareerRepository.save(sc);
+                    return new ResponseEntity("CREATED Student: " + studentId + ", Career: " + scrdto.getCareer_id(), HttpStatus.ACCEPTED);
+                }
+                throw new ConflictExistException("Student", "Career", "DNI", "CareerID", (long) studentId, scrdto.getCareer_id());
             }
             else{
-                throw new ConflictExistException("Career","ID", scrdto.getCareer_id());
+                throw new NotFoundException("Career","ID", scrdto.getCareer_id());
             }
         }
         else {
-            throw new ConflictExistException("Student","ID", (long)studentId);
+            throw new NotFoundException("Student", "DNI", (long) studentId);
         }
     }
 

@@ -29,14 +29,11 @@ public class GeneralExceptionHandler {
 
     @ExceptionHandler(MethodArgumentNotValidException.class) //MethodArgumentNotValidException, receives the exception of validations
     public ResponseEntity constraintViolationException(MethodArgumentNotValidException exc){
-        /*create the array to store the messages of the fields that failed validation*/
-        List<String> errors = new ArrayList<String>();
+
         /*first I get the BindingResult. second I get the list of FieldError*/
-        List<FieldError> ex = exc.getBindingResult().getFieldErrors();
+        List<String> errors = exc.getBindingResult().getFieldErrors().stream().map( f -> f.getDefaultMessage()).toList();
         /*for each FieldError, I get the defaultMessage which is a string and add it to the error list*/
-        for(FieldError fe : ex){
-            errors.add(fe.getDefaultMessage());
-        }
+
         return new ResponseEntity(errors, HttpStatus.BAD_REQUEST);
     }
 }
