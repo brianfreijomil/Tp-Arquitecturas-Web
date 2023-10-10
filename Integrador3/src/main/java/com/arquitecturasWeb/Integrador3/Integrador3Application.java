@@ -1,6 +1,5 @@
 package com.arquitecturasWeb.Integrador3;
 
-import com.arquitecturasWeb.Integrador3.utils.CsvReader;
 import jakarta.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
@@ -12,20 +11,8 @@ import java.sql.SQLException;
 @SpringBootApplication
 public class Integrador3Application {
 
-    private CsvReader loadDb;
-
-	public Integrador3Application(CsvReader loadDb) {
-		this.loadDb = loadDb;
-	}
-
 	public static void main(String[] args) {
 		SpringApplication.run(Integrador3Application.class, args);
-	}
-
-	@PostConstruct
-	/*IF YO*/
-	public void init() throws SQLException, IOException {
-		//this.loadDb.load();
 	}
 
 }

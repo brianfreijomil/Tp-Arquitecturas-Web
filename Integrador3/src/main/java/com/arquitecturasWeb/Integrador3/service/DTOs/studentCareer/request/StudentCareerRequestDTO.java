@@ -11,7 +11,7 @@ import java.sql.Timestamp;
 @RequiredArgsConstructor
 public class StudentCareerRequestDTO {
     @NotNull(message = "The id cannot be null")
-    private final StudentCareerIdRequestDTO id;
+    private final Long career_id;
     @NotNull(message = "The inscription cannot be null")
     private final Timestamp inscription;
     @NotNull(message = "The graduation cannot be null")

@@ -13,7 +13,6 @@ import java.sql.Timestamp;
 @Entity
 @Data
 @NoArgsConstructor
-@AllArgsConstructor
 public class StudentCareer {
     @EmbeddedId
     private StudentCareerId id;
@@ -24,12 +23,12 @@ public class StudentCareer {
     @Column
     private int antiquity;
 
-    public StudentCareer(StudentCareerRequestDTO request) {
+    public StudentCareer(StudentCareerId id, Timestamp inscription, Timestamp graduation, int antiquity) {
         super();
-        this.id = new StudentCareerId(request.getId());
-        this.inscription = request.getInscription();
-        this.graduation = request.getGraduation();
-        this.antiquity = request.getAntiquity();
+        this.id = id;
+        this.inscription = inscription;
+        this.graduation = graduation;
+        this.antiquity = antiquity;
     }
 
 }

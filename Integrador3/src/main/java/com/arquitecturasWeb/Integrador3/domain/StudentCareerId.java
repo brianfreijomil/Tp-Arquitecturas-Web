@@ -23,9 +23,9 @@ public class StudentCareerId implements Serializable {
     @JoinColumn(name = "student_id")
     private Student student;
 
-    public StudentCareerId(StudentCareerIdRequestDTO requets) {
+    public StudentCareerId(Student s, Career c) {
         super();
-        this.student = new Student(requets.getStudent());
-        this.career = new Career(requets.getCareer());
+        this.student = s;
+        this.career = c;
     }
 }

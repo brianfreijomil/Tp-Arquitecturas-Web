@@ -1,6 +1,9 @@
 package com.arquitecturasWeb.Integrador3.controllers;
 
 import com.arquitecturasWeb.Integrador3.service.DTOs.Searchs.SearchStudentsDTO;
+import com.arquitecturasWeb.Integrador3.service.DTOs.Searchs.SearchStudentsOfCareerByCityRequestDTO;
+import com.arquitecturasWeb.Integrador3.service.DTOs.studentCareer.request.StudentCareerRequestDTO;
+import com.arquitecturasWeb.Integrador3.service.DTOs.studentCareer.response.StudentsOfCareerByCityResponseDTO;
 import com.arquitecturasWeb.Integrador3.service.StudentService;
 import com.arquitecturasWeb.Integrador3.service.DTOs.student.request.StudentRequestDTO;
 import com.arquitecturasWeb.Integrador3.service.DTOs.student.response.StudentResponseDTO;
@@ -25,7 +28,12 @@ public class StudentController {
         return this.service.save(sdto);
     }
 
-    @GetMapping("/orderByName")
+    @PostMapping("/{dni}/career")
+    public ResponseEntity save(@RequestBody @Valid StudentCareerRequestDTO scrdto, @PathVariable int dni) {
+        return service.save(scrdto, dni);
+    }
+
+    @GetMapping("/")
     public List<StudentResponseDTO> getAllStudents(){
         return this.service.findAll();
     }
@@ -38,6 +46,12 @@ public class StudentController {
     @GetMapping("/lu/{lu}")
     public StudentResponseDTO findStudentByLu(@PathVariable int lu){
         return this.service.findStudentByLU(lu);
+    }
+
+    //method from StudentCareer controller
+    @GetMapping("/sort")
+    public List<StudentsOfCareerByCityResponseDTO> findStudentsOfCareerByCity(SearchStudentsOfCareerByCityRequestDTO s){
+        return  this.service.findStudentsOfCareerByCity(s);
     }
 
     @GetMapping("/search")

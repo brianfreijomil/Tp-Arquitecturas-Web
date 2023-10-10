@@ -3,7 +3,6 @@ package com.arquitecturasWeb.Integrador3.repositories;
 import com.arquitecturasWeb.Integrador3.domain.Career;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
-import org.springframework.stereotype.Repository;
 
 import java.util.List;
 import java.util.Optional;
@@ -14,6 +13,8 @@ public interface CareerRepository extends JpaRepository<Career, Long> {
     List<Career> findAll();
 
     Optional<Career> findByName(String name);
+
+    Optional<Career> findById(Long id);
 
     @Query("Select c " +
             "from Career c " +

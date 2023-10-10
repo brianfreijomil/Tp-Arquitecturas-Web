@@ -5,7 +5,9 @@ import com.arquitecturasWeb.Integrador3.service.DTOs.Searchs.SearchCareersDTO;
 import com.arquitecturasWeb.Integrador3.service.DTOs.Searchs.SearchStudentsDTO;
 import com.arquitecturasWeb.Integrador3.service.DTOs.career.request.CareerRequestDTO;
 import com.arquitecturasWeb.Integrador3.service.DTOs.career.response.CareerResponseDTO;
+import com.arquitecturasWeb.Integrador3.service.DTOs.career.response.ReportCareerDTO;
 import com.arquitecturasWeb.Integrador3.service.DTOs.student.response.StudentResponseDTO;
+import com.arquitecturasWeb.Integrador3.service.DTOs.studentCareer.response.CareerWithStudentsResponseDTO;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -35,6 +37,16 @@ public class CareerController {
     @GetMapping("/")
     public List<CareerResponseDTO> getAllCareers(){
         return this.service.findAll();
+    }
+
+    @GetMapping("/stats")
+    public List<CareerWithStudentsResponseDTO> findCareersWithStudents(){
+        return this.service.findCareersWithStudents();
+    }
+
+    @GetMapping("report")
+    public List<ReportCareerDTO> reportOfCareers(){
+        return this.service.reportOfCareers();
     }
 
     @GetMapping("/search")

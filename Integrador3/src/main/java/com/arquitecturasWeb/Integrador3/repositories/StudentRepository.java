@@ -15,7 +15,7 @@ public interface StudentRepository extends JpaRepository<Student, Long> {
 
     List<Student> findAll(Sort sort);
 
-    Optional<Student> findByDNI(int dni);
+    Student findByDNI(int dni);
 
     Optional<Student> findByLu(int lu);
 
