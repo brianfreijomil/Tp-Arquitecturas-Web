@@ -1,17 +1,13 @@
 package com.arquitecturasWeb.Integrador3.service;
 
 import com.arquitecturasWeb.Integrador3.domain.StudentCareer;
-import com.arquitecturasWeb.Integrador3.repositories.CareerRepository;
-import com.arquitecturasWeb.Integrador3.repositories.StudentCareerRepository;
-import com.arquitecturasWeb.Integrador3.repositories.StudentRepository;
-import com.arquitecturasWeb.Integrador3.service.DTOs.career.response.ReportCareerDTO;
+import com.arquitecturasWeb.Integrador3.repositories.*;
 import com.arquitecturasWeb.Integrador3.service.DTOs.Searchs.SearchStudentsOfCareerByCityRequestDTO;
+import com.arquitecturasWeb.Integrador3.service.DTOs.career.response.ReportCareerDTO;
 import com.arquitecturasWeb.Integrador3.service.DTOs.studentCareer.request.StudentCareerRequestDTO;
 import com.arquitecturasWeb.Integrador3.service.DTOs.studentCareer.response.CareerWithStudentsResponseDTO;
 import com.arquitecturasWeb.Integrador3.service.DTOs.studentCareer.response.StudentsOfCareerByCityResponseDTO;
 import com.arquitecturasWeb.Integrador3.service.exception.ConflictExistException;
-import com.arquitecturasWeb.Integrador3.service.exception.ConflictExistWithEmbebbedIdException;
-import com.arquitecturasWeb.Integrador3.service.exception.NotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -37,15 +33,24 @@ public class StudentCareerService {
 
     @Transactional(readOnly = true)
     public List<CareerWithStudentsResponseDTO> findCareersWithStudents() {
-        List<CareerWithStudentsResponseDTO> studentsCareers = repository.findCareersWithStudents();
-        return studentsCareers;
-    }
-    @Transactional(readOnly = true)
-    public List<StudentsOfCareerByCityResponseDTO> findStudentsOfCareerByCity(SearchStudentsOfCareerByCityRequestDTO search) {
-        List<StudentsOfCareerByCityResponseDTO> students = repository.findStudentByCareerAndCity();
-        return students;
+        return repository.findCareersWithStudents().stream()
+                .map(result -> new CareerWithStudentsResponseDTO(result.getCareerName(), result.getCareerId(), result.getStudentNumber()))
+                .collect(Collectors.toList());
     }
 
+    @Transactional(readOnly = true)
+    public List<StudentsOfCareerByCityResponseDTO> findStudentsOfCareerByCity(SearchStudentsOfCareerByCityRequestDTO search) {
+        return repository.findStudentByCareerAndCity(search.getCity(), search.getCareer()).stream()
+                .map(result -> new StudentsOfCareerByCityResponseDTO(result.getStudentDNI(), result.getStudentName(), result.getStudentSurname(), result.getCareerName(), result.getStudentCity()))
+                .collect(Collectors.toList());
+    }
+
+    @Transactional(readOnly = true)
+    public List<ReportCareerDTO> reportOfCareers() {
+        return this.repository.findInscriptionAndGraduatedForYear().stream()
+                .map(result -> new ReportCareerDTO((String) result[0], ((BigDecimal) result[1]), ((BigDecimal) result[2]), ((Long) result[3])))
+                .collect(Collectors.toList());
+    }
 
     public ResponseEntity save(StudentCareerRequestDTO scrdto) {
         if(!this.studentRepo.existsById((long)scrdto.getId().getStudent().getDNI())){

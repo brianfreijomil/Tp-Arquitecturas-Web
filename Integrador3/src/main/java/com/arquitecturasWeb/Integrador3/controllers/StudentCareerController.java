@@ -1,14 +1,13 @@
 package com.arquitecturasWeb.Integrador3.controllers;
 
-import com.arquitecturasWeb.Integrador3.domain.StudentCareerId;
+import com.arquitecturasWeb.Integrador3.repositories.CareerWithStudentsInterface;
+import com.arquitecturasWeb.Integrador3.repositories.StudentsByCareerAndCityInterface;
 import com.arquitecturasWeb.Integrador3.service.DTOs.Searchs.SearchStudentsOfCareerByCityRequestDTO;
-import com.arquitecturasWeb.Integrador3.service.DTOs.career.request.CareerRequestDTO;
+import com.arquitecturasWeb.Integrador3.service.DTOs.career.response.ReportCareerDTO;
 import com.arquitecturasWeb.Integrador3.service.DTOs.studentCareer.request.StudentCareerRequestDTO;
-import com.arquitecturasWeb.Integrador3.service.DTOs.studentCareerId.response.StudentCareerIdResponseDTO;
-import com.arquitecturasWeb.Integrador3.service.StudentCareerService;
 import com.arquitecturasWeb.Integrador3.service.DTOs.studentCareer.response.CareerWithStudentsResponseDTO;
+import com.arquitecturasWeb.Integrador3.service.StudentCareerService;
 import com.arquitecturasWeb.Integrador3.service.DTOs.studentCareer.response.StudentsOfCareerByCityResponseDTO;
-import jakarta.persistence.Id;
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -36,11 +35,12 @@ public class StudentCareerController {
 
     @GetMapping("getByStudentsOfCareerByCity")
     public List<StudentsOfCareerByCityResponseDTO> findStudentsOfCareerByCity(SearchStudentsOfCareerByCityRequestDTO s){
+        System.out.println(s);
         return  this.service.findStudentsOfCareerByCity(s);
     }
 
-   /* @GetMapping("reportOfCareers")
+    @GetMapping("reportOfCareers")
     public List<ReportCareerDTO> reportOfCareers(){
         return this.service.reportOfCareers();
-    }*/
+    }
 }
