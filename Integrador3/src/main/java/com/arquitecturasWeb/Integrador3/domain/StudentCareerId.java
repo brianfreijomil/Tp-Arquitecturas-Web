@@ -1,5 +1,4 @@
 package com.arquitecturasWeb.Integrador3.domain;
-import com.arquitecturasWeb.Integrador3.service.DTOs.studentCareerId.request.StudentCareerIdRequestDTO;
 import jakarta.persistence.Embeddable;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;

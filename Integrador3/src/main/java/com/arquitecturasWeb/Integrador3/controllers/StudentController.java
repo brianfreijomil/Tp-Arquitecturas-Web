@@ -49,7 +49,6 @@ public class StudentController {
         return this.service.findStudentByLU(lu);
     }
 
-    //method from StudentCareer controller
     @GetMapping("/sort")
     public List<StudentsOfCareerByCityResponseDTO> findStudentsOfCareerByCity(SearchStudentsOfCareerByCityRequestDTO s){
         return  this.service.findStudentsOfCareerByCity(s);

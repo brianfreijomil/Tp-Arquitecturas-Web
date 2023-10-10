@@ -52,7 +52,6 @@ public class CareerService{
         return careers.stream().map(s1-> new CareerResponseDTO(s1)).collect(Collectors.toList());
     }
 
-    //method from StudenCareer service
     @Transactional(readOnly = true)
     public List<CareerWithStudentsResponseDTO> findCareersWithStudents() {
         return studentCareerRepository.findCareersWithStudents().stream()
@@ -60,7 +59,6 @@ public class CareerService{
                 .collect(Collectors.toList());
     }
 
-    //method from StudentCareer service
     @Transactional(readOnly = true)
     public List<ReportCareerDTO> reportOfCareers() {
         return this.studentCareerRepository.findInscriptionAndGraduatedForYear().stream()

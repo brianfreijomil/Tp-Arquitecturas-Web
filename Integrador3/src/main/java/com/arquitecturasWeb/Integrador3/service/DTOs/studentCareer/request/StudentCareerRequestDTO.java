@@ -1,12 +1,8 @@
 package com.arquitecturasWeb.Integrador3.service.DTOs.studentCareer.request;
 
-import com.arquitecturasWeb.Integrador3.service.DTOs.studentCareerId.request.StudentCareerIdRequestDTO;
-import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
-
-import java.sql.Timestamp;
 
 @Data
 @RequiredArgsConstructor
